@@ -14,6 +14,13 @@ import FormLayoutsSeparator from 'src/views/form-layouts/FormLayoutsSeparator'
 import 'react-datepicker/dist/react-datepicker.css'
 import Grid from '@mui/material/Grid'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+import TableDense from 'src/views/tables/TableDense'
+import TableDense2 from '../tables/TableDense2'
+import TableDense3 from '../tables/TableDense3'
+import TableDense4 from '../tables/TableDense4'
+import TableDense5 from '../tables/TableDense5'
+import TableDense6 from '../tables/TableDense6'
+
 
 const CardNavigation = () => {
   // ** State
@@ -26,7 +33,12 @@ const CardNavigation = () => {
   return (
     <Card >
       <TabContext value={value}>
-        <TabList onChange={handleChange} aria-label='card navigation example'>
+        <TabList onChange={handleChange} aria-label='card navigation example'
+        sx={{
+          display: 'flex',
+          flexDirection: 'row-reverse', 
+          justifyContent: 'flex-end', 
+        }}>
           <Tab value='1' label='Personal' />
           <Tab value='2' label='Academia' />
           <Tab value='3' label='Trayectoria' />
@@ -41,47 +53,56 @@ const CardNavigation = () => {
               <FormLayoutsSeparator />
             </Grid>
           </DatePickerWrapper>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}></div>
             <Button variant='contained'>Button One</Button>
           </TabPanel>
           <TabPanel value='2' sx={{ p: 0 }}>
-            <Typography variant='h6' sx={{ marginBottom: 2 }}>
-              Header Two
-            </Typography>
-            <Typography variant='body2' sx={{ marginBottom: 4 }}>
-              Dragée chupa chups soufflé cheesecake jelly tootsie roll cupcake marzipan. Carrot cake sweet roll gummi
-              bears caramels jelly beans.
-            </Typography>
-            <Button variant='contained'>Button Two</Button>
+          <Grid item xs={12}>
+            <Card>
+              <TableDense />
+            </Card>
+          </Grid>
+          <br></br>
+            <Button variant='contained'>Siguiente</Button>
           </TabPanel>
           <TabPanel value='3' sx={{ p: 0 }}>
-            <Typography variant='h6' sx={{ marginBottom: 2 }}>
-              Header Three
-            </Typography>
-            <Typography variant='body2' sx={{ marginBottom: 4 }}>
-              Icing cake macaroon macaroon jelly chocolate bar. Chupa chups dessert dessert soufflé chocolate bar
-              jujubes gummi bears lollipop.
-            </Typography>
-            <Button variant='contained'>Button Three</Button>
+          <Grid item xs={12}>
+            <Card>
+              <TableDense2 />
+            </Card>
+          </Grid>
+          <br></br>
+            <Button variant='contained'>Siguiente</Button>
           </TabPanel>
           <TabPanel value='4' sx={{ p: 0 }}>
-            <Typography variant='h6' sx={{ marginBottom: 2 }}>
-              Header Three
-            </Typography>
-            <Typography variant='body2' sx={{ marginBottom: 4 }}>
-              Icing cake macaroon macaroon jelly chocolate bar. Chupa chups dessert dessert soufflé chocolate bar
-              jujubes gummi bears lollipop.
-            </Typography>
-            <Button variant='contained'>Button Three</Button>
+          <Grid item xs={12}>
+            <Card>
+              <TableDense3 />
+            </Card>
+          </Grid>
+          <br></br>
+          <Grid item xs={12}>
+            <Card>
+              <TableDense4 />
+            </Card>
+          </Grid>
+          <br></br>
+            <Button variant='contained'>Siguiente</Button>
           </TabPanel>
           <TabPanel value='5' sx={{ p: 0 }}>
-            <Typography variant='h6' sx={{ marginBottom: 2 }}>
-              Header Three
-            </Typography>
-            <Typography variant='body2' sx={{ marginBottom: 4 }}>
-              Icing cake macaroon macaroon jelly chocolate bar. Chupa chups dessert dessert soufflé chocolate bar
-              jujubes gummi bears lollipop.
-            </Typography>
-            <Button variant='contained'>Button Three</Button>
+          <Grid item xs={12}>
+            <Card>
+              <TableDense5 />
+            </Card>
+          </Grid>
+          <br></br>
+          <Grid item xs={12}>
+            <Card>
+              <TableDense6/>
+            </Card>
+          </Grid>
+          <br></br>
+            <Button variant='contained'>Siguiente</Button>
           </TabPanel>
           <TabPanel value='6' sx={{ p: 0 }}>
             <Typography variant='h6' sx={{ marginBottom: 2 }}>
@@ -91,7 +112,7 @@ const CardNavigation = () => {
               Icing cake macaroon macaroon jelly chocolate bar. Chupa chups dessert dessert soufflé chocolate bar
               jujubes gummi bears lollipop.
             </Typography>
-            <Button variant='contained'>Button Three</Button>
+            <Button variant='contained'>Button Six</Button>
           </TabPanel>
         </CardContent>
       </TabContext>
@@ -100,3 +121,4 @@ const CardNavigation = () => {
 }
 
 export default CardNavigation
+

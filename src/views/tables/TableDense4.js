@@ -21,12 +21,12 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9)
 ]
 
-const TableDense = () => {
+const TableDense4 = () => {
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 16px' }}>
         <Typography variant='h6' component='div'>
-          Títulos Académicos Pendiente de Registro
+          Idiomas
         </Typography>
         <Button variant='contained'>Nuevo</Button>
       </div>
@@ -60,4 +60,4 @@ const TableDense = () => {
   )
 }
 
-export default TableDense
+export default TableDense4
