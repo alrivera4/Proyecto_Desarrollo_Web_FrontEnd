@@ -18,7 +18,7 @@ const navigation = () => {
       path: '/'
     },
     {
-      title: 'Account Settings',
+      title: 'Hoja de vida',
       icon: AccountCogOutline,
       path: '/account-settings'
     },
