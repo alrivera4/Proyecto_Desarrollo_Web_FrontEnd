@@ -20,12 +20,15 @@ const CardNavigation = () => {
   }
 
   return (
-    <Card>
+    <Card >
       <TabContext value={value}>
         <TabList onChange={handleChange} aria-label='card navigation example'>
-          <Tab value='1' label='Item One' />
-          <Tab value='2' label='Item Two' />
-          <Tab value='3' label='Item Three' />
+          <Tab value='1' label='Personal' />
+          <Tab value='2' label='Academia' />
+          <Tab value='3' label='Trayectoria' />
+          <Tab value='4' label='Capacitacion' />
+          <Tab value='5' label='Publicaciones' />
+          <Tab value='6' label='Acción Positiva' />
         </TabList>
         <CardContent>
           <TabPanel value='1' sx={{ p: 0 }}>
@@ -49,6 +52,36 @@ const CardNavigation = () => {
             <Button variant='contained'>Button Two</Button>
           </TabPanel>
           <TabPanel value='3' sx={{ p: 0 }}>
+            <Typography variant='h6' sx={{ marginBottom: 2 }}>
+              Header Three
+            </Typography>
+            <Typography variant='body2' sx={{ marginBottom: 4 }}>
+              Icing cake macaroon macaroon jelly chocolate bar. Chupa chups dessert dessert soufflé chocolate bar
+              jujubes gummi bears lollipop.
+            </Typography>
+            <Button variant='contained'>Button Three</Button>
+          </TabPanel>
+          <TabPanel value='4' sx={{ p: 0 }}>
+            <Typography variant='h6' sx={{ marginBottom: 2 }}>
+              Header Three
+            </Typography>
+            <Typography variant='body2' sx={{ marginBottom: 4 }}>
+              Icing cake macaroon macaroon jelly chocolate bar. Chupa chups dessert dessert soufflé chocolate bar
+              jujubes gummi bears lollipop.
+            </Typography>
+            <Button variant='contained'>Button Three</Button>
+          </TabPanel>
+          <TabPanel value='5' sx={{ p: 0 }}>
+            <Typography variant='h6' sx={{ marginBottom: 2 }}>
+              Header Three
+            </Typography>
+            <Typography variant='body2' sx={{ marginBottom: 4 }}>
+              Icing cake macaroon macaroon jelly chocolate bar. Chupa chups dessert dessert soufflé chocolate bar
+              jujubes gummi bears lollipop.
+            </Typography>
+            <Button variant='contained'>Button Three</Button>
+          </TabPanel>
+          <TabPanel value='6' sx={{ p: 0 }}>
             <Typography variant='h6' sx={{ marginBottom: 2 }}>
               Header Three
             </Typography>
