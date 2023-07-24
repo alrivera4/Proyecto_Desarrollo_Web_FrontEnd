@@ -60,6 +60,7 @@ import AccountDetailsOutline from 'mdi-material-ui/AccountDetailsOutline'
 import AccountArrowLeftOutline from 'mdi-material-ui/AccountArrowLeftOutline'
 import AccountArrowRightOutline from 'mdi-material-ui/AccountArrowRightOutline'
 import AccountBoxMultipleOutline from 'mdi-material-ui/AccountBoxMultipleOutline'
+import mdiMagnifyPlusOutline  from '@mdi-mdiMagnifyPlusOutline';
 
 const icons = {
   Abacus,
@@ -109,7 +110,8 @@ const icons = {
   AccountDetailsOutline,
   AccountArrowLeftOutline,
   AccountArrowRightOutline,
-  AccountBoxMultipleOutline
+  AccountBoxMultipleOutline,
+  mdiMagnifyPlusOutline
 }
 
 const Icons = () => {
