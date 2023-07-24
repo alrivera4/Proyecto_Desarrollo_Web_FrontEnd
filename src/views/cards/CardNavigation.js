@@ -10,6 +10,10 @@ import Button from '@mui/material/Button'
 import TabContext from '@mui/lab/TabContext'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
+import FormLayoutsSeparator from 'src/views/form-layouts/FormLayoutsSeparator'
+import 'react-datepicker/dist/react-datepicker.css'
+import Grid from '@mui/material/Grid'
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
 const CardNavigation = () => {
   // ** State
@@ -32,13 +36,11 @@ const CardNavigation = () => {
         </TabList>
         <CardContent>
           <TabPanel value='1' sx={{ p: 0 }}>
-            <Typography variant='h6' sx={{ marginBottom: 2 }}>
-              Header One
-            </Typography>
-            <Typography variant='body2' sx={{ marginBottom: 4 }}>
-              Pudding tiramisu caramels. Gingerbread gummies danish chocolate bar toffee marzipan. Wafer wafer cake
-              powder danish oat cake.
-            </Typography>
+          <DatePickerWrapper>
+            <Grid item xs={10}>
+              <FormLayoutsSeparator />
+            </Grid>
+          </DatePickerWrapper>
             <Button variant='contained'>Button One</Button>
           </TabPanel>
           <TabPanel value='2' sx={{ p: 0 }}>
