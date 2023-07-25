@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography'
 // ** Demo Components Imports
 import CardUser from 'src/views/cards/CardUser'
 import CardImgTop from 'src/views/cards/CardImgTop'
+import CardDirector from 'src/views/cards/CardDirector'
 import CardMobile from 'src/views/cards/CardMobile'
 import CardSupport from 'src/views/cards/CardSupport'
 import CardTwitter from 'src/views/cards/CardTwitter'
@@ -27,6 +28,9 @@ const CardBasic = () => {
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <CardImgTop />
+      </Grid>
+      <Grid item xs={12} sm={6} md={4}>
+        <CardDirector />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <CardUser />
