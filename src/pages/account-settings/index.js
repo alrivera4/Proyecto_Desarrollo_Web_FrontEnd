@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
-import { Button, Card, CardContent, CardHeader, Container, Divider, Grid, Link, TextField } from '@mui/material'
+import Card from '@mui/material/Card'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import TabContext from '@mui/lab/TabContext'
@@ -19,45 +19,84 @@ import InformationOutline from 'mdi-material-ui/InformationOutline'
 import TabInfo from 'src/views/account-settings/TabInfo'
 import TabAccount from 'src/views/account-settings/TabAccount'
 import TabSecurity from 'src/views/account-settings/TabSecurity'
-import LoginPage from 'src/pages/pages/login/login'
-import RegisterCard from 'src/views/cards/CardRegister'
 
 // ** Third Party Styles Imports
 import 'react-datepicker/dist/react-datepicker.css'
 
+const Tab = styled(MuiTab)(({ theme }) => ({
+  [theme.breakpoints.down('md')]: {
+    minWidth: 100
+  },
+  [theme.breakpoints.down('sm')]: {
+    minWidth: 67
+  }
+}))
+
+const TabName = styled('span')(({ theme }) => ({
+  lineHeight: 1.71,
+  fontSize: '0.875rem',
+  marginLeft: theme.spacing(2.4),
+  [theme.breakpoints.down('md')]: {
+    display: 'none'
+  }
+}))
+
 const AccountSettings = () => {
   // ** State
-  const [value, setValue] = useState(true)
+  const [value, setValue] = useState('account')
 
-  const handleChangeLogin = () => {
-    setValue(true)
-  }
-
-  const handleChangeRegister = () => {
-    setValue(false)
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
   }
 
   return (
-    <Grid item xs={12} sm={6}>
-      <Card>
-        <CardContent>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <Link>
-                <Button onClick={handleChangeLogin}>Iniciar Sesión</Button>
-              </Link>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Link>
-                <Button onClick={handleChangeRegister}>Registrar</Button>
-              </Link>
-            </Grid>
-          </Grid>
-          <Divider></Divider>
-          {value ? <LoginPage /> : <RegisterCard />}
-        </CardContent>
-      </Card>
-    </Grid>
+    <Card>
+      <TabContext value={value}>
+        <TabList
+          onChange={handleChange}
+          aria-label='account-settings tabs'
+          sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
+        >
+          <Tab
+            value='account'
+            label={
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <AccountOutline />
+                <TabName>Account</TabName>
+              </Box>
+            }
+          />
+          <Tab
+            value='security'
+            label={
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <LockOpenOutline />
+                <TabName>Security</TabName>
+              </Box>
+            }
+          />
+          <Tab
+            value='info'
+            label={
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <InformationOutline />
+                <TabName>Info</TabName>
+              </Box>
+            }
+          />
+        </TabList>
+
+        <TabPanel sx={{ p: 0 }} value='account'>
+          <TabAccount />
+        </TabPanel>
+        <TabPanel sx={{ p: 0 }} value='security'>
+          <TabSecurity />
+        </TabPanel>
+        <TabPanel sx={{ p: 0 }} value='info'>
+          <TabInfo />
+        </TabPanel>
+      </TabContext>
+    </Card>
   )
 }
 

@@ -37,12 +37,12 @@ const navigation = () => {
       path: '/pages/register',
       openInNewTab: true
     },
-    // {
-    //   title: 'Error',
-    //   icon: AlertCircleOutline,
-    //   path: '/pages/error',
-    //   openInNewTab: true
-    // },
+    {
+      title: 'Error',
+      icon: AlertCircleOutline,
+      path: '/pages/error',
+      openInNewTab: true
+    },
     {
       sectionTitle: 'User Interface'
     },
