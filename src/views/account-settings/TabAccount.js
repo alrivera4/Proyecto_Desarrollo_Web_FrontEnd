@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from 'react'
+import { useState ,forwardRef } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
@@ -17,9 +17,26 @@ import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
 import FormControl from '@mui/material/FormControl'
 import Button from '@mui/material/Button'
+import Radio from '@mui/material/Radio'
 
-// ** Icons Imports
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormLabel from '@mui/material/FormLabel'
+import RadioGroup from '@mui/material/RadioGroup'
+import OutlinedInput from '@mui/material/OutlinedInput'
+
 import Close from 'mdi-material-ui/Close'
+
+import DatePicker from 'react-datepicker'
+
+// ** Styled Components
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+
+
+const CustomInput = forwardRef((props, ref) => {
+  return <TextField inputRef={ref} label='Birth Date' fullWidth {...props} />
+})
+
+
 
 const ImgStyled = styled('img')(({ theme }) => ({
   width: 120,
@@ -47,6 +64,7 @@ const ResetButtonStyled = styled(Button)(({ theme }) => ({
 
 const TabAccount = () => {
   // ** State
+  const [date, setDate] = useState(null)
   const [openAlert, setOpenAlert] = useState(true)
   const [imgSrc, setImgSrc] = useState('/images/avatars/1.png')
 
@@ -61,14 +79,14 @@ const TabAccount = () => {
 
   return (
     <CardContent>
-      <form>
+       <form> 
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <ImgStyled src={imgSrc} alt='Profile Pic' />
               <Box>
                 <ButtonStyled component='label' variant='contained' htmlFor='account-settings-upload-image'>
-                  Upload New Photo
+                  Foto
                   <input
                     hidden
                     type='file'
@@ -81,82 +99,141 @@ const TabAccount = () => {
                   Reset
                 </ResetButtonStyled>
                 <Typography variant='body2' sx={{ marginTop: 5 }}>
-                  Allowed PNG or JPEG. Max size of 800K.
+                  Permitido PNG or JPEG. Tamaño maximo 800K.
                 </Typography>
               </Box>
             </Box>
           </Grid>
+        
 
-          <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Username' placeholder='johnDoe' defaultValue='johnDoe' />
+          <Grid item xs={12} sm={6}> Informacion Personal 
+            <TextField fullWidth label='Nombre' placeholder='John Steven'  />
+            
+            <TextField fullWidth label='Apellidos' placeholder='Stewart Lorem'  />
+            
+            <FormControl>
+              <FormLabel item xs={6} sx={{ fontSize: '0.875rem' }}>Estado Civil</FormLabel>
+              <Select label='Country'>
+                <MenuItem value='USA'>Soltero</MenuItem>
+                <MenuItem value='UK'>Casado</MenuItem>
+                <MenuItem value='Australia'>Divorciado</MenuItem>
+                <MenuItem value='Germany'>Union Libre</MenuItem>
+              </Select>
+            </FormControl>
+            
+            <Grid item xs={12} sm={6}>
+            <DatePickerWrapper>
+              <DatePicker
+                selected={date}
+                showYearDropdown
+                showMonthDropdown
+                id='account-settings-date'
+                placeholderText='MM-DD-YYYY'
+                customInput={<CustomInput />}
+                onChange={date => setDate(date)}
+              />
+            </DatePickerWrapper>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Name' placeholder='John Doe' defaultValue='John Doe' />
+          
+            <FormControl>
+              <FormLabel item xs={6} sm={{ fontSize: '0.875rem' }}>Genero</FormLabel>
+              <RadioGroup row defaultValue='male' aria-label='gender' name='account-settings-info-radio'>
+                <FormControlLabel value='male' label='Hombre' control={<Radio />} />
+                <FormControlLabel value='female' label='Mujer' control={<Radio />} />
+                <FormControlLabel value='other' label='Otro' control={<Radio />} />
+              </RadioGroup>
+            </FormControl>
+            
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>Experiencia Laboral 
+            <TextField
+              fullWidth
+              multiline
+              label='Bio'
+              minRows={2}
+              placeholder='Bio'
+            />
+            <Grid item xs={12} sm={6}>Cursos 
+            <TextField
+              fullWidth
+              multiline
+              label='Bio'
+              minRows={2}
+              placeholder='Bio'
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>Articulos Cientificos 
+            <TextField
+              fullWidth
+              multiline
+              label='Bio'
+              minRows={2}
+              placeholder='Bio'
+            />
+          </Grid>
+          </Grid>
+          
+         
+          </Grid>
+          
+      </form>
+       
+       <form > 
+        <Grid container spacing={7}>
+          
+          <Grid item xs={12} sm={6}>Contacto
+            <TextField fullWidth type='number' label='Telefono ' placeholder='(123) 456-7890' />
             <TextField
               fullWidth
               type='email'
               label='Email'
               placeholder='johnDoe@example.com'
-              defaultValue='johnDoe@example.com'
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel>Role</InputLabel>
-              <Select label='Role' defaultValue='admin'>
-                <MenuItem value='admin'>Admin</MenuItem>
-                <MenuItem value='author'>Author</MenuItem>
-                <MenuItem value='editor'>Editor</MenuItem>
-                <MenuItem value='maintainer'>Maintainer</MenuItem>
-                <MenuItem value='subscriber'>Subscriber</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel>Status</InputLabel>
-              <Select label='Status' defaultValue='active'>
-                <MenuItem value='active'>Active</MenuItem>
-                <MenuItem value='inactive'>Inactive</MenuItem>
-                <MenuItem value='pending'>Pending</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Company' placeholder='ABC Pvt. Ltd.' defaultValue='ABC Pvt. Ltd.' />
-          </Grid>
 
-          {openAlert ? (
-            <Grid item xs={12} sx={{ mb: 3 }}>
-              <Alert
-                severity='warning'
-                sx={{ '& a': { fontWeight: 400 } }}
-                action={
-                  <IconButton size='small' color='inherit' aria-label='close' onClick={() => setOpenAlert(false)}>
-                    <Close fontSize='inherit' />
-                  </IconButton>
-                }
+<FormControl fullWidth>
+              <InputLabel>Direccion</InputLabel>
+              <Select label='Country'>
+                <MenuItem value='USA'>USA</MenuItem>
+                <MenuItem value='UK'>UK</MenuItem>
+                <MenuItem value='Australia'>Australia</MenuItem>
+                <MenuItem value='Germany'>Germany</MenuItem>
+              </Select>
+            </FormControl>
+            <Grid item xs={12} sm={6}> Idiomas
+            <FormControl fullWidth>
+              <InputLabel id='form-layouts-separator-multiple-select-label'>Languages</InputLabel>
+              <Select
+                multiple
+                defaultValue={['English']}
+                id='account-settings-multiple-select'
+                labelId='account-settings-multiple-select-label'
+                input={<OutlinedInput label='Languages' id='select-multiple-language' />}
               >
-                <AlertTitle>Your email is not confirmed. Please check your inbox.</AlertTitle>
-                <Link href='/' onClick={e => e.preventDefault()}>
-                  Resend Confirmation
-                </Link>
-              </Alert>
-            </Grid>
-          ) : null}
-
+                <MenuItem value='English'>English</MenuItem>
+                <MenuItem value='French'>French</MenuItem>
+                <MenuItem value='Spanish'>Spanish</MenuItem>
+                <MenuItem value='Portuguese'>Portuguese</MenuItem>
+                <MenuItem value='Italian'>Italian</MenuItem>
+                <MenuItem value='German'>German</MenuItem>
+                <MenuItem value='Arabic'>Arabic</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          
+        </Grid>
+          
+          
           <Grid item xs={12}>
             <Button variant='contained' sx={{ marginRight: 3.5 }}>
               Save Changes
             </Button>
-            <Button type='reset' variant='outlined' color='secondary'>
+            <Button type='reset' variant='outlined' color='secondary' onClick={() => setDate(null)}>
               Reset
             </Button>
           </Grid>
         </Grid>
       </form>
+     
     </CardContent>
   )
 }

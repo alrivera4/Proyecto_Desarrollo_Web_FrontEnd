@@ -115,7 +115,7 @@ const TableBasic = () => {
               <p>Recuerde:</p>
               <p>El regitro de información en la sección Hoja de vida es obligatoria según corresponda.</p>
               <Button onClick={handleAccept} variant="contained" color="primary" sx={{ marginTop: '1rem' }}>
-                Aplicar
+                Regresar
               </Button>
               <Button onClick={handleCloseModal} variant="contained" color="secondary" sx={{ marginTop: '1rem' }}>
                 Cerrar
