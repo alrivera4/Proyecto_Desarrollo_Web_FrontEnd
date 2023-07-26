@@ -16,3 +16,16 @@ module.exports = {
     return config
   }
 }
+
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/pages/landing', // Reemplaza 'home' con la ruta de tu página de inicio
+        permanent: true,
+      },
+    ];
+  },
+};
+
