@@ -107,7 +107,7 @@ const TableBasic = () => {
             <div>
               <h2 >INSTRUCCIONES</h2>
               <p>Cada postulante podrá aplicar exclusivamente a un puesto por convocatoria.</p>
-              <p>Una vez que aplique a un puesto la o el postulante no podrá modificar el regitro "hoja de vida" para el puesto postulado.</p>
+              <p>Una vez que aplique a un puesto la o el postulante no podrá modificar el regitro "" para el puesto postulado.</p>
               <p>No se admitirán postulaciones (solicitud y documentos de respaldo) con manchas, tachones o cualquier otro tipo de alteraciones, que no permita la lectura comprensible o ponga en duda el contenido.
 </p>
               <p>No se admitirá postulaciones fuera del calendario y horario establecido quedando automáticamente descartados 
