@@ -13,6 +13,7 @@ import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import TableContainer from '@mui/material/TableContainer'
+import Checkbox from '@mui/material/Checkbox'; // Importamos el Checkbox
 
 // ** Icons Imports
 import ChevronUp from 'mdi-material-ui/ChevronUp'
@@ -41,20 +42,25 @@ const createData = (name, calories, fat, carbs, protein, price) => {
   }
 }
 
+
 const Row = props => {
   // ** Props
-  const { row } = props
+  const { row } = props;
 
   // ** State
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState(false); // State for checkbox
 
   return (
     <Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
-          <IconButton aria-label='expand row' size='small' onClick={() => setOpen(!open)}>
-            {open ? <ChevronUp /> : <ChevronDown />}
-          </IconButton>
+          {/* Replacing the IconButton with a Checkbox */}
+          <Checkbox
+            checked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+            inputProps={{ 'aria-label': 'collapse row' }}
+          />
         </TableCell>
         <TableCell component='th' scope='row'>
           {row.name}
@@ -66,40 +72,22 @@ const Row = props => {
       </TableRow>
       <TableRow>
         <TableCell colSpan={6} sx={{ py: '0 !important' }}>
-          <Collapse in={open} timeout='auto' unmountOnExit>
+          {/* Use the state variable from the checkbox to control the Collapse */}
+          <Collapse in={isChecked} timeout='auto' unmountOnExit>
             <Box sx={{ m: 2 }}>
               <Typography variant='h6' gutterBottom component='div'>
-                History
+                Formulario 
               </Typography>
               <Table size='small' aria-label='purchases'>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align='right'>Amount</TableCell>
-                    <TableCell align='right'>Total price ($)</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.history.map(historyRow => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component='th' scope='row'>
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align='right'>{historyRow.amount}</TableCell>
-                      <TableCell align='right'>{Math.round(historyRow.amount * row.price * 100) / 100}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
+                {/* ... (Table Body) */}
               </Table>
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
     </Fragment>
-  )
-}
+  );
+};
 
 const rows = [
   createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),

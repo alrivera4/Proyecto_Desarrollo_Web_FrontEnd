@@ -20,6 +20,8 @@ import TableDense3 from '../tables/TableDense3'
 import TableDense4 from '../tables/TableDense4'
 import TableDense5 from '../tables/TableDense5'
 import TableDense6 from '../tables/TableDense6'
+import TableCollapsible from '../tables/TableCollapsible'
+
 
 
 const CardNavigation = () => {
@@ -109,8 +111,7 @@ const CardNavigation = () => {
               Header Three
             </Typography>
             <Typography variant='body2' sx={{ marginBottom: 4 }}>
-              Icing cake macaroon macaroon jelly chocolate bar. Chupa chups dessert dessert soufflé chocolate bar
-              jujubes gummi bears lollipop.
+            <TableCollapsible></TableCollapsible>
             </Typography>
             <Button variant='contained'>Button Six</Button>
           </TabPanel>
