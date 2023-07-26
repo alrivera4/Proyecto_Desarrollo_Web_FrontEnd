@@ -20,6 +20,13 @@ import { styled, useTheme } from '@mui/material/styles'
 import MuiCard from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogActions from '@mui/material/DialogActions';
+import TabRegister from 'src/views/account-settings/TabRegistro'
+
 
 // ** Icons Imports
 import EyeOutline from 'mdi-material-ui/EyeOutline'
@@ -57,6 +64,16 @@ const RegisterCard = () => {
     password: '',
     showPassword: false
   })
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   // ** Hook
   const theme = useTheme()
@@ -121,12 +138,33 @@ const RegisterCard = () => {
             required
             sx={{ marginBottom: 4 }}
           />
-          <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={() => router.push('')}>
-            Siguiente
-          </Button>
+          <Button
+  fullWidth
+  size='large'
+  variant='contained'
+  sx={{ marginBottom: 7 }}
+  onClick={handleOpen}
+>
+  Siguiente
+</Button>
+
         </form>
       </Container>
       <FooterIllustrationsV1 />
+
+      <Dialog open={open} onClose={handleClose} maxWidth="200" maxLength="200" fullWidth>
+        <DialogTitle>Registrarme</DialogTitle>
+        <DialogContent sx={{ width: '100%', height: '100%', display: '', justifyContent: 'center', alignItems: 'center' }}>
+          <DialogContentText>
+            <Container>
+            <TabRegister/>
+            </Container>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   )
 }
