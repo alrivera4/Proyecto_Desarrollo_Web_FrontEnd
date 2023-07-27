@@ -214,8 +214,12 @@ const FormLayoutsTrayectoria = () => {
             onChange={(e) => setContractType(e.target.value)}
             error={!!contractTypeError}
             >
-              <MenuItem value='Contrato1'>Contrato 1</MenuItem>
-              <MenuItem value='Contrato2'>Contrato 2</MenuItem>
+              <MenuItem value='Contrato1'>Indefinido</MenuItem>
+              <MenuItem value='Contrato2'>A Plazo Fijo</MenuItem>
+              <MenuItem value='Contrato3'>Por Servicio</MenuItem>
+              <MenuItem value='Contrato4'>Por Temporada</MenuItem>
+              <MenuItem value='Contrato5'>Tiempo Parcial</MenuItem>
+              <MenuItem value='Contrato6'>Relevo</MenuItem>
             </Select>
             {contractTypeError && <Typography variant='body2' color='error'>{contractTypeError}</Typography>}
           </FormControl>
@@ -231,8 +235,12 @@ const FormLayoutsTrayectoria = () => {
             onChange={(e) => setInstitutionType(e.target.value)}
             error={!!institutionTypeError}
             >
-              <MenuItem value='Contrato1'>Contrato 1</MenuItem>
-              <MenuItem value='Contrato2'>Contrato 2</MenuItem>
+              <MenuItem value='Contrato1'>Privadas</MenuItem>
+              <MenuItem value='Contrato2'>Publicas</MenuItem>
+              <MenuItem value='Contrato3'>No Gubernamentales-ONG</MenuItem>
+              <MenuItem value='Contrato4'>Gubernamentales</MenuItem>
+              <MenuItem value='Contrato5'>Educativas</MenuItem>
+              <MenuItem value='Contrato6'>Organizaciones Internacionales</MenuItem>
             </Select>
             {institutionTypeError && <Typography variant='body2' color='error'>{institutionTypeError}</Typography>}
           </FormControl>
@@ -248,8 +256,12 @@ const FormLayoutsTrayectoria = () => {
               onChange={(e) => setExperienceType(e.target.value)}
               error={!!experienceTypeError}
             >
-              <MenuItem value='Experiencia1'>Experiencia 1</MenuItem>
-              <MenuItem value='Experiencia2'>Experiencia 2</MenuItem>
+              <MenuItem value='Experiencia1'>Tiempo Completo</MenuItem>
+              <MenuItem value='Experiencia2'>Tiempo Parcial</MenuItem>
+              <MenuItem value='Experienci3'>Freelance</MenuItem>
+              <MenuItem value='Experienci4'>Prácticas o Pasantias</MenuItem>
+              <MenuItem value='Experienci5'>Voluntaria</MenuItem>
+              <MenuItem value='Experienci6'>Internacional</MenuItem>
             </Select>
             {experienceTypeError && <Typography variant='body2' color='error'>{experienceTypeError}</Typography>}
           </FormControl>
