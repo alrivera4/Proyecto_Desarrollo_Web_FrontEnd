@@ -19,291 +19,230 @@ import Typography from '@mui/material/Typography'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 
 
-// ** Third Party Imports
-import MessageOutline from 'mdi-material-ui/MessageOutline'
-
 const FormLayoutsCapIdioma = () => {
   // ** States
   const [file, setFile] = useState(null);
-  const [title, setTitle] = useState(''); // Add the state for title
-  const [titleError, setTitleError] = useState('');
-  const [institution, setInstitution] = useState(''); // Add the state for institution
-  const [institutionError, setInstitutionError] = useState('');
-  const [selectedYear, setSelectedYear] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [descripcionError, setDescripcionError] = useState('');
+  const [certificacion, setCertificacion] = useState('');
+  const [certificacionError, setCertificacionError] = useState('');
+  const [idiomaType, setIdiomaType] = useState('');
+  const [idiomaTypeError, setIdiomaTypeError] = useState('');
+  const [escritoType, setEscritoType] = useState('');
+  const [escritoTypeError, setEscritoTypeError] = useState('');
+  const [oralType, setOralType] = useState('');
+  const [oralTypeError, setOralTypeError] = useState('');
+  const [comprensionType, setComprensionType] = useState('');
+  const [comprensionTypeError, setComprensionTypeError] = useState('');
+
+  const isLettersAndSpacesOnly = (value) => /^[a-zA-Z\s]*$/.test(value);
 
   // Handle File Upload
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
 
-  const handleYearChange = (event) => {
-    setSelectedYear(event.target.value);
-  };
-
-  const [selectedValues, setSelectedValues] = useState({
-    areaEstudio: '',
-    nivelEstudio: '',
-    estadoEstudio: '',
-  });
-
   // Handle Form Submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const regex = /^[a-zA-Z\s]*$/;
-    
-    if (!regex.test(title)) {
-      setTitleError('Title should only contain letters and spaces');
-    } else {
-      setTitleError('');
-    }
+      let formIsValid = true;
+  
+      // Validate "Certificacion"
+      if (!isLettersAndSpacesOnly(certificacion)) {
+        setCertificacionError('Evento should only contain letters and spaces');
+        formIsValid = false;
+      } else {
+        setCertificacionError('');
+      }
+  
+      // Validate "Idioma"
+      if (!idiomaType) {
+        setIdiomaTypeError('Please select a Idioma');
+        formIsValid = false;
+      } else {
+        setIdiomaTypeError('');
+      }
+  
+      // Validate "Nivel Escrito"
+      if (!escritoType) {
+        setEscritoTypeError('Please select Nivel Escrito');
+        formIsValid = false;
+      } else {
+        setEscritoTypeError('');
+      }
+  
+      // Validate "Nivel Oral"
+      if (!oralType) {
+        setOralTypeError('Please select Nivel Oral');
+        formIsValid = false;
+      } else {
+        setOralTypeError('');
+      }
 
-    if (!regex.test(institution)) {
-      setInstitutionError('Institution should only contain letters and spaces');
-    } else {
-      setInstitutionError('');
-    }
+      // Validate "Comprension"
+      if (!comprensionType) {
+        setComprensionTypeError('Please select Comprension');
+        formIsValid = false;
+      } else {
+        setComprensionTypeError('');
+      }
+  
 
-    if (!regex.test(descripcion)) {
-      setDescripcionError('Description should only contain letters and spaces');
-    } else {
-      setDescripcionError('');
-    }
+      if (formIsValid) {
+        console.log('Form submitted successfully');
 
-    // Continue with form submission if all fields are valid
-    if (regex.test(title) && regex.test(institution) && regex.test(descripcion)) {
-      // Perform the form submission logic here
-      console.log('Form submitted successfully');
 
-      // Clear the form data after successful submission
-      setTitle('');
-      setInstitution('');
-      setFile(null);
-      setSelectedYear('');
-      setDescripcion('');
-
-      setSelectedValues({
-        areaEstudio: '',
-        nivelEstudio: '',
-        estadoEstudio: '',
-      })
-      }   
+        // Clear the form data after successful submission
+        setCertificacion('');
+        setFile(null);
+        setIdiomaType('');
+        setEscritoType('');
+        setOralType('');
+        setComprensionType('');
+      }
     };
-
-  const startYear = 1980;
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: currentYear - startYear + 1 }, (_, index) => startYear + index);
-
 
   return (
     <Card>
-    <CardHeader title='Idiomas' titleTypographyProps={{ variant: 'h6' }} />
-    <Divider sx={{ margin: 0 }} />
-    <form onSubmit={handleSubmit}>
-      <Grid container spacing={5}>
-        <Grid item xs={12}>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <Typography variant='body2' sx={{ fontWeight: 600 }}>Título</Typography>
-          <TextField 
-            fullWidth 
-            placeholder=''
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            error={!!titleError}
-            helperText={titleError}
-            required 
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <Typography variant='body2' sx={{ fontWeight: 600 }}>Institución</Typography>
-            <TextField
-             fullWidth 
-             placeholder='' 
-             value={institution}
-             onChange={(e) => setInstitution(e.target.value)}
-             error={!!institutionError}
-             helperText={institutionError}
-             required
-            />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Areá de Estudio</Typography>
-          <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-            <Select
-              id='form-layouts-separator-select'
-              labelId='form-layouts-separator-select-label'
-              label='Country'
-              placeholder='Bio...'
-              MenuProps={{
-                PaperProps: {
-                  style: {
-                    maxHeight: 200, // Ajusta esta altura según tus necesidades
-                  },
-                }
-              }}
-              value={selectedValues.areaEstudio}
-              onChange={(e) =>
-                setSelectedValues({
-                  ...selectedValues,
-                  areaEstudio: e.target.value,
-                })
-              }
-            >
-              <MenuItem value='CS'>Ciencias Sociales</MenuItem>
-              <MenuItem value='CN'>Ciencias Naturales</MenuItem>
-              <MenuItem value='HU'>Humanidades</MenuItem>
-              <MenuItem value='CSalud'>Ciencias de la Salud</MenuItem>
-              <MenuItem value='IT'>Ingeniría y Tecnología</MenuItem>
-              <MenuItem value='Artes'>Artes y Bellas Artes</MenuItem>
-              <MenuItem value='CTierra'>Ciencias de la Tierra y Medio Ambiente</MenuItem>
-              <MenuItem value='Bio'>Biotecnología y Genética</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Nivel de Estudio</Typography>
-          <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-            <Select
-              id='form-layouts-separator-select'
-              labelId='form-layouts-separator-select-label'
-              label='Country'
-              placeholder='Bio...'
-              MenuProps={{
-                PaperProps: {
-                  style: {
-                    maxHeight: 200, // Ajusta esta altura según tus necesidades
-                  },
-                }
-              }}
-              value={selectedValues.nivelEstudio}
-              onChange={(e) =>
-                setSelectedValues({
-                  ...selectedValues,
-                  nivelEstudio: e.target.value,
-                })
-              }
-            >
-              <MenuItem value='Pre'>Pregrado</MenuItem>
-              <MenuItem value='Pos'>Posgrado</MenuItem>
-              <MenuItem value='Lic'>Licenciatura</MenuItem>
-              <MenuItem value='Tec'>Tecnología</MenuItem>
-              <MenuItem value='Doc'>Doctorado</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Estado de Estudio</Typography>
-            <InputLabel id='form-layouts-separator-select-label-2'></InputLabel>
-            <Select
-              label='Country 2'
-              defaultValue=''
-              id='form-layouts-separator-select-2'
-              labelId='form-layouts-separator-select-label-2'
-              MenuProps={{
-                PaperProps: {
-                  style: {
-                    maxHeight: 200, // Ajusta esta altura según tus necesidades
-                  },
-                }
-              }}
-              value={selectedValues.estadoEstudio}
-              onChange={(e) =>
-                setSelectedValues({
-                  ...selectedValues,
-                  estadoEstudio: e.target.value,
-                })
-              }
-            >
-              <MenuItem value='Parcial'>Estudiante de Tiempo Parcial</MenuItem>
-              <MenuItem value='Graduado'>Graduado</MenuItem>
-              <MenuItem value='Practicas'>Estudiante de Prácticas</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Año de Inicio</Typography>
-          <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-          <Select
-          labelId='form-layouts-separator-select-label'
-          label='Año de Inicio'
-          value={selectedYear}
-          onChange={handleYearChange}
-        >
-          {years.map((year) => (
-            <MenuItem key={year} value={year}>{year}</MenuItem>
-          ))}
-          </Select>
-          </FormControl>
-        </Grid>
-      </Grid>  
-      <br></br>
-      <Grid item xs={12}>
-      <Typography variant='body2' sx={{ fontWeight: 600 }}>Descripción</Typography>
-              <TextField
-                fullWidth
-                multiline
-                minRows={3}
-                label=''
-                placeholder='Bio...'
-                value={descripcion}
-                onChange={(e) => setDescripcion(e.target.value)}
-                sx={{ '& .MuiOutlinedInput-root': { alignItems: 'baseline' } }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <MessageOutline />
-                    </InputAdornment>
-                  )
-                }}
-              />
-            </Grid>
-      <br></br>
+      <CardHeader title='Experiencia Profesional' titleTypographyProps={{ variant: 'h6' }} />
       <Divider sx={{ margin: 0 }} />
-      <br></br>
-      <Grid item xs={12}>
+      <form onSubmit={handleSubmit}>
+        <Grid container spacing={6}>
+          <Grid item xs={12} sm={6}>
+            <Typography variant='body2' sx={{ fontWeight: 600 }}>Certificación</Typography>
+            <TextField 
+              fullWidth 
+              placeholder=''
+              value={certificacion}
+              onChange={(e) => setCertificacion(e.target.value)}
+              error={!!certificacionError}
+              helperText={certificacionError}
+              required  
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <Typography variant='body2' sx={{ fontWeight: 600 }}>Idioma</Typography>
+              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+              <Select
+                labelId='idioma-type-label'
+                label='Idioma'
+                value={idiomaType}
+                onChange={(e) => setIdiomaType(e.target.value)}
+                error={!!idiomaTypeError}
+              >
+                <MenuItem value='Cap1'>Técnica o Profesional</MenuItem>
+                <MenuItem value='Cap2'>Gerencial y Liderazgo</MenuItem>
+                <MenuItem value='Cap3'>Ventas y Servicio al Cliente</MenuItem>
+                <MenuItem value='Cap4'>Seguridad Laboral</MenuItem>
+                <MenuItem value='Cap5'>Trabajo en Equipo</MenuItem>
+              </Select>
+              {idiomaTypeError && <Typography variant='body2' color='error'>{idiomaTypeError}</Typography>}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+          <Divider sx={{ margin: 0 }} />
+            <FormControl fullWidth>
+              <Typography variant='body2' sx={{ fontWeight: 600 }}>Nivel Escrito</Typography>
+              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+              <Select
+                labelId='escrito-type-label'
+                label='Nivel Escrito'
+                value={escritoType}
+                onChange={(e) => setEscritoType(e.target.value)}
+                error={!!escritoTypeError}
+              >
+                <MenuItem value='Area1'>TI</MenuItem>
+                <MenuItem value='Area2'>Salud</MenuItem>
+                <MenuItem value='Area3'>Educación</MenuItem>
+                <MenuItem value='Area4'>Finanzas</MenuItem>
+                <MenuItem value='Area5'>Ingeniería</MenuItem>
+                <MenuItem value='Area6'>Marketing</MenuItem>
+              </Select>
+              {escritoTypeError && <Typography variant='body2' color='error'>{escritoTypeError}</Typography>}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+          <Divider sx={{ margin: 0 }} />
+            <FormControl fullWidth>
+              <Typography variant='body2' sx={{ fontWeight: 600 }}>Nivel Oral</Typography>
+              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+              <Select
+                labelId='oral-type-label'
+                label='Nivel Oral'
+                value={oralType}
+                onChange={(e) => setOralType(e.target.value)}
+                error={!!oralTypeError}
+              >
+                <MenuItem value='Subarea1'>Desarrollo de software</MenuItem>
+                <MenuItem value='Subarea2'>Fisioterapia y rehabilitación</MenuItem>
+                <MenuItem value='Subarea3'>Educación a distancia</MenuItem>
+                <MenuItem value='Subarea4'>Auditoría interna</MenuItem>
+                <MenuItem value='Subarea5'>Ingeniería civil</MenuItem>
+                <MenuItem value='Subarea6'>Marketing digital</MenuItem>
+              </Select>
+              {oralTypeError && <Typography variant='body2' color='error'>{oralTypeError}</Typography>}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <Typography variant='body2' sx={{ fontWeight: 600 }}>Comprensión</Typography>
+              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+              <Select
+                labelId='comprension-type-label'
+                label='Comprensión'
+                value={comprensionType}
+                onChange={(e) => setComprensionType(e.target.value)}
+                error={!!comprensionTypeError}
+              >
+                <MenuItem value='Campo1'>Agricultura y agroindustria</MenuItem>
+                <MenuItem value='Campo2'>Turismo y hotelería:</MenuItem>
+                <MenuItem value='Campo3'>Investigación y desarrollo</MenuItem>
+                <MenuItem value='Campo4'>Industria manufacturera</MenuItem>
+                <MenuItem value='Campo5'>Servicios al cliente</MenuItem>
+                <MenuItem value='Campo6'>Administración y gestión</MenuItem>
+              </Select>
+              {comprensionTypeError && <Typography variant='body2' color='error'>{comprensionTypeError}</Typography>}
+            </FormControl>
+          </Grid>
+        </Grid>  
+        <br></br>
+        <Divider sx={{ margin: 0 }} />
+        <Grid item xs={12}>
           <Typography variant='body2' sx={{ fontWeight: 600 }}>
             Certificado
           </Typography>
         </Grid>
         <br></br>
-          <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column' }}>
-            <input
-              accept=".pdf"
-              id="document-upload"
-              type="file"
-              style={{ display: 'none' }}
-              onChange={handleFileChange}
-            />
-            <label htmlFor="document-upload" sx={{ marginBottom: '10px' }}>
-              <Button
-                variant="outlined"
-                component="span"
-                fullWidth
-                size="large"
-                startIcon={<CloudUploadIcon />} 
-              >
-                Add Documents (PDF)
-              </Button>
-            </label>
-            {file && <Typography variant="body2">{file.name}</Typography>}
-          </Grid>
-      <Divider sx={{ margin: 0 }} />
-      <br></br>
-      <CardActions>
-        <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-          Submit
-        </Button>
-      </CardActions>
-    </form>
-  </Card>
-  )
-}
-
+        <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <input
+            accept=".pdf"
+            id="document-upload"
+            type="file"
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+          />
+          <label htmlFor="document-upload" sx={{ marginBottom: '10px' }}>
+            <Button
+              variant="outlined"
+              component="span"
+              fullWidth
+              size="large"
+              startIcon={<CloudUploadIcon />} 
+            >
+              Add Documents (PDF)
+            </Button>
+          </label>
+          {file && <Typography variant="body2">{file.name}</Typography>}
+        </Grid>
+        <Divider sx={{ margin: 0 }} />
+        <CardActions>
+          <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
+            Submit
+          </Button>
+        </CardActions>
+      </form>
+    </Card>
+  );
+};
+   
 export default FormLayoutsCapIdioma

@@ -270,12 +270,12 @@ const FormLayoutsCapCurso = () => {
               onChange={(e) => setSubareaType(e.target.value)}
               error={!!subareaTypeError}
             >
-              <MenuItem value='Subárea1'>Desarrollo de software</MenuItem>
-              <MenuItem value='Subárea2'>Fisioterapia y rehabilitación</MenuItem>
-              <MenuItem value='Subárea3'>Educación a distancia</MenuItem>
-              <MenuItem value='Subárea4'>Auditoría interna</MenuItem>
-              <MenuItem value='Subárea5'>Ingeniería civil</MenuItem>
-              <MenuItem value='Subárea6'>Marketing digital</MenuItem>
+              <MenuItem value='Subarea1'>Desarrollo de software</MenuItem>
+              <MenuItem value='Subarea2'>Fisioterapia y rehabilitación</MenuItem>
+              <MenuItem value='Subarea3'>Educación a distancia</MenuItem>
+              <MenuItem value='Subarea4'>Auditoría interna</MenuItem>
+              <MenuItem value='Subarea5'>Ingeniería civil</MenuItem>
+              <MenuItem value='Subarea6'>Marketing digital</MenuItem>
             </Select>
             {subareaTypeError && <Typography variant='body2' color='error'>{subareaTypeError}</Typography>}
           </FormControl>
