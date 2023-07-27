@@ -56,7 +56,6 @@ const CardNavigation = () => {
             </Grid>
           </DatePickerWrapper>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}></div>
-            <Button variant='contained'>Button One</Button>
           </TabPanel>
           <TabPanel value='2' sx={{ p: 0 }}>
           <Grid item xs={12}>
@@ -65,7 +64,6 @@ const CardNavigation = () => {
             </Card>
           </Grid>
           <br></br>
-            <Button variant='contained'>Siguiente</Button>
           </TabPanel>
           <TabPanel value='3' sx={{ p: 0 }}>
           <Grid item xs={12}>
@@ -74,7 +72,6 @@ const CardNavigation = () => {
             </Card>
           </Grid>
           <br></br>
-            <Button variant='contained'>Siguiente</Button>
           </TabPanel>
           <TabPanel value='4' sx={{ p: 0 }}>
           <Grid item xs={12}>
@@ -89,7 +86,6 @@ const CardNavigation = () => {
             </Card>
           </Grid>
           <br></br>
-            <Button variant='contained'>Siguiente</Button>
           </TabPanel>
           <TabPanel value='5' sx={{ p: 0 }}>
           <Grid item xs={12}>
@@ -104,7 +100,6 @@ const CardNavigation = () => {
             </Card>
           </Grid>
           <br></br>
-            <Button variant='contained'>Siguiente</Button>
           </TabPanel>
           <TabPanel value='6' sx={{ p: 0 }}>
             <Typography variant='h6' sx={{ marginBottom: 2 }}>
@@ -113,7 +108,6 @@ const CardNavigation = () => {
             <Typography variant='body2' sx={{ marginBottom: 4 }}>
             <TableCollapsible></TableCollapsible>
             </Typography>
-            <Button variant='contained'>Button Six</Button>
           </TabPanel>
         </CardContent>
       </TabContext>

@@ -45,11 +45,6 @@ const Personal = () => {
           <FullHeightCard />
         </Box>
       </ApexChartWrapper>
-      <Link passHref href='/'>
-        <Button component='a' variant='contained' sx={{ px: 5.5 }}>
-          Back to Home
-        </Button>
-      </Link>
     </BoxWrapper>
       </Grid>
     </Grid>
