@@ -19,12 +19,6 @@ import Typography from '@mui/material/Typography'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 
 
-// ** Third Party Imports
-import MessageOutline from 'mdi-material-ui/MessageOutline'
-
-// Helper function to validate only letters and spaces
-
-
 const FormLayoutsTrayectoria = () => {
   // ** States
   const [file, setFile] = useState(null);
