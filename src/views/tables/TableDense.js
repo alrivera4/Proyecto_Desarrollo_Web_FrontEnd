@@ -18,14 +18,9 @@ import CardContent from '@mui/material/CardContent'
 import InputAdornment from '@mui/material/InputAdornment'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
-
-//Importar Iconos 
-import Phone from 'mdi-material-ui/Phone'
-import EmailOutline from 'mdi-material-ui/EmailOutline'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
-import MessageOutline from 'mdi-material-ui/MessageOutline'
-
-
+import FormLayoutsAcademia from '../form-layouts/FormLayoutsAcademia';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 
@@ -60,88 +55,20 @@ const TableDense = () => {
         </Typography>
         <Button variant="contained" onClick={abrirModal}>Nuevo</Button>
       </div>
-
       {/* Ventana Modal */}
       <Dialog open={mostrarModal} onClose={cerrarModal}>
-        <DialogTitle>Formulario</DialogTitle>
+        <DialogTitle>
+          Formulario
+          <IconButton aria-label="close" onClick={cerrarModal} sx={{ position: 'absolute', right: 8, top: 8 }}>
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
         <DialogContent>
-        <Card>
-      <CardHeader title='Basic with Icons' titleTypographyProps={{ variant: 'h6' }} />
-      <CardContent>
-        <form>
-          <Grid container spacing={5}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label='Full Name'
-                placeholder='Leonard Carter'
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <AccountOutline />
-                    </InputAdornment>
-                  )
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                type='email'
-                label='Email'
-                placeholder='carterleonard@gmail.com'
-                helperText='You can use letters, numbers & periods'
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <EmailOutline />
-                    </InputAdornment>
-                  )
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                type='number'
-                label='Phone No.'
-                placeholder='+1-123-456-8790'
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <Phone />
-                    </InputAdornment>
-                  )
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                multiline
-                minRows={3}
-                label='Message'
-                placeholder='Bio...'
-                sx={{ '& .MuiOutlinedInput-root': { alignItems: 'baseline' } }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <MessageOutline />
-                    </InputAdornment>
-                  )
-                }}
-              />
-            </Grid>
-          </Grid>
-        </form>
-      </CardContent>
-    </Card>
+          <FormLayoutsAcademia />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={cerrarModal}>Cancelar</Button>
-          <Button onClick={cerrarModal}>Enviar</Button>
-        </DialogActions>
       </Dialog>
+
+      <Button onClick={abrirModal}>Abrir Modal</Button>
 
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
@@ -155,7 +82,7 @@ const TableDense = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {rows.map((row) => (
               <TableRow key={row.name} sx={{ '&:last-of-type  td, &:last-of-type  th': { border: 0 } }}>
                 <TableCell component='th' scope='row'>
                   {row.name}
@@ -174,3 +101,4 @@ const TableDense = () => {
 };
 
 export default TableDense;
+
