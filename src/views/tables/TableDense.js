@@ -67,9 +67,6 @@ const TableDense = () => {
           <FormLayoutsAcademia />
         </DialogContent>
       </Dialog>
-
-      <Button onClick={abrirModal}>Abrir Modal</Button>
-
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
           <TableHead>
