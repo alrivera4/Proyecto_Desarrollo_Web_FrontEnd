@@ -130,11 +130,11 @@ const FormLayoutsCapIdioma = () => {
                 onChange={(e) => setIdiomaType(e.target.value)}
                 error={!!idiomaTypeError}
               >
-                <MenuItem value='Cap1'>Técnica o Profesional</MenuItem>
-                <MenuItem value='Cap2'>Gerencial y Liderazgo</MenuItem>
-                <MenuItem value='Cap3'>Ventas y Servicio al Cliente</MenuItem>
-                <MenuItem value='Cap4'>Seguridad Laboral</MenuItem>
-                <MenuItem value='Cap5'>Trabajo en Equipo</MenuItem>
+                <MenuItem value='Idioma1'>Inglés</MenuItem>
+                <MenuItem value='Idioma2'>Francés</MenuItem>
+                <MenuItem value='Idioma3'>Chino Mandarín</MenuItem>
+                <MenuItem value='Idioma'>Portugués</MenuItem>
+                <MenuItem value='Idioma5'>Ruso</MenuItem>
               </Select>
               {idiomaTypeError && <Typography variant='body2' color='error'>{idiomaTypeError}</Typography>}
             </FormControl>
@@ -151,12 +151,9 @@ const FormLayoutsCapIdioma = () => {
                 onChange={(e) => setEscritoType(e.target.value)}
                 error={!!escritoTypeError}
               >
-                <MenuItem value='Area1'>TI</MenuItem>
-                <MenuItem value='Area2'>Salud</MenuItem>
-                <MenuItem value='Area3'>Educación</MenuItem>
-                <MenuItem value='Area4'>Finanzas</MenuItem>
-                <MenuItem value='Area5'>Ingeniería</MenuItem>
-                <MenuItem value='Area6'>Marketing</MenuItem>
+                <MenuItem value='escrito1'>Alto</MenuItem>
+                <MenuItem value='escrito2'>Medio</MenuItem>
+                <MenuItem value='escrito3'>Bajo</MenuItem>
               </Select>
               {escritoTypeError && <Typography variant='body2' color='error'>{escritoTypeError}</Typography>}
             </FormControl>
@@ -173,12 +170,9 @@ const FormLayoutsCapIdioma = () => {
                 onChange={(e) => setOralType(e.target.value)}
                 error={!!oralTypeError}
               >
-                <MenuItem value='Subarea1'>Desarrollo de software</MenuItem>
-                <MenuItem value='Subarea2'>Fisioterapia y rehabilitación</MenuItem>
-                <MenuItem value='Subarea3'>Educación a distancia</MenuItem>
-                <MenuItem value='Subarea4'>Auditoría interna</MenuItem>
-                <MenuItem value='Subarea5'>Ingeniería civil</MenuItem>
-                <MenuItem value='Subarea6'>Marketing digital</MenuItem>
+                <MenuItem value='oral1'>Alto</MenuItem>
+                <MenuItem value='oral2'>Medio</MenuItem>
+                <MenuItem value='oral3'>Bajo</MenuItem>
               </Select>
               {oralTypeError && <Typography variant='body2' color='error'>{oralTypeError}</Typography>}
             </FormControl>
@@ -194,12 +188,9 @@ const FormLayoutsCapIdioma = () => {
                 onChange={(e) => setComprensionType(e.target.value)}
                 error={!!comprensionTypeError}
               >
-                <MenuItem value='Campo1'>Agricultura y agroindustria</MenuItem>
-                <MenuItem value='Campo2'>Turismo y hotelería:</MenuItem>
-                <MenuItem value='Campo3'>Investigación y desarrollo</MenuItem>
-                <MenuItem value='Campo4'>Industria manufacturera</MenuItem>
-                <MenuItem value='Campo5'>Servicios al cliente</MenuItem>
-                <MenuItem value='Campo6'>Administración y gestión</MenuItem>
+                <MenuItem value='Comp1'>Alto</MenuItem>
+                <MenuItem value='Comp2'>Medio</MenuItem>
+                <MenuItem value='Comp3'>Bajo</MenuItem>
               </Select>
               {comprensionTypeError && <Typography variant='body2' color='error'>{comprensionTypeError}</Typography>}
             </FormControl>
