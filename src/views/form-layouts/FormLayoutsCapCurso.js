@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField'
 import CardHeader from '@mui/material/CardHeader'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
+import OutlinedInput from '@mui/material/OutlinedInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import Select from '@mui/material/Select'
 import CardActions from '@mui/material/CardActions'
@@ -18,251 +19,317 @@ import Typography from '@mui/material/Typography'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 
 
-// ** Third Party Imports
-import MessageOutline from 'mdi-material-ui/MessageOutline'
-
 const FormLayoutsCapCurso = () => {
   // ** States
   const [file, setFile] = useState(null);
-  const [title, setTitle] = useState(''); // Add the state for title
-  const [titleError, setTitleError] = useState('');
-  const [institution, setInstitution] = useState(''); // Add the state for institution
-  const [institutionError, setInstitutionError] = useState('');
-  const [selectedYear, setSelectedYear] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [descripcionError, setDescripcionError] = useState('');
+  const [evento, setEvento] = useState('');
+  const [eventoError, setEventoError] = useState('');
+  const [certifica, setCertifica] = useState('');
+  const [certificaError, setCertificaError] = useState('');
+  const [duracion, setDuracion] = useState('');
+  const [duracionError, setDuracionError] = useState('');
+  const [capacitacionType, setCapacitacionType] = useState('');
+  const [capacitacionTypeError, setCapacitacionTypeError] = useState('');
+  const [areaType, setAreaType] = useState('');
+  const [areaTypeError, setAreaTypeError] = useState('');
+  const [subareaType, setSubareaType] = useState('');
+  const [subareaTypeError, setSubareaTypeError] = useState('');
+  const [campoType, setCampoType] = useState('');
+  const [campoTypeError, setCampoTypeError] = useState('');
+  const [ingresoStart, setIngresoStart] = useState('');
+  const [ingresoStartError, setIngresoStartError] = useState('');
+  const [salidaEnd, setSalidaEnd] = useState('');
+  const [salidaEndError, setSalidaEndError] = useState('');
+
+
+  const isValidNumber = (value) => /^\d+$/.test(value);
+
+  const isLettersAndSpacesOnly = (value) => /^[a-zA-Z\s]*$/.test(value);
+
+  const isValidDate = (value) => {
+    return !isNaN(Date.parse(value));
+  };
+
 
   // Handle File Upload
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
 
-  const handleYearChange = (event) => {
-    setSelectedYear(event.target.value);
-  };
-
-  const [selectedValues, setSelectedValues] = useState({
-    areaEstudio: '',
-    nivelEstudio: '',
-    estadoEstudio: '',
-  });
-
   // Handle Form Submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const regex = /^[a-zA-Z\s]*$/;
-    
-    if (!regex.test(title)) {
-      setTitleError('Title should only contain letters and spaces');
-    } else {
-      setTitleError('');
-    }
+      let formIsValid = true;
+  
+      // Validate "Evento"
+      if (!isLettersAndSpacesOnly(evento)) {
+        setEventoError('Evento should only contain letters and spaces');
+        formIsValid = false;
+      } else {
+        setEventoError('');
+      }
+  
+      // Validate "Certifica"
+      if (!isLettersAndSpacesOnly(certifica)) {
+        setCertificaError('Certifica should only contain letters and spaces');
+        formIsValid = false;
+      } else {
+        setCertificaError('');
+      }
+  
+      // Validate "Duracion"
+      if (!isValidNumber(duracion)) {
+        setDuracionError('Duración should only contain numbers');
+        formIsValid = false;
+      } else {
+        setDuracionError('');
+      }
+  
+      // Validate "Tipo de Capacitacion"
+      if (!capacitacionType) {
+        // Assuming that the initial value of contractType is an empty string
+        // Change this if the initial value is different
+        setCapacitacionTypeError('Please select a Tipo de Capacitación');
+        formIsValid = false;
+      } else {
+        setCapacitacionTypeError('');
+      }
+  
+      // Validate "Area"
+      if (!areaType) {
+        // Assuming that the initial value of institutionType is an empty string
+        // Change this if the initial value is different
+        setAreaTypeError('Please select a Tipo de Área');
+        formIsValid = false;
+      } else {
+        setAreaTypeError('');
+      }
+  
+      // Validate "Subarea"
+      if (!subareaType) {
+        // Assuming that the initial value of experienceType is an empty string
+        // Change this if the initial value is different
+        setSubareaTypeError('Please select a Tipo de Subárea');
+        formIsValid = false;
+      } else {
+        setSubareaTypeError('');
+      }
 
-    if (!regex.test(institution)) {
-      setInstitutionError('Institution should only contain letters and spaces');
-    } else {
-      setInstitutionError('');
-    }
+      // Validate "Campo"
+      if (!campoType) {
+        // Assuming that the initial value of experienceType is an empty string
+        // Change this if the initial value is different
+        setCampoTypeError('Please select a Tipo de Campo');
+        formIsValid = false;
+      } else {
+        setCampoTypeError('');
+      }
+  
+      // Validate "Ingreso" date format
+      if (!ingresoStart) {
+        setIngresoStartError('Please enter the start date');
+        formIsValid = false;
+      } else if (!isValidDate(ingresoStart)) {
+        setIngresoStartError('Please enter a valid date (YYYY-MM-DD)');
+        formIsValid = false;
+      } else {
+        setIngresoStartError('');
+      }
 
-    if (!regex.test(descripcion)) {
-      setDescripcionError('Description should only contain letters and spaces');
-    } else {
-      setDescripcionError('');
-    }
+  
+      // Validate "Salida" date format
+      if (!salidaEnd) {
+        setSalidaEndError('Please enter the end date');
+        formIsValid = false;
+      } else if (!isValidDate(salidaEnd)) {
+        setSalidaEndError('Please enter a valid date (YYYY-MM-DD)');
+        formIsValid = false;
+      } else {
+        setSalidaEndError('');
+      }
+  
+      // Continue with form submission if all fields are valid
+      if (formIsValid && ingresoStart > salidaEnd) {
+        setSalidaEndError('The end date should be after the start date');
+        formIsValid = false;
+      }
 
-    // Continue with form submission if all fields are valid
-    if (regex.test(title) && regex.test(institution) && regex.test(descripcion)) {
-      // Perform the form submission logic here
-      console.log('Form submitted successfully');
+      if (formIsValid) {
+        // Perform the form submission logic here
+        console.log('Form submitted successfully');
 
-      // Clear the form data after successful submission
-      setTitle('');
-      setInstitution('');
-      setFile(null);
-      setSelectedYear('');
-      setDescripcion('');
 
-      setSelectedValues({
-        areaEstudio: '',
-        nivelEstudio: '',
-        estadoEstudio: '',
-      })
-      }   
+        // Clear the form data after successful submission
+        setEvento('');
+        setCertifica('');
+        setDuracion('');
+        setFile(null);
+        setCapacitacionType('');
+        setAreaType('');
+        setSubareaType('');
+        setCampoType('');
+        setIngresoStart('');
+        setSalidaEnd('');
+      }
     };
-
-  const startYear = 1980;
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: currentYear - startYear + 1 }, (_, index) => startYear + index);
-
 
   return (
     <Card>
-    <CardHeader title='Cursos' titleTypographyProps={{ variant: 'h6' }} />
+    <CardHeader title='Experiencia Profesional' titleTypographyProps={{ variant: 'h6' }} />
     <Divider sx={{ margin: 0 }} />
     <form onSubmit={handleSubmit}>
       <Grid container spacing={5}>
         <Grid item xs={12}>
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Typography variant='body2' sx={{ fontWeight: 600 }}>Título</Typography>
+        <Typography variant='body2' sx={{ fontWeight: 600 }}>Evento</Typography>
           <TextField 
             fullWidth 
             placeholder=''
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            error={!!titleError}
-            helperText={titleError}
-            required 
+            value={evento}
+            onChange={(e) => setEvento(e.target.value)}
+            error={!!eventoError}
+            helperText={eventoError}
+            required  
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Typography variant='body2' sx={{ fontWeight: 600 }}>Institución</Typography>
+        <Typography variant='body2' sx={{ fontWeight: 600 }}>Certifica</Typography>
             <TextField
              fullWidth 
              placeholder='' 
-             value={institution}
-             onChange={(e) => setInstitution(e.target.value)}
-             error={!!institutionError}
-             helperText={institutionError}
+             value={certifica}
+             onChange={(e) => setCertifica(e.target.value)}
+             error={!!certificaError}
+             helperText={certificaError}
              required
             />
         </Grid>
         <Grid item xs={12} sm={6}>
+        <Typography variant='body2' sx={{ fontWeight: 600 }}>Duración-Horas</Typography>
+            <TextField
+              fullWidth 
+              placeholder='' 
+              value={duracion}
+              onChange={(e) => setDuracion(e.target.value)}
+              error={!!duracionError}
+              helperText={duracionError}
+              required
+            />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Areá de Estudio</Typography>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Tipo de Capacitación</Typography>
           <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
             <Select
-              id='form-layouts-separator-select'
-              labelId='form-layouts-separator-select-label'
-              label='Country'
-              placeholder='Bio...'
-              MenuProps={{
-                PaperProps: {
-                  style: {
-                    maxHeight: 200, // Ajusta esta altura según tus necesidades
-                  },
-                }
-              }}
-              value={selectedValues.areaEstudio}
-              onChange={(e) =>
-                setSelectedValues({
-                  ...selectedValues,
-                  areaEstudio: e.target.value,
-                })
-              }
+            labelId='capacitacion-type-label'
+            label='Tipo de Capacitación'
+            value={capacitacionType}
+            onChange={(e) => setCapacitacionType(e.target.value)}
+            error={!!capacitacionTypeError}
             >
-              <MenuItem value='CS'>Ciencias Sociales</MenuItem>
-              <MenuItem value='CN'>Ciencias Naturales</MenuItem>
-              <MenuItem value='HU'>Humanidades</MenuItem>
-              <MenuItem value='CSalud'>Ciencias de la Salud</MenuItem>
-              <MenuItem value='IT'>Ingeniría y Tecnología</MenuItem>
-              <MenuItem value='Artes'>Artes y Bellas Artes</MenuItem>
-              <MenuItem value='CTierra'>Ciencias de la Tierra y Medio Ambiente</MenuItem>
-              <MenuItem value='Bio'>Biotecnología y Genética</MenuItem>
+              <MenuItem value='Cap1'>Técnica o Profesional</MenuItem>
+              <MenuItem value='Cap2'>Gerencial y Liderazgo</MenuItem>
+              <MenuItem value='Cap3'>Ventas y Servicio al Cliente</MenuItem>
+              <MenuItem value='Cap4'>Seguridad Laboral</MenuItem>
+              <MenuItem value='Cap5'>Trabajo en Equipo</MenuItem>
             </Select>
+            {capacitacionTypeError && <Typography variant='body2' color='error'>{capacitacionTypeError}</Typography>}
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Nivel de Estudio</Typography>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Área</Typography>
           <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
             <Select
-              id='form-layouts-separator-select'
-              labelId='form-layouts-separator-select-label'
-              label='Country'
-              placeholder='Bio...'
-              MenuProps={{
-                PaperProps: {
-                  style: {
-                    maxHeight: 200, // Ajusta esta altura según tus necesidades
-                  },
-                }
-              }}
-              value={selectedValues.nivelEstudio}
-              onChange={(e) =>
-                setSelectedValues({
-                  ...selectedValues,
-                  nivelEstudio: e.target.value,
-                })
-              }
+            labelId='area-type-label'
+            label='Área'
+            value={areaType}
+            onChange={(e) => setAreaType(e.target.value)}
+            error={!!areaTypeError}
             >
-              <MenuItem value='Pre'>Pregrado</MenuItem>
-              <MenuItem value='Pos'>Posgrado</MenuItem>
-              <MenuItem value='Lic'>Licenciatura</MenuItem>
-              <MenuItem value='Tec'>Tecnología</MenuItem>
-              <MenuItem value='Doc'>Doctorado</MenuItem>
+              <MenuItem value='Area1'>TI</MenuItem>
+              <MenuItem value='Area2'>Salud</MenuItem>
+              <MenuItem value='Area3'>Educación</MenuItem>
+              <MenuItem value='Area4'>Finanzas</MenuItem>
+              <MenuItem value='Area5'>Ingeniería</MenuItem>
+              <MenuItem value='Area6'>Marketing</MenuItem>
             </Select>
+            {areaTypeError && <Typography variant='body2' color='error'>{areaTypeError}</Typography>}
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Estado de Estudio</Typography>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Subárea</Typography>
+          <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+            <Select
+              labelId='subarea-type-label'
+              label='Subárea'
+              value={subareaType}
+              onChange={(e) => setSubareaType(e.target.value)}
+              error={!!subareaTypeError}
+            >
+              <MenuItem value='Subárea1'>Desarrollo de software</MenuItem>
+              <MenuItem value='Subárea2'>Fisioterapia y rehabilitación</MenuItem>
+              <MenuItem value='Subárea3'>Educación a distancia</MenuItem>
+              <MenuItem value='Subárea4'>Auditoría interna</MenuItem>
+              <MenuItem value='Subárea5'>Ingeniería civil</MenuItem>
+              <MenuItem value='Subárea6'>Marketing digital</MenuItem>
+            </Select>
+            {subareaTypeError && <Typography variant='body2' color='error'>{subareaTypeError}</Typography>}
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormControl fullWidth>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Campo</Typography>
+          <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+            <Select
+              labelId='campo-type-label'
+              label='Campo'
+              value={campoType}
+              onChange={(e) => setCampoType(e.target.value)}
+              error={!!campoTypeError}
+            >
+              <MenuItem value='Campo1'>Agricultura y agroindustria</MenuItem>
+              <MenuItem value='Campo2'>Turismo y hotelería:</MenuItem>
+              <MenuItem value='Campo3'>Investigación y desarrollo</MenuItem>
+              <MenuItem value='Campo4'>Industria manufacturera</MenuItem>
+              <MenuItem value='Campo5'>Servicios al cliente</MenuItem>
+              <MenuItem value='Campo6'>Administración y gestión</MenuItem>
+            </Select>
+            {campoTypeError && <Typography variant='body2' color='error'>{campoTypeError}</Typography>}
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormControl fullWidth>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Fecha Ingreso</Typography>
             <InputLabel id='form-layouts-separator-select-label-2'></InputLabel>
-            <Select
-              label='Country 2'
-              defaultValue=''
-              id='form-layouts-separator-select-2'
-              labelId='form-layouts-separator-select-label-2'
-              MenuProps={{
-                PaperProps: {
-                  style: {
-                    maxHeight: 200, // Ajusta esta altura según tus necesidades
-                  },
-                }
-              }}
-              value={selectedValues.estadoEstudio}
-              onChange={(e) =>
-                setSelectedValues({
-                  ...selectedValues,
-                  estadoEstudio: e.target.value,
-                })
-              }
-            >
-              <MenuItem value='Parcial'>Estudiante de Tiempo Parcial</MenuItem>
-              <MenuItem value='Graduado'>Graduado</MenuItem>
-              <MenuItem value='Practicas'>Estudiante de Prácticas</MenuItem>
-            </Select>
+            <TextField
+              fullWidth
+              type='date'
+              value={ingresoStart}
+              onChange={(e) => setIngresoStart(e.target.value)}
+              error={!!ingresoStartError}
+              helperText={ingresoStartError}
+            />
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Año de Inicio</Typography>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Fecha Salida</Typography>
           <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-          <Select
-          labelId='form-layouts-separator-select-label'
-          label='Año de Inicio'
-          value={selectedYear}
-          onChange={handleYearChange}
-        >
-          {years.map((year) => (
-            <MenuItem key={year} value={year}>{year}</MenuItem>
-          ))}
-          </Select>
+          <TextField
+              fullWidth
+              type='date'
+              value={salidaEnd}
+              onChange={(e) => setSalidaEnd(e.target.value)}
+              error={!!salidaEndError}
+              helperText={salidaEndError}
+          />
           </FormControl>
         </Grid>
       </Grid>  
-      <br></br>
-      <Grid item xs={12}>
-      <Typography variant='body2' sx={{ fontWeight: 600 }}>Descripción</Typography>
-              <TextField
-                fullWidth
-                multiline
-                minRows={3}
-                label=''
-                placeholder='Bio...'
-                value={descripcion}
-                onChange={(e) => setDescripcion(e.target.value)}
-                sx={{ '& .MuiOutlinedInput-root': { alignItems: 'baseline' } }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <MessageOutline />
-                    </InputAdornment>
-                  )
-                }}
-              />
-            </Grid>
       <br></br>
       <Divider sx={{ margin: 0 }} />
       <br></br>

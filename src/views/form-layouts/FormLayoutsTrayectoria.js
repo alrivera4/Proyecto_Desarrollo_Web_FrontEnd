@@ -235,12 +235,12 @@ const FormLayoutsTrayectoria = () => {
             onChange={(e) => setInstitutionType(e.target.value)}
             error={!!institutionTypeError}
             >
-              <MenuItem value='Contrato1'>Privadas</MenuItem>
-              <MenuItem value='Contrato2'>Publicas</MenuItem>
-              <MenuItem value='Contrato3'>No Gubernamentales-ONG</MenuItem>
-              <MenuItem value='Contrato4'>Gubernamentales</MenuItem>
-              <MenuItem value='Contrato5'>Educativas</MenuItem>
-              <MenuItem value='Contrato6'>Organizaciones Internacionales</MenuItem>
+              <MenuItem value='Institución1'>Privadas</MenuItem>
+              <MenuItem value='Institución2'>Publicas</MenuItem>
+              <MenuItem value='Institución3'>No Gubernamentales-ONG</MenuItem>
+              <MenuItem value='Institución4'>Gubernamentales</MenuItem>
+              <MenuItem value='Institución5'>Educativas</MenuItem>
+              <MenuItem value='Institución6'>Organizaciones Internacionales</MenuItem>
             </Select>
             {institutionTypeError && <Typography variant='body2' color='error'>{institutionTypeError}</Typography>}
           </FormControl>
@@ -258,10 +258,10 @@ const FormLayoutsTrayectoria = () => {
             >
               <MenuItem value='Experiencia1'>Tiempo Completo</MenuItem>
               <MenuItem value='Experiencia2'>Tiempo Parcial</MenuItem>
-              <MenuItem value='Experienci3'>Freelance</MenuItem>
-              <MenuItem value='Experienci4'>Prácticas o Pasantias</MenuItem>
-              <MenuItem value='Experienci5'>Voluntaria</MenuItem>
-              <MenuItem value='Experienci6'>Internacional</MenuItem>
+              <MenuItem value='Experiencia3'>Freelance</MenuItem>
+              <MenuItem value='Experiencia4'>Prácticas o Pasantias</MenuItem>
+              <MenuItem value='Experiencia5'>Voluntaria</MenuItem>
+              <MenuItem value='Experiencia6'>Internacional</MenuItem>
             </Select>
             {experienceTypeError && <Typography variant='body2' color='error'>{experienceTypeError}</Typography>}
           </FormControl>
