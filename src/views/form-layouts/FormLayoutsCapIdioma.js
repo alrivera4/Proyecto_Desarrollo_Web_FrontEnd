@@ -103,7 +103,7 @@ const FormLayoutsCapIdioma = () => {
 
   return (
     <Card>
-      <CardHeader title='Experiencia Profesional' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Idiomas' titleTypographyProps={{ variant: 'h6' }} />
       <Divider sx={{ margin: 0 }} />
       <form onSubmit={handleSubmit}>
         <Grid container spacing={6}>

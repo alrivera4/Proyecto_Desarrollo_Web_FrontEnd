@@ -1,5 +1,5 @@
 // ** React Imports
-import { forwardRef, useState } from 'react'
+import { useState } from 'react'
 
 // ** MUI Imports
 import Card from '@mui/material/Card'
@@ -11,299 +11,271 @@ import TextField from '@mui/material/TextField'
 import CardHeader from '@mui/material/CardHeader'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import InputAdornment from '@mui/material/InputAdornment'
 import Select from '@mui/material/Select'
 import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 
-
-// ** Third Party Imports
-import MessageOutline from 'mdi-material-ui/MessageOutline'
-
 const FormLayoutsPubLibros = () => {
   // ** States
   const [file, setFile] = useState(null);
-  const [title, setTitle] = useState(''); // Add the state for title
-  const [titleError, setTitleError] = useState('');
-  const [institution, setInstitution] = useState(''); // Add the state for institution
-  const [institutionError, setInstitutionError] = useState('');
-  const [selectedYear, setSelectedYear] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [descripcionError, setDescripcionError] = useState('');
+  const [titulo, setTitulo] = useState('');
+  const [tituloError, setTituloError] = useState('');
+  const [areaType, setAreaType] = useState('');
+  const [areaTypeError, setAreaTypeError] = useState('');
+  const [subareaType, setSubareaType] = useState('');
+  const [subareaTypeError, setSubareaTypeError] = useState('');
+  const [campoType, setCampoType] = useState('');
+  const [campoTypeError, setCampoTypeError] = useState('');
+  const [publicacionStart, setPublicacionStart] = useState('');
+  const [publicacionStartError, setPublicacionStartError] = useState('');
+  const [issn, setIssn] = useState('');
+  const [issnError, setIssnError] = useState('');
 
   // Handle File Upload
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
 
-  const handleYearChange = (event) => {
-    setSelectedYear(event.target.value);
-  };
+  const isValidNumber = (value) => /^\d+$/.test(value);
 
-  const [selectedValues, setSelectedValues] = useState({
-    areaEstudio: '',
-    nivelEstudio: '',
-    estadoEstudio: '',
-  });
+  const isLettersAndSpacesOnly = (value) => /^[a-zA-Z\s]*$/.test(value);
+
+  const isValidDOI = (value) => /^[a-zA-Z0-9]+$/.test(value);
+
+
+  const isValidDate = (value) => {
+    return !isNaN(Date.parse(value));
+  };
 
   // Handle Form Submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const regex = /^[a-zA-Z\s]*$/;
+    let formIsValid = true;
+  
+      // Validate "Titulo"
+      if (!isLettersAndSpacesOnly(titulo)) {
+        setTituloError('Título should only contain letters and spaces');
+        formIsValid = false;
+      } else {
+        setTituloError('');
+      }
+
+      // Validate "Area"
+      if (!areaType) {
+        setAreaTypeError('Please select a Tipo de Área');
+        formIsValid = false;
+      } else {
+        setAreaTypeError('');
+      }
+  
+      // Validate "Subarea"
+      if (!subareaType) {
+        setSubareaTypeError('Please select a Tipo de Subárea');
+        formIsValid = false;
+      } else {
+        setSubareaTypeError('');
+      }
+
+      // Validate "Campo"
+      if (!campoType) {
+        setCampoTypeError('Please select a Tipo de Campo');
+        formIsValid = false;
+      } else {
+        setCampoTypeError('');
+      }
+  
+      // Validate "Fecha de Publicación" date format
+      if (!publicacionStart) {
+        setPublicacionStartError('Please enter the date');
+        formIsValid = false;
+      } else if (!isValidDate(publicacionStart)) {
+        setPublicacionStartError('Please enter a valid date (YYYY-MM-DD)');
+        formIsValid = false;
+      } else {
+        setPublicacionStartError('');
+      }
+
+      // Validate "Índice ISSN"
+      if (!isLettersAndSpacesOnly(issn)) {
+        setIssnError('Índice ISSN should only contain letters and spaces');
+        formIsValid = false;
+      } else {
+        setIssnError('');
+      }
     
-    if (!regex.test(title)) {
-      setTitleError('Title should only contain letters and spaces');
-    } else {
-      setTitleError('');
-    }
+    // Perform the form submission logic here
+    console.log('Form submitted successfully');
 
-    if (!regex.test(institution)) {
-      setInstitutionError('Institution should only contain letters and spaces');
-    } else {
-      setInstitutionError('');
-    }
-
-    if (!regex.test(descripcion)) {
-      setDescripcionError('Description should only contain letters and spaces');
-    } else {
-      setDescripcionError('');
-    }
-
-    // Continue with form submission if all fields are valid
-    if (regex.test(title) && regex.test(institution) && regex.test(descripcion)) {
-      // Perform the form submission logic here
-      console.log('Form submitted successfully');
-
-      // Clear the form data after successful submission
-      setTitle('');
-      setInstitution('');
-      setFile(null);
-      setSelectedYear('');
-      setDescripcion('');
-
-      setSelectedValues({
-        areaEstudio: '',
-        nivelEstudio: '',
-        estadoEstudio: '',
-      })
-      }   
-    };
-
-  const startYear = 1980;
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: currentYear - startYear + 1 }, (_, index) => startYear + index);
-
+    // Clear the form data after successful submission
+    setTitulo('');
+    setAreaType('');
+    setSubareaType('');
+    setCampoType('');
+    setPublicacionStart('');
+    setIssn('');
+    setFile(null);
+  };
 
   return (
     <Card>
-    <CardHeader title='Libros' titleTypographyProps={{ variant: 'h6' }} />
-    <Divider sx={{ margin: 0 }} />
-    <form onSubmit={handleSubmit}>
-      <Grid container spacing={5}>
-        <Grid item xs={12}>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <Typography variant='body2' sx={{ fontWeight: 600 }}>Título</Typography>
-          <TextField 
-            fullWidth 
-            placeholder=''
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            error={!!titleError}
-            helperText={titleError}
-            required 
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <Typography variant='body2' sx={{ fontWeight: 600 }}>Institución</Typography>
-            <TextField
-             fullWidth 
-             placeholder='' 
-             value={institution}
-             onChange={(e) => setInstitution(e.target.value)}
-             error={!!institutionError}
-             helperText={institutionError}
-             required
+      <CardHeader title='Libros' titleTypographyProps={{ variant: 'h6' }} />
+      <Divider sx={{ margin: 0 }} />
+      <form onSubmit={handleSubmit}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Typography variant='body2' sx={{ fontWeight: 600 }}>Título</Typography>
+            <TextField 
+              fullWidth 
+              placeholder=''
+              value={titulo}
+              onChange={(e) => setTitulo(e.target.value)}
+              error={!!tituloError}
+              helperText={tituloError}
+              required   
             />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Areá de Estudio</Typography>
-          <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-            <Select
-              id='form-layouts-separator-select'
-              labelId='form-layouts-separator-select-label'
-              label='Country'
-              placeholder='Bio...'
-              MenuProps={{
-                PaperProps: {
-                  style: {
-                    maxHeight: 200, // Ajusta esta altura según tus necesidades
-                  },
-                }
-              }}
-              value={selectedValues.areaEstudio}
-              onChange={(e) =>
-                setSelectedValues({
-                  ...selectedValues,
-                  areaEstudio: e.target.value,
-                })
-              }
-            >
-              <MenuItem value='CS'>Ciencias Sociales</MenuItem>
-              <MenuItem value='CN'>Ciencias Naturales</MenuItem>
-              <MenuItem value='HU'>Humanidades</MenuItem>
-              <MenuItem value='CSalud'>Ciencias de la Salud</MenuItem>
-              <MenuItem value='IT'>Ingeniría y Tecnología</MenuItem>
-              <MenuItem value='Artes'>Artes y Bellas Artes</MenuItem>
-              <MenuItem value='CTierra'>Ciencias de la Tierra y Medio Ambiente</MenuItem>
-              <MenuItem value='Bio'>Biotecnología y Genética</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Nivel de Estudio</Typography>
-          <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-            <Select
-              id='form-layouts-separator-select'
-              labelId='form-layouts-separator-select-label'
-              label='Country'
-              placeholder='Bio...'
-              MenuProps={{
-                PaperProps: {
-                  style: {
-                    maxHeight: 200, // Ajusta esta altura según tus necesidades
-                  },
-                }
-              }}
-              value={selectedValues.nivelEstudio}
-              onChange={(e) =>
-                setSelectedValues({
-                  ...selectedValues,
-                  nivelEstudio: e.target.value,
-                })
-              }
-            >
-              <MenuItem value='Pre'>Pregrado</MenuItem>
-              <MenuItem value='Pos'>Posgrado</MenuItem>
-              <MenuItem value='Lic'>Licenciatura</MenuItem>
-              <MenuItem value='Tec'>Tecnología</MenuItem>
-              <MenuItem value='Doc'>Doctorado</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Estado de Estudio</Typography>
-            <InputLabel id='form-layouts-separator-select-label-2'></InputLabel>
-            <Select
-              label='Country 2'
-              defaultValue=''
-              id='form-layouts-separator-select-2'
-              labelId='form-layouts-separator-select-label-2'
-              MenuProps={{
-                PaperProps: {
-                  style: {
-                    maxHeight: 200, // Ajusta esta altura según tus necesidades
-                  },
-                }
-              }}
-              value={selectedValues.estadoEstudio}
-              onChange={(e) =>
-                setSelectedValues({
-                  ...selectedValues,
-                  estadoEstudio: e.target.value,
-                })
-              }
-            >
-              <MenuItem value='Parcial'>Estudiante de Tiempo Parcial</MenuItem>
-              <MenuItem value='Graduado'>Graduado</MenuItem>
-              <MenuItem value='Practicas'>Estudiante de Prácticas</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>Año de Inicio</Typography>
-          <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-          <Select
-          labelId='form-layouts-separator-select-label'
-          label='Año de Inicio'
-          value={selectedYear}
-          onChange={handleYearChange}
-        >
-          {years.map((year) => (
-            <MenuItem key={year} value={year}>{year}</MenuItem>
-          ))}
-          </Select>
-          </FormControl>
-        </Grid>
-      </Grid>  
-      <br></br>
-      <Grid item xs={12}>
-      <Typography variant='body2' sx={{ fontWeight: 600 }}>Descripción</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl fullWidth>
+              <Typography variant='body2' sx={{ fontWeight: 600 }}>Área</Typography>
+              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+              <Select
+                labelId='area-type-label'
+                label='Área'
+                value={areaType}
+                onChange={(e) => setAreaType(e.target.value)}
+                error={!!areaTypeError}
+                required
+              >
+                <MenuItem value='Area1'>TI</MenuItem>
+                <MenuItem value='Area2'>Salud</MenuItem>
+                <MenuItem value='Area3'>Educación</MenuItem>
+                <MenuItem value='Area4'>Finanzas</MenuItem>
+                <MenuItem value='Area5'>Ingeniería</MenuItem>
+                <MenuItem value='Area6'>Marketing</MenuItem>
+              </Select>
+              {areaTypeError && <Typography variant='body2' color='error'>{areaTypeError}</Typography>}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl fullWidth>
+              <Typography variant='body2' sx={{ fontWeight: 600 }}>Subárea</Typography>
+              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+              <Select
+                labelId='subarea-type-label'
+                label='Subárea'
+                value={subareaType}
+                onChange={(e) => setSubareaType(e.target.value)}
+                error={!!subareaTypeError}
+                required
+              >
+                <MenuItem value='Subarea1'>Desarrollo de software</MenuItem>
+                <MenuItem value='Subarea2'>Fisioterapia y rehabilitación</MenuItem>
+                <MenuItem value='Subarea3'>Educación a distancia</MenuItem>
+                <MenuItem value='Subarea4'>Auditoría interna</MenuItem>
+                <MenuItem value='Subarea5'>Ingeniería civil</MenuItem>
+                <MenuItem value='Subarea6'>Marketing digital</MenuItem>
+              </Select>
+              {subareaTypeError && <Typography variant='body2' color='error'>{subareaTypeError}</Typography>}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl fullWidth>
+              <Typography variant='body2' sx={{ fontWeight: 600 }}>Campo</Typography>
+              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+              <Select
+                labelId='campo-type-label'
+                label='Campo'
+                value={campoType}
+                onChange={(e) => setCampoType(e.target.value)}
+                error={!!campoTypeError}
+                required
+              >
+                <MenuItem value='Campo1'>Agricultura y agroindustria</MenuItem>
+                <MenuItem value='Campo2'>Turismo y hotelería:</MenuItem>
+                <MenuItem value='Campo3'>Investigación y desarrollo</MenuItem>
+                <MenuItem value='Campo4'>Industria manufacturera</MenuItem>
+                <MenuItem value='Campo5'>Servicios al cliente</MenuItem>
+                <MenuItem value='Campo6'>Administración y gestión</MenuItem>
+              </Select>
+              {campoTypeError && <Typography variant='body2' color='error'>{campoTypeError}</Typography>}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl fullWidth>
+              <Typography variant='body2' sx={{ fontWeight: 600 }}>Fecha de Publicación</Typography>
               <TextField
                 fullWidth
-                multiline
-                minRows={3}
-                label=''
-                placeholder='Bio...'
-                value={descripcion}
-                onChange={(e) => setDescripcion(e.target.value)}
-                sx={{ '& .MuiOutlinedInput-root': { alignItems: 'baseline' } }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <MessageOutline />
-                    </InputAdornment>
-                  )
+                type='date'
+                value={publicacionStart}
+                onChange={(e) => setPublicacionStart(e.target.value)}
+                error={!!publicacionStartError}
+                helperText={publicacionStartError}
+                required
+                InputLabelProps={{
+                  shrink: true,
                 }}
               />
-            </Grid>
-      <br></br>
-      <Divider sx={{ margin: 0 }} />
-      <br></br>
-      <Grid item xs={12}>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl fullWidth>
+              <Typography variant='body2' sx={{ fontWeight: 600 }}>ISSN</Typography>
+              <TextField
+                fullWidth 
+                placeholder='' 
+                value={issn}
+                onChange={(e) => setIssn(e.target.value)}
+                error={!!issnError}
+                helperText={issnError}
+                required
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+        <br></br>
+        <Divider sx={{ margin: 0 }} />
+        <br></br>
+        <Grid item xs={12}>
           <Typography variant='body2' sx={{ fontWeight: 600 }}>
             Certificado
           </Typography>
         </Grid>
         <br></br>
-          <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column' }}>
-            <input
-              accept=".pdf"
-              id="document-upload"
-              type="file"
-              style={{ display: 'none' }}
-              onChange={handleFileChange}
-            />
-            <label htmlFor="document-upload" sx={{ marginBottom: '10px' }}>
-              <Button
-                variant="outlined"
-                component="span"
-                fullWidth
-                size="large"
-                startIcon={<CloudUploadIcon />} 
-              >
-                Add Documents (PDF)
-              </Button>
-            </label>
-            {file && <Typography variant="body2">{file.name}</Typography>}
-          </Grid>
-      <Divider sx={{ margin: 0 }} />
-      <br></br>
-      <CardActions>
-        <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-          Submit
-        </Button>
-      </CardActions>
-    </form>
-  </Card>
-  )
+        <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <input
+            accept=".pdf"
+            id="document-upload"
+            type="file"
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+          />
+          <label htmlFor="document-upload" sx={{ marginBottom: '10px' }}>
+            <Button
+              variant="outlined"
+              component="span"
+              fullWidth
+              size="large"
+              startIcon={<CloudUploadIcon />} 
+            >
+              Add Documents (PDF)
+            </Button>
+          </label>
+          {file && <Typography variant="body2">{file.name}</Typography>}
+        </Grid>
+        <br></br>
+        <Divider sx={{ margin: 0 }} />
+        <br></br>
+        <CardActions>
+          <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
+            Submit
+          </Button>
+        </CardActions>
+      </form>
+    </Card>
+  );
 }
+
 
 export default FormLayoutsPubLibros

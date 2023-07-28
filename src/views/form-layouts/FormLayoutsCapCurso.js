@@ -176,7 +176,7 @@ const FormLayoutsCapCurso = () => {
 
   return (
     <Card>
-    <CardHeader title='Experiencia Profesional' titleTypographyProps={{ variant: 'h6' }} />
+    <CardHeader title='Cursos' titleTypographyProps={{ variant: 'h6' }} />
     <Divider sx={{ margin: 0 }} />
     <form onSubmit={handleSubmit}>
       <Grid container spacing={5}>
