@@ -10,6 +10,7 @@ import Button from '@mui/material/Button'
 import TabContext from '@mui/lab/TabContext'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
+import FormInfo from 'src/views/form-layouts/FormInfo'
 import FormLayoutsSeparator from 'src/views/form-layouts/FormLayoutsSeparator'
 import 'react-datepicker/dist/react-datepicker.css'
 import Grid from '@mui/material/Grid'
@@ -45,8 +46,8 @@ const CardNavigation = () => {
         <TabList onChange={handleChange} aria-label='card navigation example'
         sx={{
           display: 'flex',
-          flexDirection: 'row-reverse', 
-          justifyContent: 'flex-end', 
+          flexDirection: 'row-reverse',
+          justifyContent: 'flex-end',
         }}>
           <Tab value='1' label='Personal' />
           <Tab value='2' label='Academia' />
@@ -58,14 +59,14 @@ const CardNavigation = () => {
         <CardContent>
           <TabPanel value='1' sx={{ p: 0 }}>
           <DatePickerWrapper>
-            <Grid item xs={10}>
-              <FormLayoutsSeparator />
+            <Grid item xs={12} sm={12}>
+              <FormInfo />
             </Grid>
           </DatePickerWrapper>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}></div>
           </TabPanel>
           <TabPanel value='2' sx={{ p: 0 }}>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={12}>
             <Card>
               <TableDense />
             </Card>
@@ -73,7 +74,7 @@ const CardNavigation = () => {
           <br></br>
           </TabPanel>
           <TabPanel value='3' sx={{ p: 0 }}>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={12}>
             <Card>
               <TableDense2 />
             </Card>
@@ -81,13 +82,13 @@ const CardNavigation = () => {
           <br></br>
           </TabPanel>
           <TabPanel value='4' sx={{ p: 0 }}>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={12}>
             <Card>
               <TableDense3 />
             </Card>
           </Grid>
           <br></br>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={12}>
             <Card>
               <TableDense4 />
             </Card>
@@ -95,13 +96,13 @@ const CardNavigation = () => {
           <br></br>
           </TabPanel>
           <TabPanel value='5' sx={{ p: 0 }}>
-          <Grid item xs={12}>
+          <Grid xs={12} sm={12}>
             <Card>
               <TableDense5 />
             </Card>
           </Grid>
           <br></br>
-          <Grid item xs={12}>
+          <Grid xs={12} sm={12}>
             <Card>
               <TableDense6/>
             </Card>
@@ -109,7 +110,7 @@ const CardNavigation = () => {
           <br></br>
           </TabPanel>
           <TabPanel value='6' sx={{ p: 0 }}>
-            
+
             <Typography variant='body2' sx={{ marginBottom: 6 }}>
             <TableCollapsible></TableCollapsible>
             <TableCollapsible2></TableCollapsible2>
