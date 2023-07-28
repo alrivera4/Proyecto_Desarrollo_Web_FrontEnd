@@ -21,6 +21,13 @@ import TableDense4 from '../tables/TableDense4'
 import TableDense5 from '../tables/TableDense5'
 import TableDense6 from '../tables/TableDense6'
 import TableCollapsible from '../tables/TableCollapsible'
+import TableCollapsible2 from '../tables/TableCollapsible2'
+import TableCollapsible3 from '../tables/TableCollapsible3'
+import TableCollapsible4 from '../tables/TableCollapsible4'
+import TableCollapsible5 from '../tables/TableCollapsible5'
+
+
+
 
 
 
@@ -102,11 +109,14 @@ const CardNavigation = () => {
           <br></br>
           </TabPanel>
           <TabPanel value='6' sx={{ p: 0 }}>
-            <Typography variant='h6' sx={{ marginBottom: 2 }}>
-              Header Three
-            </Typography>
-            <Typography variant='body2' sx={{ marginBottom: 4 }}>
+            
+            <Typography variant='body2' sx={{ marginBottom: 6 }}>
             <TableCollapsible></TableCollapsible>
+            <TableCollapsible2></TableCollapsible2>
+            <TableCollapsible3></TableCollapsible3>
+            <TableCollapsible4></TableCollapsible4>
+            <TableCollapsible5></TableCollapsible5>
+
             </Typography>
           </TabPanel>
         </CardContent>

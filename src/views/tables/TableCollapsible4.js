@@ -11,12 +11,6 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import TableContainer from '@mui/material/TableContainer';
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormLabel from '@mui/material/FormLabel'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
-
-
 
 const createData = (name, calories, fat, carbs, protein, price) => {
   return {
@@ -70,28 +64,7 @@ const Row = (props) => {
         <TableCell colSpan={1} sx={{ py: '0 !important' }}>
           <Collapse in={isChecked} timeout='auto' unmountOnExit>
             <Box sx={{ m: 2 }}>
-            
-              <FormLabel item xs={6} sx={{ fontSize: '0.875rem' }}>Estado Civil</FormLabel>
-              <Select label='Country'>
-                <MenuItem value='USA'>Soltero</MenuItem>
-                <MenuItem value='UK'>Casado</MenuItem>
-                <MenuItem value='Australia'>Divorciado</MenuItem>
-                <MenuItem value='Germany'>Union Libre</MenuItem>
-              </Select>
-           
-
-              <Typography variant='h6' gutterBottom component='div'>
-                Porcentaje
-              </Typography>
-              <input
-                type='range'
-                value={percentage}
-                onChange={handlePercentageChange}
-                min={30}
-                max={100}
-              />
-             
-              <span>{`${percentage}%`}</span>
+              
             </Box>
           </Collapse>
         </TableCell>
@@ -100,16 +73,16 @@ const Row = (props) => {
   );
 };
 
-const rows = [createData('¿Tiene usted alguna discapacidad mayor al 30%?')];
+const rows = [createData('¿Es usted migrante o exmigrante con una duración igual o mayor a dos años continuos?')];
 
-const TableCollapsible= () => {
+const TableCollapsible4 = () => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label='collapsible table'>
         <TableHead>
           <TableRow>
             <TableCell /> {/* Remove the TableCell for the checkbox */}
-            <TableCell>Discapacidad</TableCell>
+            <TableCell>Migrante</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -122,4 +95,4 @@ const TableCollapsible= () => {
   );
 };
 
-export default TableCollapsible;
+export default TableCollapsible4;
