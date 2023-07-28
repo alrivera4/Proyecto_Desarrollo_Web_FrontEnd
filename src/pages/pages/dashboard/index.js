@@ -18,22 +18,25 @@ import CardAppleWatch from 'src/views/cards/CardAppleWatch'
 import CardAppleWatch2 from 'src/views/cards/CardAppleWatch2'
 import CardAppleWatch3 from 'src/views/cards/CardAppleWatch3'
 
+
+
 const Dashboard = () => {
   return (
     <ApexChartWrapper>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Grid item xs={12} sm={6} md={4} lg={3} style={{ maxWidth: '300px', margin: '16px' }}>
+      <Grid container spacing={2} mt={20}>
+        <Grid item xs={12} sm={4}>
           <CardAppleWatch />
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} style={{ maxWidth: '300px', margin: '16px' }}>
+        <Grid item xs={12} sm={4}>
           <CardAppleWatch2 />
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} style={{ maxWidth: '300px', margin: '16px' }}>
+        <Grid item xs={12} sm={4}>
           <CardAppleWatch3 />
         </Grid>
-      </div>
+      </Grid>
     </ApexChartWrapper>
-  )
+  );
 }
+
 
 export default Dashboard

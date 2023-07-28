@@ -9,10 +9,10 @@ import Link from 'next/link'
 const CardAppleWatch2 = () => {
   return (
     <Card>
-      <CardMedia sx={{ height: '9.375rem' }} image='/images/cards/watch-on-hand.jpg' />
+      <CardMedia sx={{ height: '9.375rem' }} image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Jc0gfZWpHrIjH4jugiplpkmddaZ9HxFbHe9ZaGqw6mhAgv0TFZjWN_KBXBVeneUMO4Q&usqp=CAU' />
       <CardContent sx={{ padding: theme => `${theme.spacing(3, 5.25, 4)} !important` }}>
         <Typography variant='h6' sx={{ marginBottom: 2 }}>
-          Oferta   
+          Oferta
         </Typography>
         <Typography variant='body2'>
           Ofertas Registradas

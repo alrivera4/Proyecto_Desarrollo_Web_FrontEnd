@@ -11,7 +11,7 @@ import Link from 'next/link'
 const CardAppleWatch3 = () => {
   return (
     <Card>
-      <CardMedia sx={{ height: '9.375rem' }} image='/images/cards/watch-on-hand.jpg' />
+      <CardMedia sx={{ height: '9.375rem' }} image='https://archivo.olacefs.com/wp-content/uploads/2015/03/Foto.jpg' />
       <CardContent sx={{ padding: theme => `${theme.spacing(3, 5.25, 4)} !important` }}>
         <Typography variant='h6' sx={{ marginBottom: 2 }}>
           Mi Postulación
@@ -22,7 +22,7 @@ const CardAppleWatch3 = () => {
       </CardContent>
       <Link passHref href='/pages/postulacion'>
       <Button variant='contained' sx={{ py: 2.5, width: '100%', borderTopLeftRadius: 0, borderTopRightRadius: 0 }}>
-        Ver mi Postulacion 
+        Ver mi Postulacion
       </Button>
       </Link>
     </Card>
