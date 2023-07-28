@@ -27,11 +27,6 @@ import TableCollapsible3 from '../tables/TableCollapsible3'
 import TableCollapsible4 from '../tables/TableCollapsible4'
 import TableCollapsible5 from '../tables/TableCollapsible5'
 
-
-
-
-
-
 const CardNavigation = () => {
   // ** State
   const [value, setValue] = useState('1')
@@ -41,90 +36,91 @@ const CardNavigation = () => {
   }
 
   return (
-    <Card >
-      <TabContext value={value}>
-        <TabList onChange={handleChange} aria-label='card navigation example'
-        sx={{
-          display: 'flex',
-          flexDirection: 'row-reverse',
-          justifyContent: 'flex-end',
-        }}>
-          <Tab value='1' label='Personal' />
-          <Tab value='2' label='Academia' />
-          <Tab value='3' label='Trayectoria' />
-          <Tab value='4' label='Capacitacion' />
-          <Tab value='5' label='Publicaciones' />
-          <Tab value='6' label='Acción Positiva' />
-        </TabList>
-        <CardContent>
-          <TabPanel value='1' sx={{ p: 0 }}>
-          <DatePickerWrapper>
-            <Grid item xs={12} sm={12}>
-              <FormInfo />
+    <Grid item xs={12} sm={12}>
+      <Card>
+        <TabContext value={value}>
+          <TabList
+            onChange={handleChange}
+            aria-label='card navigation example'
+            sx={{
+              display: 'flex',
+              flexDirection: 'row-reverse',
+              justifyContent: 'flex-end'
+            }}
+          >
+            <Tab value='1' label='Personal' />
+            <Tab value='2' label='Academia' />
+            <Tab value='3' label='Trayectoria' />
+            <Tab value='4' label='Capacitacion' />
+            <Tab value='5' label='Publicaciones' />
+            <Tab value='6' label='Acción Positiva' />
+          </TabList>
+          <CardContent>
+            <TabPanel value='1' sx={{ p: 0 }}>
+              <Grid item xs={12} sm={12}>
+                <FormInfo />
+              </Grid>
+            </TabPanel>
+            <Grid>
+              <TabPanel value='2' sx={{ p: 0 }}>
+                <Grid item xs={12} sm={12}>
+                  <Card>
+                    <TableDense />
+                  </Card>
+                </Grid>
+                <br></br>
+              </TabPanel>
             </Grid>
-          </DatePickerWrapper>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}></div>
-          </TabPanel>
-          <TabPanel value='2' sx={{ p: 0 }}>
-          <Grid item xs={12} sm={12}>
-            <Card>
-              <TableDense />
-            </Card>
-          </Grid>
-          <br></br>
-          </TabPanel>
-          <TabPanel value='3' sx={{ p: 0 }}>
-          <Grid item xs={12} sm={12}>
-            <Card>
-              <TableDense2 />
-            </Card>
-          </Grid>
-          <br></br>
-          </TabPanel>
-          <TabPanel value='4' sx={{ p: 0 }}>
-          <Grid item xs={12} sm={12}>
-            <Card>
-              <TableDense3 />
-            </Card>
-          </Grid>
-          <br></br>
-          <Grid item xs={12} sm={12}>
-            <Card>
-              <TableDense4 />
-            </Card>
-          </Grid>
-          <br></br>
-          </TabPanel>
-          <TabPanel value='5' sx={{ p: 0 }}>
-          <Grid xs={12} sm={12}>
-            <Card>
-              <TableDense5 />
-            </Card>
-          </Grid>
-          <br></br>
-          <Grid xs={12} sm={12}>
-            <Card>
-              <TableDense6/>
-            </Card>
-          </Grid>
-          <br></br>
-          </TabPanel>
-          <TabPanel value='6' sx={{ p: 0 }}>
-
-            <Typography variant='body2' sx={{ marginBottom: 6 }}>
-            <TableCollapsible></TableCollapsible>
-            <TableCollapsible2></TableCollapsible2>
-            <TableCollapsible3></TableCollapsible3>
-            <TableCollapsible4></TableCollapsible4>
-            <TableCollapsible5></TableCollapsible5>
-
-            </Typography>
-          </TabPanel>
-        </CardContent>
-      </TabContext>
-    </Card>
+            <TabPanel value='3' sx={{ p: 0 }}>
+              <Grid item xs={12} sm={12}>
+                <Card>
+                  <TableDense2 />
+                </Card>
+              </Grid>
+              <br></br>
+            </TabPanel>
+            <TabPanel value='4' sx={{ p: 0 }}>
+              <Grid item xs={12} sm={12}>
+                <Card>
+                  <TableDense3 />
+                </Card>
+              </Grid>
+              <br></br>
+              <Grid item xs={12} sm={12}>
+                <Card>
+                  <TableDense4 />
+                </Card>
+              </Grid>
+              <br></br>
+            </TabPanel>
+            <TabPanel value='5' sx={{ p: 0 }}>
+              <Grid xs={12} sm={12}>
+                <Card>
+                  <TableDense5 />
+                </Card>
+              </Grid>
+              <br></br>
+              <Grid xs={12} sm={12}>
+                <Card>
+                  <TableDense6 />
+                </Card>
+              </Grid>
+              <br></br>
+            </TabPanel>
+            <TabPanel value='6' sx={{ p: 0 }}>
+              <Typography variant='body2' sx={{ marginBottom: 6 }}>
+                <TableCollapsible></TableCollapsible>
+                <TableCollapsible2></TableCollapsible2>
+                <TableCollapsible3></TableCollapsible3>
+                <TableCollapsible4></TableCollapsible4>
+                <TableCollapsible5></TableCollapsible5>
+              </Typography>
+            </TabPanel>
+          </CardContent>
+        </TabContext>
+      </Card>
+    </Grid>
   )
 }
 
 export default CardNavigation
-
