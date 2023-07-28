@@ -56,13 +56,13 @@ const CardNavigation = () => {
             <Tab value='6' label='Acción Positiva' />
           </TabList>
           <CardContent>
-            <TabPanel value='1' sx={{ p: 0 }}>
+            <TabPanel value='1' sx={{ p: 0 , width: '100%'}}>
               <Grid item xs={12} sm={12}>
                 <FormInfo />
               </Grid>
             </TabPanel>
             <Grid>
-              <TabPanel value='2' sx={{ p: 0 }}>
+              <TabPanel value='2' sx={{ p: 0 , width: '100%'}}>
                 <Grid item xs={12} sm={12}>
                   <Card>
                     <TableDense />
@@ -71,7 +71,7 @@ const CardNavigation = () => {
                 <br></br>
               </TabPanel>
             </Grid>
-            <TabPanel value='3' sx={{ p: 0 }}>
+            <TabPanel value='3' sx={{ p: 0 , width: '100%'}}>
               <Grid item xs={12} sm={12}>
                 <Card>
                   <TableDense2 />
@@ -79,7 +79,7 @@ const CardNavigation = () => {
               </Grid>
               <br></br>
             </TabPanel>
-            <TabPanel value='4' sx={{ p: 0 }}>
+            <TabPanel value='4' sx={{ p: 0 , width: '100%'}}>
               <Grid item xs={12} sm={12}>
                 <Card>
                   <TableDense3 />
@@ -93,7 +93,7 @@ const CardNavigation = () => {
               </Grid>
               <br></br>
             </TabPanel>
-            <TabPanel value='5' sx={{ p: 0 }}>
+            <TabPanel value='5' sx={{ p: 0 , width: '100%'}}>
               <Grid xs={12} sm={12}>
                 <Card>
                   <TableDense5 />
@@ -107,7 +107,7 @@ const CardNavigation = () => {
               </Grid>
               <br></br>
             </TabPanel>
-            <TabPanel value='6' sx={{ p: 0 }}>
+            <TabPanel value='6' sx={{ p: 0 , width: '100%'}}>
               <Typography variant='body2' sx={{ marginBottom: 6 }}>
                 <TableCollapsible></TableCollapsible>
                 <TableCollapsible2></TableCollapsible2>
