@@ -20,13 +20,12 @@ import { styled, useTheme } from '@mui/material/styles'
 import MuiCard from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogActions from '@mui/material/DialogActions';
+import Dialog from '@mui/material/Dialog'
+import DialogTitle from '@mui/material/DialogTitle'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogActions from '@mui/material/DialogActions'
 import TabRegister from 'src/views/account-settings/TabRegistro'
-
 
 // ** Icons Imports
 import EyeOutline from 'mdi-material-ui/EyeOutline'
@@ -65,15 +64,15 @@ const RegisterCard = () => {
     showPassword: false
   })
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const handleOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   // ** Hook
   const theme = useTheme()
@@ -114,57 +113,10 @@ const RegisterCard = () => {
 
   return (
     <Box mt={5}>
-      <Container>
-        <Box sx={{ mb: 6 }}>
-          <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
-            Registrate aquí
-          </Typography>
-          <Typography variant='body2'>Forma parte de la Comunidad de la UNACH</Typography>
-        </Box>
-        <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-        <TextField
-            autoFocus
-            fullWidth
-            id='cedula'
-            label='Cédula'
-            value={values.cedula}
-            onChange={handleChange('cedula')}
-            InputProps={{
-              inputProps: {
-                pattern: '[0-9]*',
-                maxLength: 10
-              }
-            }}
-            required
-            sx={{ marginBottom: 4 }}
-          />
-          <Button
-  fullWidth
-  size='large'
-  variant='contained'
-  sx={{ marginBottom: 7 }}
-  onClick={handleOpen}
->
-  Siguiente
-</Button>
-
-        </form>
-      </Container>
-      <FooterIllustrationsV1 />
-
-      <Dialog open={open} onClose={handleClose} maxWidth="200" maxLength="200" fullWidth>
-        <DialogTitle>Registrarme</DialogTitle>
-        <DialogContent sx={{ width: '100%', height: '100%', display: '', justifyContent: 'center', alignItems: 'center' }}>
-          <DialogContentText>
-            <Container>
-            <TabRegister/>
+       <Container>
+              <TabRegister />
             </Container>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
+      <FooterIllustrationsV1 />
     </Box>
   )
 }

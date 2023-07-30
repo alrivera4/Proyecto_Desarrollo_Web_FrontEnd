@@ -11,7 +11,7 @@ import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from '@mui/material/Checkbox'
 import InputLabel from '@mui/material/InputLabel'
 import AlertTitle from '@mui/material/AlertTitle'
 import IconButton from '@mui/material/IconButton'
@@ -30,7 +30,6 @@ import FormLabel from '@mui/material/FormLabel'
 import RadioGroup from '@mui/material/RadioGroup'
 import OutlinedInput from '@mui/material/OutlinedInput'
 
-
 import Close from 'mdi-material-ui/Close'
 
 import DatePicker from 'react-datepicker'
@@ -42,7 +41,6 @@ import { Container } from '@mui/material'
 const CustomInput = forwardRef((props, ref) => {
   return <TextField inputRef={ref} label='Birth Date' fullWidth {...props} />
 })
-
 
 const ImgStyled = styled('img')(({ theme }) => ({
   width: 120,
@@ -58,7 +56,6 @@ const ButtonStyled = styled(Button)(({ theme }) => ({
   }
 }))
 
-
 const ResetButtonStyled = styled(Button)(({ theme }) => ({
   marginLeft: theme.spacing(4.5),
   [theme.breakpoints.down('sm')]: {
@@ -69,17 +66,15 @@ const ResetButtonStyled = styled(Button)(({ theme }) => ({
   }
 }))
 
-
-
 const TabRegister = () => {
   // ** State
   const [date, setDate] = useState(null)
   const [openAlert, setOpenAlert] = useState(true)
   const [imgSrc, setImgSrc] = useState('/images/avatars/1.png')
 
-  const handleTermsCheckboxChange = (event) => {
-    setAcceptedTerms(event.target.checked);
-  };
+  const handleTermsCheckboxChange = event => {
+    setAcceptedTerms(event.target.checked)
+  }
 
   const onChange = file => {
     const reader = new FileReader()
@@ -90,7 +85,7 @@ const TabRegister = () => {
     }
   }
   const [open, setOpen] = useState(false)
-  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
 
   const handleOpen = () => {
     setOpen(true)
@@ -99,7 +94,6 @@ const TabRegister = () => {
   const handleClose = () => {
     setOpen(false)
   }
-
 
   return (
     <CardContent>
@@ -137,21 +131,18 @@ const TabRegister = () => {
                 <MenuItem value='Pasaporte'>Pasaporte</MenuItem>
               </Select>
             </FormControl>
-            <Grid item xs={12} sm={6} md={6}>
-              Nombre
-              <TextField label='Nombre' placeholder='' />
-            </Grid>
           </Grid>
-          <Grid item xs={12} sm={5}>
+          <Grid item xs={12} sm={6} md={6}>
+            Nombre
+            <TextField label='Nombre' placeholder='' fullWidth />
+          </Grid>
+          <Grid item xs={12} sm={6} md={6}>
             N° de Identificación
-            <Grid item xs={12} sm={6}>
-              <TextField type='number' label='N° de Identificación' placeholder='' />
-            </Grid>
-            <Grid item xs={12} sm={6} md={7}>
-              {' '}
-              Apellido
-              <TextField label='Apellido' placeholder='' />
-            </Grid>
+            <TextField label='N° de Identificación' placeholder='' fullWidth />
+          </Grid>
+          <Grid item xs={12} sm={6} md={6}>
+            Apellido
+            <TextField label='Apellido' placeholder='' fullWidth />
           </Grid>
         </Grid>
       </form>
@@ -160,11 +151,11 @@ const TabRegister = () => {
         <Grid container spacing={7}>
           <Grid item xs={12} sm={6} md={6}>
             Email
-            <TextField fullWidth type='email' label='Email' placeholder='johnDoe@example.com' />
+            <TextField fullWidth type='email' label='email' placeholder='johnDoe@example.com' />
           </Grid>
           <Grid item xs={12} sm={6}>
             Nueva Contraseña
-            <TextField fullWidth type='password' label='Password' placeholder='password' />
+            <TextField fullWidth type='password' label='Nueva Contraseña' placeholder='Nueva Contraseña' />
           </Grid>
           <Grid item xs={12} sm={6} mt={0}>
             Contraseña
@@ -191,72 +182,79 @@ const TabRegister = () => {
                         correspondientes. En caso de falsedad u ocultamiento de información, el postulante se someterá a
                         la normativa que por esos hechos previne las leyes de la República. Los documentos que consigna
                         el postulante y que respalden ta información no podrán ser legible, impertinentes o mutilados,
-                        en cuyo caso no serán considerados.</p>
-                        <p>Los aspirantes deberán subir su hoja de vida conta
-                        documentación de respaldo que acredite el cumplimiento de los requisitos y los méritos como son:
-                        Experiencia, formación, publicaciones y los demás exigidos en la ley y reglamentación interna de
-                        la Universidad y demás habilitantes. </p>
-                        <p>Previo a la aceptación de términos, deberá considerar los
-                        siguientes aspectos: </p>
-                        <p>Escanear sus documentos personales correspondientes cédula y papeleta de
-                        votación actualizada, formación (títulos de tercer y/o cuarto nivel con el respectivo registro
-                        de la SENEDCYT), experiencia, cursos de capacitación, publicaciones de libres y artículos
-                        indexados, y en caso de acciones afirmativas contar con los respectivos documentos de respaldo.</p>
-                        <p>En la plataforma de postulación deberá llenar todos los campos solicitados INFORMACIÓN PERSONAL
+                        en cuyo caso no serán considerados.
+                      </p>
+                      <p>
+                        Los aspirantes deberán subir su hoja de vida conta documentación de respaldo que acredite el
+                        cumplimiento de los requisitos y los méritos como son: Experiencia, formación, publicaciones y
+                        los demás exigidos en la ley y reglamentación interna de la Universidad y demás habilitantes.{' '}
+                      </p>
+                      <p>Previo a la aceptación de términos, deberá considerar los siguientes aspectos: </p>
+                      <p>
+                        Escanear sus documentos personales correspondientes cédula y papeleta de votación actualizada,
+                        formación (títulos de tercer y/o cuarto nivel con el respectivo registro de la SENEDCYT),
+                        experiencia, cursos de capacitación, publicaciones de libres y artículos indexados, y en caso de
+                        acciones afirmativas contar con los respectivos documentos de respaldo.
+                      </p>
+                      <p>
+                        En la plataforma de postulación deberá llenar todos los campos solicitados INFORMACIÓN PERSONAL
                         PROFESIONAL, para proceder aplicar la OFERTA ACADÉMICA según el perfil del postulante y el
-                        requerimiento académico convocado.</p>
-                        <p> La aplicación de la postulación se lo realizará a una sola
-                        plaza académica, muna que podrá ser utilizada en la acción MI POSTULACIÓN </p>
-                        <p>Además, como
-                        requisitos generales:</p>
-                        <ul>
-                          <li>
-                            No haber sido sancionado por las Universidades y Escuelas Politécnicas por el
-                            incumplimiento de obligaciones establecidas en la Ley Orgánica de Educación Superior, sus
-                            Reglamentos y demás normativa interna
-                          </li>
-                          <li>
-                            Que todos los documentos presentados son de responsabilidad absoluta y gozan de
-                            autenticidad y veracidad del postulantes
-                          </li>
-                          <li>
-                            No poseer parentesco alguno de hasta el curso grado de consanguinidad y segundo de
-                            afinidad, ser conyugo a mantener unión de hecho con:
-                            <ul>
-                              <li>Rector de la Universidad Nacional de
-                            Chimborazo</li>
+                        requerimiento académico convocado.
+                      </p>
+                      <p>
+                        {' '}
+                        La aplicación de la postulación se lo realizará a una sola plaza académica, muna que podrá ser
+                        utilizada en la acción MI POSTULACIÓN{' '}
+                      </p>
+                      <p>Además, como requisitos generales:</p>
+                      <ul>
+                        <li>
+                          No haber sido sancionado por las Universidades y Escuelas Politécnicas por el incumplimiento
+                          de obligaciones establecidas en la Ley Orgánica de Educación Superior, sus Reglamentos y demás
+                          normativa interna
+                        </li>
+                        <li>
+                          Que todos los documentos presentados son de responsabilidad absoluta y gozan de autenticidad y
+                          veracidad del postulantes
+                        </li>
+                        <li>
+                          No poseer parentesco alguno de hasta el curso grado de consanguinidad y segundo de afinidad,
+                          ser conyugo a mantener unión de hecho con:
+                          <ul>
+                            <li>Rector de la Universidad Nacional de Chimborazo</li>
                             <li>Señores/as Vicerrectores.</li>
-                            <li>Miembros del Organismo Colegiado Institucional (Consejo Universitario de la Universidad
-                            Nacional de Chimborazo</li>
-                            </ul>
-                          </li>
-                          <li>
-                            No estar inmerso en ninguna prohibición o inhabilidad establecida en la Constitución de la
-                            República y ordenamiento jurídica •Estar en pleno ejercicio de los derechos previstos en la
-                            Constitución de la publica y las leyes para el desempeño de una función pública
-                          </li>
-                        </ul>
-
+                            <li>
+                              Miembros del Organismo Colegiado Institucional (Consejo Universitario de la Universidad
+                              Nacional de Chimborazo
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          No estar inmerso en ninguna prohibición o inhabilidad establecida en la Constitución de la
+                          República y ordenamiento jurídica •Estar en pleno ejercicio de los derechos previstos en la
+                          Constitución de la publica y las leyes para el desempeño de una función pública
+                        </li>
+                      </ul>
                     </Container>
                   </DialogContentText>
                   <Grid item xs={12} ml={15}>
-          <FormControlLabel
-            control={<Checkbox checked={acceptedTerms} onChange={handleTermsCheckboxChange} />}
-            label="Acepto Términos y Condiciones"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            fullWidth
-            size="large"
-            variant="contained"
-            sx={{ marginBottom: 7 }}
-            onClick={handleOpen}
-            disabled={!acceptedTerms} // Disable the button if the checkbox is not checked
-          >
-            Siguiente
-          </Button>
-        </Grid>
+                    <FormControlLabel
+                      control={<Checkbox checked={acceptedTerms} onChange={handleTermsCheckboxChange} />}
+                      label='Acepto Términos y Condiciones'
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      fullWidth
+                      size='large'
+                      variant='contained'
+                      sx={{ marginBottom: 7 }}
+                      onClick={handleOpen}
+                      disabled={!acceptedTerms} // Disable the button if the checkbox is not checked
+                    >
+                      Siguiente
+                    </Button>
+                  </Grid>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose}>Close</Button>
@@ -264,7 +262,6 @@ const TabRegister = () => {
               </Dialog>
             </Container>
           </Grid>
-
         </Grid>
       </form>
     </CardContent>
