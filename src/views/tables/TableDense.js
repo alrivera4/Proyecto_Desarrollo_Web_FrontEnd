@@ -21,6 +21,8 @@ import Grid from '@mui/material/Grid'
 import FormLayoutsAcademia from '../form-layouts/FormLayoutsAcademia';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
@@ -80,14 +82,30 @@ const TableDense = () => {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.name} sx={{ '&:last-of-type  td, &:last-of-type  th': { border: 0 } }}>
+              <TableRow key={row.name}>
                 <TableCell component='th' scope='row'>
                   {row.name}
                 </TableCell>
                 <TableCell align='right'></TableCell>
                 <TableCell align='right'></TableCell>
-                <TableCell align='right'></TableCell>
-                <TableCell align='right'></TableCell>
+                <TableCell align='right'>
+                  <Grid container spacing={0} direction="row" justifyContent="flex-end" alignItems="center">
+                    <Grid item>
+                      <IconButton aria-label="edit">
+                        <EditIcon />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </TableCell>
+                <TableCell align='right'>
+                  <Grid container spacing={0} direction="row" justifyContent="flex-end" alignItems="center">
+                    <Grid item>
+                      <IconButton aria-label="delete">
+                        <DeleteIcon />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

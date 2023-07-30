@@ -25,6 +25,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogActions from '@mui/material/DialogActions'
 
+
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormLabel from '@mui/material/FormLabel'
 import RadioGroup from '@mui/material/RadioGroup'
@@ -71,6 +72,7 @@ const TabRegister = () => {
   const [date, setDate] = useState(null)
   const [openAlert, setOpenAlert] = useState(true)
   const [imgSrc, setImgSrc] = useState('/images/avatars/1.png')
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 
   const handleTermsCheckboxChange = event => {
     setAcceptedTerms(event.target.checked)
@@ -88,11 +90,20 @@ const TabRegister = () => {
   const [acceptedTerms, setAcceptedTerms] = useState(false)
 
   const handleOpen = () => {
+    setOpen(false)
+    setShowSuccessMessage(true)
+
+  }
+
+  const handleOpen1 = () => {
     setOpen(true)
+
   }
 
   const handleClose = () => {
     setOpen(false)
+
+
   }
 
   return (
@@ -156,7 +167,7 @@ const TabRegister = () => {
       <form>
         <Grid container spacing={10} alignItems='center' justifyContent='center'>
           <Grid item xs={12} sm={6} mt={6}>
-            <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={handleOpen}>
+          <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={handleOpen1}>
               Siguiente
             </Button>
             <Container>
@@ -257,6 +268,16 @@ const TabRegister = () => {
           </Grid>
         </Grid>
       </form>
+      {showSuccessMessage && (
+        <Grid container spacing={10}>
+          <Grid item xs={12}>
+            <Alert severity='success'>
+              <AlertTitle>Éxito</AlertTitle>
+              Usuario registrado con éxito.
+            </Alert>
+          </Grid>
+        </Grid>
+        )}
     </CardContent>
   )
 }
