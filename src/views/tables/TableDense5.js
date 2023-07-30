@@ -68,7 +68,7 @@ const TableDense5 = () => {
         </DialogContent>
       </Dialog>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
+        <Table sx={{ minWidth: 1000 }} size='' aria-label='a dense table'>
           <TableHead>
             <TableRow>
               <TableCell>Dessert (100g serving)</TableCell>

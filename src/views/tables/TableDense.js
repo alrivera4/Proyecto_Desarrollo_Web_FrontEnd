@@ -68,14 +68,14 @@ const TableDense = () => {
         </DialogContent>
       </Dialog>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
+        <Table sx={{ minWidth: 1000 }} size='' aria-label='a dense table'>
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align='right'>Calories</TableCell>
-              <TableCell align='right'>Fat (g)</TableCell>
-              <TableCell align='right'>Carbs (g)</TableCell>
-              <TableCell align='right'>Protein (g)</TableCell>
+              <TableCell>Título</TableCell>
+              <TableCell align='right'>Institución Educativa</TableCell>
+              <TableCell align='right'>Area</TableCell>
+              <TableCell align='right'>Editar</TableCell>
+              <TableCell align='right'>Eliminar</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -84,10 +84,10 @@ const TableDense = () => {
                 <TableCell component='th' scope='row'>
                   {row.name}
                 </TableCell>
-                <TableCell align='right'>{row.calories}</TableCell>
-                <TableCell align='right'>{row.fat}</TableCell>
-                <TableCell align='right'>{row.carbs}</TableCell>
-                <TableCell align='right'>{row.protein}</TableCell>
+                <TableCell align='right'></TableCell>
+                <TableCell align='right'></TableCell>
+                <TableCell align='right'></TableCell>
+                <TableCell align='right'></TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -98,7 +98,7 @@ const TabRegister = () => {
   return (
     <CardContent>
       <form>
-        <Grid container spacing={7}>
+        <Grid container spacing={3}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <ImgStyled src={imgSrc} alt='Profile Pic' />
@@ -124,45 +124,38 @@ const TabRegister = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={6}>
-            Tipo de Identificación
             <FormControl fullWidth>
-              <Select label='Cedula'>
+              <InputLabel id='tipo-identificacion-label'>Tipo de Identificación</InputLabel>
+              <Select labelId='tipo-identificacion-label' label='tipo-identificacion-label'>
                 <MenuItem value='Cedula'>Cédula</MenuItem>
                 <MenuItem value='Pasaporte'>Pasaporte</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            Nombre
             <TextField label='Nombre' placeholder='' fullWidth />
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            N° de Identificación
             <TextField label='N° de Identificación' placeholder='' fullWidth />
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            Apellido
             <TextField label='Apellido' placeholder='' fullWidth />
+          </Grid>
+          <Grid item xs={12} sm={6} md={6}>
+            <TextField fullWidth type='Email' label='Email' placeholder='johnDoe@example.com' />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth type='password' label='Contraseña' placeholder='' />
+          </Grid>
+          <Grid item xs={12} sm={6} mt={0}>
+            <TextField fullWidth type='password' label='Confirmar Contraseña' placeholder='' />
           </Grid>
         </Grid>
       </form>
 
       <form>
-        <Grid container spacing={7}>
-          <Grid item xs={12} sm={6} md={6}>
-            Email
-            <TextField fullWidth type='email' label='email' placeholder='johnDoe@example.com' />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            Nueva Contraseña
-            <TextField fullWidth type='password' label='Nueva Contraseña' placeholder='Nueva Contraseña' />
-          </Grid>
-          <Grid item xs={12} sm={6} mt={0}>
-            Contraseña
-            <TextField fullWidth type='password' label='Password' placeholder='password' />
-          </Grid>
-
-          <Grid item xs={12}>
+        <Grid container spacing={10} alignItems='center' justifyContent='center'>
+          <Grid item xs={12} sm={6} mt={6}>
             <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={handleOpen}>
               Siguiente
             </Button>
