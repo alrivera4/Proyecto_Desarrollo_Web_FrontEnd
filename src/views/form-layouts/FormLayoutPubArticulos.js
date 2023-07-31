@@ -313,11 +313,11 @@ const FormLayoutsPubArticulos = () => {
               error={!!campoTypeError}
             >
               <MenuItem value='Campo1'>Agricultura y agroindustria</MenuItem>
-              <MenuItem value='Campo2'>Turismo y hotelería:</MenuItem>
+              <MenuItem value='Campo2'>Turismo y hotelería</MenuItem>
               <MenuItem value='Campo3'>Investigación y desarrollo</MenuItem>
               <MenuItem value='Campo4'>Industria manufacturera</MenuItem>
               <MenuItem value='Campo5'>Servicios al cliente</MenuItem>
-              <MenuItem value='Campo6'>Administración y gestión</MenuItem>
+              <MenuItem value='Campo6'>Administración y Gestión</MenuItem>
             </Select>
             {campoTypeError && <Typography variant='body2' color='error'>{campoTypeError}</Typography>}
           </FormControl>
