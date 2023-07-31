@@ -44,62 +44,62 @@ const FormLayoutsCapIdioma = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-      let formIsValid = true;
-  
-      // Validate "Certificacion"
-      if (!isLettersAndSpacesOnly(certificacion)) {
-        setCertificacionError('Evento should only contain letters and spaces');
-        formIsValid = false;
-      } else {
-        setCertificacionError('');
-      }
-  
-      // Validate "Idioma"
-      if (!idiomaType) {
-        setIdiomaTypeError('Please select a Idioma');
-        formIsValid = false;
-      } else {
-        setIdiomaTypeError('');
-      }
-  
-      // Validate "Nivel Escrito"
-      if (!escritoType) {
-        setEscritoTypeError('Please select Nivel Escrito');
-        formIsValid = false;
-      } else {
-        setEscritoTypeError('');
-      }
-  
-      // Validate "Nivel Oral"
-      if (!oralType) {
-        setOralTypeError('Please select Nivel Oral');
-        formIsValid = false;
-      } else {
-        setOralTypeError('');
-      }
+    let formIsValid = true;
 
-      // Validate "Comprension"
-      if (!comprensionType) {
-        setComprensionTypeError('Please select Comprension');
-        formIsValid = false;
-      } else {
-        setComprensionTypeError('');
-      }
-  
+    // Validate "Certificacion"
+    if (!isLettersAndSpacesOnly(certificacion)) {
+      setCertificacionError('Evento should only contain letters and spaces');
+      formIsValid = false;
+    } else {
+      setCertificacionError('');
+    }
 
-      if (formIsValid) {
-        console.log('Form submitted successfully');
+    // Validate "Idioma"
+    if (!idiomaType) {
+      setIdiomaTypeError('Please select a Idioma');
+      formIsValid = false;
+    } else {
+      setIdiomaTypeError('');
+    }
+
+    // Validate "Nivel Escrito"
+    if (!escritoType) {
+      setEscritoTypeError('Please select Nivel Escrito');
+      formIsValid = false;
+    } else {
+      setEscritoTypeError('');
+    }
+
+    // Validate "Nivel Oral"
+    if (!oralType) {
+      setOralTypeError('Please select Nivel Oral');
+      formIsValid = false;
+    } else {
+      setOralTypeError('');
+    }
+
+    // Validate "Comprension"
+    if (!comprensionType) {
+      setComprensionTypeError('Please select Comprension');
+      formIsValid = false;
+    } else {
+      setComprensionTypeError('');
+    }
 
 
-        // Clear the form data after successful submission
-        setCertificacion('');
-        setFile(null);
-        setIdiomaType('');
-        setEscritoType('');
-        setOralType('');
-        setComprensionType('');
-      }
-    };
+    if (formIsValid) {
+      console.log('Form submitted successfully');
+
+
+      // Clear the form data after successful submission
+      setCertificacion('');
+      setFile(null);
+      setIdiomaType('');
+      setEscritoType('');
+      setOralType('');
+      setComprensionType('');
+    }
+  };
 
   return (
     <Card>
@@ -109,14 +109,14 @@ const FormLayoutsCapIdioma = () => {
         <Grid container spacing={6}>
           <Grid item xs={12} sm={6}>
             <Typography variant='body2' sx={{ fontWeight: 600 }}>Certificación</Typography>
-            <TextField 
-              fullWidth 
+            <TextField
+              fullWidth
               placeholder=''
               value={certificacion}
               onChange={(e) => setCertificacion(e.target.value)}
               error={!!certificacionError}
               helperText={certificacionError}
-              required  
+              required
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -140,7 +140,7 @@ const FormLayoutsCapIdioma = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
-          <Divider sx={{ margin: 0 }} />
+            <Divider sx={{ margin: 0 }} />
             <FormControl fullWidth>
               <Typography variant='body2' sx={{ fontWeight: 600 }}>Nivel Escrito</Typography>
               <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
@@ -159,7 +159,7 @@ const FormLayoutsCapIdioma = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
-          <Divider sx={{ margin: 0 }} />
+            <Divider sx={{ margin: 0 }} />
             <FormControl fullWidth>
               <Typography variant='body2' sx={{ fontWeight: 600 }}>Nivel Oral</Typography>
               <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
@@ -195,7 +195,7 @@ const FormLayoutsCapIdioma = () => {
               {comprensionTypeError && <Typography variant='body2' color='error'>{comprensionTypeError}</Typography>}
             </FormControl>
           </Grid>
-        </Grid>  
+        </Grid>
         <br></br>
         <Divider sx={{ margin: 0 }} />
         <Grid item xs={12}>
@@ -218,7 +218,7 @@ const FormLayoutsCapIdioma = () => {
               component="span"
               fullWidth
               size="large"
-              startIcon={<CloudUploadIcon />} 
+              startIcon={<CloudUploadIcon />}
             >
               Add Documents (PDF)
             </Button>
@@ -235,5 +235,5 @@ const FormLayoutsCapIdioma = () => {
     </Card>
   );
 };
-   
+
 export default FormLayoutsCapIdioma

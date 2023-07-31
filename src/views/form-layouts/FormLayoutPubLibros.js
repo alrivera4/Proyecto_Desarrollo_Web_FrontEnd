@@ -53,58 +53,58 @@ const FormLayoutsPubLibros = () => {
     e.preventDefault();
 
     let formIsValid = true;
-  
-      // Validate "Titulo"
-      if (!isLettersAndSpacesOnly(titulo)) {
-        setTituloError('Título should only contain letters and spaces');
-        formIsValid = false;
-      } else {
-        setTituloError('');
-      }
 
-      // Validate "Area"
-      if (!areaType) {
-        setAreaTypeError('Please select a Tipo de Área');
-        formIsValid = false;
-      } else {
-        setAreaTypeError('');
-      }
-  
-      // Validate "Subarea"
-      if (!subareaType) {
-        setSubareaTypeError('Please select a Tipo de Subárea');
-        formIsValid = false;
-      } else {
-        setSubareaTypeError('');
-      }
+    // Validate "Titulo"
+    if (!isLettersAndSpacesOnly(titulo)) {
+      setTituloError('Título should only contain letters and spaces');
+      formIsValid = false;
+    } else {
+      setTituloError('');
+    }
 
-      // Validate "Campo"
-      if (!campoType) {
-        setCampoTypeError('Please select a Tipo de Campo');
-        formIsValid = false;
-      } else {
-        setCampoTypeError('');
-      }
-  
-      // Validate "Fecha de Publicación" date format
-      if (!publicacionStart) {
-        setPublicacionStartError('Please enter the date');
-        formIsValid = false;
-      } else if (!isValidDate(publicacionStart)) {
-        setPublicacionStartError('Please enter a valid date (YYYY-MM-DD)');
-        formIsValid = false;
-      } else {
-        setPublicacionStartError('');
-      }
+    // Validate "Area"
+    if (!areaType) {
+      setAreaTypeError('Please select a Tipo de Área');
+      formIsValid = false;
+    } else {
+      setAreaTypeError('');
+    }
 
-      // Validate "Índice ISSN"
-      if (!isLettersAndSpacesOnly(issn)) {
-        setIssnError('Índice ISSN should only contain letters and spaces');
-        formIsValid = false;
-      } else {
-        setIssnError('');
-      }
-    
+    // Validate "Subarea"
+    if (!subareaType) {
+      setSubareaTypeError('Please select a Tipo de Subárea');
+      formIsValid = false;
+    } else {
+      setSubareaTypeError('');
+    }
+
+    // Validate "Campo"
+    if (!campoType) {
+      setCampoTypeError('Please select a Tipo de Campo');
+      formIsValid = false;
+    } else {
+      setCampoTypeError('');
+    }
+
+    // Validate "Fecha de Publicación" date format
+    if (!publicacionStart) {
+      setPublicacionStartError('Please enter the date');
+      formIsValid = false;
+    } else if (!isValidDate(publicacionStart)) {
+      setPublicacionStartError('Please enter a valid date (YYYY-MM-DD)');
+      formIsValid = false;
+    } else {
+      setPublicacionStartError('');
+    }
+
+    // Validate "Índice ISSN"
+    if (!isLettersAndSpacesOnly(issn)) {
+      setIssnError('Índice ISSN should only contain letters and spaces');
+      formIsValid = false;
+    } else {
+      setIssnError('');
+    }
+
     // Perform the form submission logic here
     console.log('Form submitted successfully');
 
@@ -126,14 +126,14 @@ const FormLayoutsPubLibros = () => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Typography variant='body2' sx={{ fontWeight: 600 }}>Título</Typography>
-            <TextField 
-              fullWidth 
+            <TextField
+              fullWidth
               placeholder=''
               value={titulo}
               onChange={(e) => setTitulo(e.target.value)}
               error={!!tituloError}
               helperText={tituloError}
-              required   
+              required
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
@@ -223,8 +223,8 @@ const FormLayoutsPubLibros = () => {
             <FormControl fullWidth>
               <Typography variant='body2' sx={{ fontWeight: 600 }}>ISSN</Typography>
               <TextField
-                fullWidth 
-                placeholder='' 
+                fullWidth
+                placeholder=''
                 value={issn}
                 onChange={(e) => setIssn(e.target.value)}
                 error={!!issnError}
@@ -257,7 +257,7 @@ const FormLayoutsPubLibros = () => {
               component="span"
               fullWidth
               size="large"
-              startIcon={<CloudUploadIcon />} 
+              startIcon={<CloudUploadIcon />}
             >
               Add Documents (PDF)
             </Button>
