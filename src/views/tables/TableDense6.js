@@ -21,6 +21,8 @@ import Grid from '@mui/material/Grid'
 import FormLayoutsPubLibros from '../form-layouts/FormLayoutPubLibros';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
@@ -71,11 +73,12 @@ const TableDense6 = () => {
         <Table sx={{ minWidth: 1000 }} size='' aria-label='a dense table'>
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align='right'>Calories</TableCell>
-              <TableCell align='right'>Fat (g)</TableCell>
-              <TableCell align='right'>Carbs (g)</TableCell>
-              <TableCell align='right'>Protein (g)</TableCell>
+              <TableCell>Título</TableCell>
+              <TableCell align='right'>ISBN</TableCell>
+              <TableCell align='right'>Fecha de Publicación</TableCell>
+              <TableCell align='right'>Certificado</TableCell>
+              <TableCell align='right'>Editar</TableCell>
+              <TableCell align='right'>Eliminar</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -84,10 +87,27 @@ const TableDense6 = () => {
                 <TableCell component='th' scope='row'>
                   {row.name}
                 </TableCell>
-                <TableCell align='right'>{row.calories}</TableCell>
-                <TableCell align='right'>{row.fat}</TableCell>
-                <TableCell align='right'>{row.carbs}</TableCell>
-                <TableCell align='right'>{row.protein}</TableCell>
+                <TableCell align='right'></TableCell>
+                <TableCell align='right'></TableCell>
+                <TableCell align='right'></TableCell>
+                <TableCell align='right'>
+                <Grid container spacing={0} direction="row" justifyContent="flex-end" alignItems="center">
+                    <Grid item>
+                      <IconButton aria-label="edit">
+                        <EditIcon />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </TableCell>
+                <TableCell align='right'>
+                  <Grid container spacing={0} direction="row" justifyContent="flex-end" alignItems="center">
+                    <Grid item>
+                      <IconButton aria-label="delete">
+                        <DeleteIcon />
+                      </IconButton>
+                    </Grid>
+                  </Grid>   
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
