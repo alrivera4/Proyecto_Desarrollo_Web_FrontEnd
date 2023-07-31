@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -11,10 +11,12 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import TableContainer from '@mui/material/TableContainer';
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormLabel from '@mui/material/FormLabel'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
 
 
 
@@ -43,12 +45,22 @@ const createData = (name, calories, fat, carbs, protein, price) => {
 
 const Row = (props) => {
   const { row } = props;
-  const [open, setOpen] = useState(false);
+
   const [isChecked, setIsChecked] = useState(false);
   const [percentage, setPercentage] = useState(0);
 
   const handlePercentageChange = (event) => {
     setPercentage(parseInt(event.target.value, 10));
+  };
+  const [selectedOption, setSelectedOption] = useState('');
+  const [file, setFile] = useState(null);
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
   };
 
   return (
@@ -61,44 +73,73 @@ const Row = (props) => {
             inputProps={{ 'aria-label': 'collapse row' }}
           />
         </TableCell>
-        {/* Only render the name column */}
+        {/* Render both the name column and the checkbox content */}
         <TableCell component='th' scope='row'>
           {row.name}
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell colSpan={1} sx={{ py: '0 !important' }}>
+          {/* Additional content */}
           <Collapse in={isChecked} timeout='auto' unmountOnExit>
-            <Box sx={{ m: 2 }}>
-            
-              <FormLabel item xs={6} sx={{ fontSize: '0.875rem' }}>Estado Civil</FormLabel>
-              <Select label='Country'>
-                <MenuItem value='USA'>Soltero</MenuItem>
-                <MenuItem value='UK'>Casado</MenuItem>
-                <MenuItem value='Australia'>Divorciado</MenuItem>
-                <MenuItem value='Germany'>Union Libre</MenuItem>
-              </Select>
+          <table>
+  <thead>
+    <tr>
+      <th>Porcentaje</th>
+      <th>Tipo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <Box sx={{ m: 2 }}>
+          <Typography gutterBottom component='div'>
+            {percentage}%
+          </Typography>
+          <input
+            type='range'
+            value={percentage}
+            onChange={handlePercentageChange}
+            min={30}
+            max={100}
+          />
+        </Box>
+      </td>
+      <td>
+        <Box sx={{ m: 2 }}>
+          <Typography gutterBottom component='div'>
            
+          </Typography>
+          <FormControlLabel
+            control={
+              <Select value={selectedOption} onChange={handleOptionChange}>
+                <MenuItem value='opcion1'>Opción 1</MenuItem>
+                <MenuItem value='opcion2'>Opción 2</MenuItem>
+                <MenuItem value='opcion3'>Opción 3</MenuItem>
+              </Select>
+            }
+          />
+        </Box>
+      </td>
+    </tr>
+    <tr>
+      <td colSpan={2}>
+        <Box sx={{ m: 2 }}>
+          <Typography gutterBottom component='div'>
+            Certificado
+          </Typography>
+          <Input type='file' onChange={handleFileChange} />
+        </Box>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-              <Typography variant='h6' gutterBottom component='div'>
-                Porcentaje
-              </Typography>
-              <input
-                type='range'
-                value={percentage}
-                onChange={handlePercentageChange}
-                min={30}
-                max={100}
-              />
-             
-              <span>{`${percentage}%`}</span>
-            </Box>
-          </Collapse>
+
+</Collapse>
+
         </TableCell>
       </TableRow>
     </Fragment>
   );
 };
+
 
 const rows = [createData('¿Tiene usted alguna discapacidad mayor al 30%?')];
 

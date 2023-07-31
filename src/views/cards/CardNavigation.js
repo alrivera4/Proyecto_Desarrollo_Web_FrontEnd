@@ -54,7 +54,7 @@ const CardNavigation = () => {
             <Tab value='3' label='Trayectoria' />
             <Tab value='4' label='Capacitacion' />
             <Tab value='5' label='Publicaciones' />
-            <Tab value='6' label='Acción Positiva' />
+            <Tab value='6' label='Acción Afirmativa' />
           </TabList>
           <CardContent>
             <TabPanel value='1' sx={{ p: 0 , width: '100%'}}>
@@ -113,15 +113,15 @@ const CardNavigation = () => {
               </Grid>
               <br></br>
             </TabPanel>
-            <TabPanel value='6' sx={{ p: 0 , width: '100%'}}>
-              <Typography variant='body2' sx={{ marginBottom: 6 }}>
-                <TableCollapsible></TableCollapsible>
-                <TableCollapsible2></TableCollapsible2>
-                <TableCollapsible3></TableCollapsible3>
-                <TableCollapsible4></TableCollapsible4>
-                <TableCollapsible5></TableCollapsible5>
-              </Typography>
-            </TabPanel>
+            <TabPanel value='6' sx={{ p: 0, width: '100%' }}>
+  <Typography variant='body2' sx={{ marginBottom: 6 }}>
+    <TableCollapsible></TableCollapsible>
+    <TableCollapsible2></TableCollapsible2>
+    <TableCollapsible3></TableCollapsible3>
+    <TableCollapsible4></TableCollapsible4>
+    <TableCollapsible5></TableCollapsible5>
+  </Typography>
+</TabPanel>
           </CardContent>
         </TabContext>
       </Card>

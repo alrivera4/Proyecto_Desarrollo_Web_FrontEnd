@@ -59,7 +59,7 @@ const Row = props => {
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell colSpan={1} sx={{ py: '0 !important' }}>
+        <TableCell >
           <Collapse in={isChecked} timeout='auto' unmountOnExit>
             <Box sx={{ m: 2 }}>
               <Typography variant='h6' gutterBottom component='div'>
