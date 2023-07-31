@@ -16,6 +16,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import Grid from '@mui/material/Grid'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import TableDense from 'src/views/tables/TableDense'
+import TableDense1 from '../tables/TableDense1'
 import TableDense2 from '../tables/TableDense2'
 import TableDense3 from '../tables/TableDense3'
 import TableDense4 from '../tables/TableDense4'
@@ -63,6 +64,11 @@ const CardNavigation = () => {
             </TabPanel>
             <Grid>
               <TabPanel value='2' sx={{ p: 0 , width: '100%'}}>
+                <Grid item xs={12} sm={12}>
+                  <Card>
+                    <TableDense1 />
+                  </Card>
+                </Grid>
                 <Grid item xs={12} sm={12}>
                   <Card>
                     <TableDense />
