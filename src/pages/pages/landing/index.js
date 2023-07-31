@@ -35,7 +35,7 @@ const LandingPage = () => {
       {/* Encabezado */}
       <Grid container style={styles.header}>
         <Grid item xs={12} sm={4} style={{ textAlign: 'center', marginTop: '1px' }}>
-          <img src='https://media.discordapp.net/attachments/998785521818026066/1129942862520397894/image.png' alt='Logo' style={{ width: '200px', height: 'auto' }} />
+          <img src='https://www.espe.edu.ec/wp-content/uploads/2022/01/ESPEtransparente.png' alt='Logo' style={{ width: '200px', height: 'auto' }} />
         </Grid>
         <Grid item xs={12} sm={8} style={{ padding: '5px' }}></Grid>
       </Grid>
@@ -50,7 +50,7 @@ const LandingPage = () => {
         <Grid item xs={12} sm={4}></Grid>
         <Grid item xs={12} sm={4} style={styles.whiteText} mt={25} ml={290}>
           <img
-            src='https://sicoaweb2.unach.edu.ec/Content/images/landing/logo_unachenmovimiento.png'
+            src='https://moodleltga.espe.edu.ec/moodle/pluginfile.php/1/theme_eguru/logo/1689336800/logo%20espe%20100%20an%CC%83os%20variaciones-06%20%281%29.png'
             alt='UNACH Logo'
             style={styles.logoImage}
           />
