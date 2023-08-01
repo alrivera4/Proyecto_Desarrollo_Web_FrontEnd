@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import TableContainer from '@mui/material/TableContainer';
 import Checkbox from '@mui/material/Checkbox';
+import Input from '@mui/material/Input';
+
 
 const createData = (name, calories, fat, carbs, protein, price) => {
   return {
@@ -37,13 +39,24 @@ const createData = (name, calories, fat, carbs, protein, price) => {
 
 const Row = (props) => {
   const { row } = props;
-  const [open, setOpen] = useState(false);
+
   const [isChecked, setIsChecked] = useState(false);
   const [percentage, setPercentage] = useState(0);
 
   const handlePercentageChange = (event) => {
     setPercentage(parseInt(event.target.value, 10));
   };
+  const [selectedOption, setSelectedOption] = useState('');
+  const [file, setFile] = useState(null);
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
 
   return (
     <Fragment>
@@ -55,18 +68,21 @@ const Row = (props) => {
             inputProps={{ 'aria-label': 'collapse row' }}
           />
         </TableCell>
-        {/* Only render the name column */}
+        {/* Render both the name column and the checkbox content */}
         <TableCell component='th' scope='row'>
           {row.name}
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell colSpan={1} sx={{ py: '0 !important' }}>
+          {/* Additional content */}
           <Collapse in={isChecked} timeout='auto' unmountOnExit>
-            <Box sx={{ m: 2 }}>
-              
-            </Box>
-          </Collapse>
+    
+          <Box sx={{ m: 2 }} >
+          <Typography gutterBottom component='div'>
+            Certificado
+          </Typography>
+          <Input type='file' onChange={handleFileChange} />
+        </Box>
+
+
+</Collapse>
         </TableCell>
       </TableRow>
     </Fragment>

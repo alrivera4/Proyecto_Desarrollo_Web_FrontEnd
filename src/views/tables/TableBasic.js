@@ -12,22 +12,26 @@ import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
 
 
+
 const createData = (name, calories, fat, carbs, protein, a, b) => {
   return { name, calories, fat, carbs, protein, a, b };
 };
 
 const rows = [
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 2, <Magnify sx={{ color: '#1da1f2' }} />),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 1, <Magnify sx={{ color: '#1da1f2' }} />),
-  createData('Eclair', 262, 16.0, 24, 6.0, 4, <Magnify sx={{ color: '#1da1f2' }} />),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 'HOLA', <Magnify sx={{ color: '#1da1f2' }} />),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 'AA', <Magnify sx={{ color: '#1da1f2' }} />),
+  createData( 237, 9.0, 37,'Ice cream sandwich', 4.3, 2, <Magnify sx={{ color: '#1da1f2' }} />),
+  createData( 159,6.0, 24, 'Ice cream sandwich',4.0, 1, <Magnify sx={{ color: '#1da1f2' }} />),
+  createData( 262, 16.0, 24, 'Eclair',6.0, 4, <Magnify sx={{ color: '#1da1f2' }} />),
+  createData(305,  3.7, 67,'Cupcake', 4.3, 'HOLA', <Magnify sx={{ color: '#1da1f2' }} />),
+  createData( 356, 16.0, 49,'Gingerbread', 3.9, 'AA', <Magnify sx={{ color: '#1da1f2' }} />),
 ];
 
 const TableBasic = () => {
   const [searchValue, setSearchValue] = useState('');
   const [selectedRow, setSelectedRow] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [confirmationModalOpen, setConfirmationModalOpen] = useState(false); // Nuevo estado para la pantalla de confirmación
+  const [successMessageOpen, setSuccessMessageOpen] = useState(false);
+
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -43,11 +47,17 @@ const TableBasic = () => {
     setModalOpen(false);
   };
 
-  const handleAccept = () => {
-    // Aquí puedes realizar alguna acción al hacer clic en el botón de aceptar
-    handleCloseModal();
+  const handleApplyClick = () => {
+    setConfirmationModalOpen(true);
   };
 
+  const handleApply = () => {
+    setConfirmationModalOpen(false); // Cerrar la pantalla de confirmación
+    setSuccessMessageOpen(true); // Mostrar el mensaje de éxito
+  };
+  
+
+  
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
       {/* Campo de búsqueda */}
@@ -55,7 +65,7 @@ const TableBasic = () => {
         type="text"
         value={searchValue}
         onChange={handleSearchChange}
-        placeholder="Buscar por Facultad"
+        placeholder="Buscar por Campo de conocimiento "
         style={{ width: '300px', marginRight: '20px' }}
       />
       <TableContainer component={Paper}>
@@ -73,10 +83,10 @@ const TableBasic = () => {
           </TableHead>
           <TableBody>
             {rows
-              .filter(row => row.name.toLowerCase().includes(searchValue.toLowerCase()))
+              .filter(row => row.carbs.toLowerCase().includes(searchValue.toLowerCase()))
               .map(row => (
                 <TableRow
-                  key={row.name}
+                  key={row.carbs}
                   sx={{
                     '&:last-of-type td, &:last-of-type th': {
                       border: 0,
@@ -114,9 +124,9 @@ const TableBasic = () => {
 </p>
               <p>Recuerde:</p>
               <p>El regitro de información en la sección Hoja de vida es obligatoria según corresponda.</p>
-              <Button onClick={handleAccept} variant="contained" color="primary" sx={{ marginTop: '1rem' }}>
-                Aplicar
-              </Button>
+              <Button onClick={handleApplyClick} variant="contained" color="primary" sx={{ marginTop: '1rem' }}>
+            Aplicar
+          </Button>
               <Button onClick={handleCloseModal} variant="contained" color="secondary" sx={{ marginTop: '1rem' }}>
                 Cerrar
               </Button>
@@ -124,6 +134,36 @@ const TableBasic = () => {
           )}
         </DialogContent>
       </Dialog>
+            {/* Pantalla de confirmación */}
+      <Dialog open={confirmationModalOpen} onClose={() => setConfirmationModalOpen(false)} maxWidth="md" fullWidth>
+        <DialogContent sx={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          {selectedRow && (
+            <div>
+              {/* Contenido de la pantalla de confirmación */}
+              <h2>Confirmación</h2>
+              <p>¿Estás seguro de que deseas aplicar a este puesto?</p>
+              <Button onClick={handleApply} variant="contained" color="primary" sx={{ marginTop: '1rem' }}>
+                Si
+              </Button>
+              <Button onClick={() => setConfirmationModalOpen(false)} variant="contained" color="secondary" sx={{ marginTop: '1rem' }}>
+                No
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+       {/* Mensaje de éxito */}
+    <Dialog open={successMessageOpen} onClose={() => setSuccessMessageOpen(false)} maxWidth="md" fullWidth>
+      <DialogContent sx={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div>
+          {/* Contenido del mensaje de éxito */}
+          <h2>Aplicación con éxito</h2>
+          <p>Tu solicitud ha sido enviada correctamente.</p>
+          <Button onClick={handleCloseModal} variant="contained" color="secondary" sx={{ marginTop: '1rem' }}> Cerrar
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
     </div>
   );
 };

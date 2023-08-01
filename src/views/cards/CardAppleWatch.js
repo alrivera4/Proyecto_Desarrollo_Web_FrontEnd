@@ -9,7 +9,7 @@ import Link from 'next/link'
 const CardAppleWatch = () => {
   return (
     <Card>
-      <CardMedia sx={{ height: '9.375rem' }} image='https://www.softzone.es/app/uploads-softzone.es/2022/03/Actualizar-todo-el-software-del-PC.jpg' />
+      <CardMedia sx={{ height: '9.375rem' }} image='/images/img1.png' />
       <CardContent sx={{ padding: theme => `${theme.spacing(3, 5.25, 4)} !important` }}>
         <Typography variant='h6' sx={{ marginBottom: 2 }}>
           Información

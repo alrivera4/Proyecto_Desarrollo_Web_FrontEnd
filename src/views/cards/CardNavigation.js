@@ -44,7 +44,7 @@ const CardNavigation = () => {
             onChange={handleChange}
             aria-label='card navigation example'
             sx={{
-              display: 'flex',
+              display: 'static',
               flexDirection: 'row-reverse',
               justifyContent: 'flex-end'
             }}

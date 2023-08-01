@@ -11,7 +11,7 @@ import Link from 'next/link'
 const CardAppleWatch3 = () => {
   return (
     <Card>
-      <CardMedia sx={{ height: '9.375rem' }} image='https://archivo.olacefs.com/wp-content/uploads/2015/03/Foto.jpg' />
+      <CardMedia sx={{ height: '9.375rem' }} image='/images/img3.png' />
       <CardContent sx={{ padding: theme => `${theme.spacing(3, 5.25, 4)} !important` }}>
         <Typography variant='h6' sx={{ marginBottom: 2 }}>
           Mi Postulación

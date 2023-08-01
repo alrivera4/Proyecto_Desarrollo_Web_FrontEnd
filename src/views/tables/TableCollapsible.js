@@ -78,7 +78,7 @@ const Row = (props) => {
           {row.name}
           {/* Additional content */}
           <Collapse in={isChecked} timeout='auto' unmountOnExit>
-          <table>
+          <table >
   <thead>
     <tr>
       <th>Porcentaje</th>
@@ -146,7 +146,7 @@ const rows = [createData('¿Tiene usted alguna discapacidad mayor al 30%?')];
 const TableCollapsible= () => {
   return (
     <TableContainer component={Paper}>
-      <Table aria-label='collapsible table'>
+      <Table   size='100%' aria-label='collapsible table'>
         <TableHead>
           <TableRow>
             <TableCell /> {/* Remove the TableCell for the checkbox */}
