@@ -72,10 +72,12 @@ const FormLayoutsAcademia = () => {
       setDescripcionError('');
     }
 
-    // Continue with form submission if all fields are valid
-    if (regex.test(title) && regex.test(institution) && regex.test(descripcion)) {
+    const confirmResult = window.confirm('¿Está seguro de guardar los datos del formulario y borrarlos?');
+
+    // If the user clicks "Aceptar" in the confirmation dialog and all fields are valid
+    if (confirmResult && regex.test(title) && regex.test(institution) && regex.test(descripcion)) {
       // Perform the form submission logic here
-      console.log('Form submitted successfully');
+      console.log('Formulario enviado exitosamente');
 
       // Clear the form data after successful submission
       setTitle('');
@@ -88,7 +90,10 @@ const FormLayoutsAcademia = () => {
         areaEstudio: '',
         nivelEstudio: '',
         estadoEstudio: '',
-      })
+      });
+    } else {
+      // If the user clicks "Cancelar" in the confirmation dialog or any fields are invalid
+      console.log('Envío de formulario cancelado o campos inválidos');
     }
   };
 
@@ -245,7 +250,6 @@ const FormLayoutsAcademia = () => {
         </Grid>
         <br></br>
         <Divider sx={{ margin: 0 }} />
-        <br></br>
         <Grid item xs={12}>
           <Typography variant='body2' sx={{ fontWeight: 600 }}>
             Certificado
@@ -271,7 +275,11 @@ const FormLayoutsAcademia = () => {
               Add Documents (PDF)
             </Button>
           </label>
-          {file && <Typography variant="body2">{file.name}</Typography>}
+          {file && (
+            <Typography variant="body2" sx={{ overflowWrap: 'break-word' }}>
+              {file.name}
+            </Typography>
+          )}
         </Grid>
         <Divider sx={{ margin: 0 }} />
         <br></br>
