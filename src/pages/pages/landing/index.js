@@ -41,8 +41,9 @@ const LandingPage = () => {
       </Grid>
 
       <Grid container style={styles.heroContainer}>
-        <Grid item xs={12} sm={4} mt={15} ml={10} style={styles.blackText}>
-          <h2>Talento Humano</h2>
+        <Grid item xs={12} sm={6} mt={15} ml={10} style={styles.blackText}>
+          <h2>Talento Humano:            Sistema de gestión de la Información de los Procesos del departamento de Adminitración de Talento Humano
+</h2>
           {/*<h3>
             Sistema de gestión de la Información de los Procesos del departamento de Adminitración de Talento Humano
   </h3>*/}
