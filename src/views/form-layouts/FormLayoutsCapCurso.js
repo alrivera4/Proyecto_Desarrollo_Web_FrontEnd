@@ -149,28 +149,28 @@ const FormLayoutsCapCurso = () => {
       setSalidaEndError('');
     }
 
-    // Continue with form submission if all fields are valid
-    if (formIsValid && ingresoStart > salidaEnd) {
-      setSalidaEndError('The end date should be after the start date');
-      formIsValid = false;
-    }
-
     if (formIsValid) {
-      // Perform the form submission logic here
-      console.log('Form submitted successfully');
+      // Show confirmation alert before submitting the form
+      const confirmResult = window.confirm('¿Está seguro de guardar los datos del formulario?');
 
+      if (confirmResult) {
+        // Perform the form submission logic here
+        console.log('Form submitted successfully');
 
-      // Clear the form data after successful submission
-      setEvento('');
-      setCertifica('');
-      setDuracion('');
-      setFile(null);
-      setCapacitacionType('');
-      setAreaType('');
-      setSubareaType('');
-      setCampoType('');
-      setIngresoStart('');
-      setSalidaEnd('');
+        // Clear the form data after successful submission
+        setEvento('');
+        setCertifica('');
+        setDuracion('');
+        setFile(null);
+        setCapacitacionType('');
+        setAreaType('');
+        setSubareaType('');
+        setCampoType('');
+        setIngresoStart('');
+        setSalidaEnd('');
+      } else {
+        console.log('Form submission canceled');
+      }
     }
   };
 

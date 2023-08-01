@@ -72,7 +72,7 @@ const FormLayoutsAcademia = () => {
       setDescripcionError('');
     }
 
-    const confirmResult = window.confirm('¿Está seguro de guardar los datos del formulario y borrarlos?');
+    const confirmResult = window.confirm('¿Está seguro de guardar los datos del formulario?');
 
     // If the user clicks "Aceptar" in the confirmation dialog and all fields are valid
     if (confirmResult && regex.test(title) && regex.test(institution) && regex.test(descripcion)) {
