@@ -41,19 +41,19 @@ const LandingPage = () => {
       </Grid>
 
       <Grid container style={styles.heroContainer}>
-        <Grid item xs={12} sm={4} mt={15} ml={10} style={styles.whiteText}>
+        <Grid item xs={12} sm={4} mt={15} ml={10} style={styles.blackText}>
           <h2>Talento Humano</h2>
-          <h3>
+          {/*<h3>
             Sistema de gestión de la Información de los Procesos del departamento de Adminitración de Talento Humano
-          </h3>
+  </h3>*/}
         </Grid>
         <Grid item xs={12} sm={4}></Grid>
         <Grid item xs={12} sm={4} style={styles.whiteText} mt={25} ml={290}>
-          <img
+          {/*<img
             src='https://moodleltga.espe.edu.ec/moodle/pluginfile.php/1/theme_eguru/logo/1689336800/logo%20espe%20100%20an%CC%83os%20variaciones-06%20%281%29.png'
             alt='UNACH Logo'
             style={styles.logoImage}
-          />
+  />*/}
         </Grid>
       </Grid>
 
