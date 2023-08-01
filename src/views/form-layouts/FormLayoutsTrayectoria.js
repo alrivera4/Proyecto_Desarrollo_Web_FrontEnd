@@ -55,8 +55,14 @@ const FormLayoutsTrayectoria = () => {
   // Handle Form Submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Show confirmation dialog to the user
+    const confirmResult = window.confirm('¿Está seguro de guardar los datos del formulario y borrarlos?');
 
-    let formIsValid = true;
+    // If the user clicks "Aceptar" in the confirmation dialog
+    if (confirmResult) {
+      let formIsValid = true;
+
 
     // Validate "Institución"
     if (!isLettersAndSpacesOnly(institution)) {
@@ -135,27 +141,29 @@ const FormLayoutsTrayectoria = () => {
       setContractEndError('');
     }
 
-    // Continue with form submission if all fields are valid
-    if (formIsValid && contractStart > contractEnd) {
-      setContractEndError('The end date should be after the start date');
-      formIsValid = false;
-    }
+   if (formIsValid && contractStart > contractEnd) {
+        setContractEndError('La fecha de fin debe ser posterior a la fecha de inicio');
+        formIsValid = false;
+      }
 
-    if (formIsValid) {
-      // Perform the form submission logic here
-      console.log('Form submitted successfully');
+      if (formIsValid) {
+        // Perform the form submission logic here
+        console.log('Formulario enviado exitosamente');
 
-
-      // Clear the form data after successful submission
-      setInstitution('');
-      setDepartment('');
-      setPosition('');
-      setFile(null);
-      setContractType('');
-      setInstitutionType('');
-      setExperienceType('');
-      setContractStart('');
-      setContractEnd('');
+        // Clear the form data after successful submission
+        setInstitution('');
+        setDepartment('');
+        setPosition('');
+        setFile(null);
+        setContractType('');
+        setInstitutionType('');
+        setExperienceType('');
+        setContractStart('');
+        setContractEnd('');
+      }
+    } else {
+      // If the user clicks "Cancelar" in the confirmation dialog
+      console.log('Envío de formulario cancelado');
     }
   };
 
@@ -295,6 +303,7 @@ const FormLayoutsTrayectoria = () => {
             </FormControl>
           </Grid>
         </Grid>
+        <br></br>
         <br></br>
         <Divider sx={{ margin: 0 }} />
         <br></br>
