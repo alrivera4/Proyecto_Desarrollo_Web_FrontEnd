@@ -56,7 +56,9 @@ const LoginPage = () => {
   const [values, setValues] = useState({
     cedula: '',
     password: '',
-    showPassword: false
+    showPassword: false,
+    cedulaError: false,
+    passwordError: false,
   })
 
   // ** Hook
@@ -68,12 +70,19 @@ const LoginPage = () => {
       // Verificar que solo se ingresen números en el campo "cedula"
       const cedulaValue = event.target.value
       if (/^\d{0,10}$/.test(cedulaValue)) {
-        setValues({ ...values, [prop]: cedulaValue })
+        setValues({ ...values, [prop]: cedulaValue, cedulaError: false }) // Reset cedulaError when the input is valid
+      } else {
+        setValues({ ...values, [prop]: cedulaValue, cedulaError: true }) // Set cedulaError to true when the input is invalid
       }
+    } else if (prop === 'password') {
+      // Verificar que el campo "password" no esté vacío
+      const passwordValue = event.target.value
+      setValues({ ...values, [prop]: passwordValue, passwordError: passwordValue.trim() === '' }) // Set passwordError to true when the password is empty
     } else {
       setValues({ ...values, [prop]: event.target.value })
     }
-  }
+  };
+
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword })
@@ -94,14 +103,23 @@ const LoginPage = () => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    if (!isFormValid()) {
-      // Show an error message or perform some error handling here
-      console.log('Please fill in all fields')
+    const isCedulaValid = /^\d{10}$/.test(values.cedula);
+    const isPasswordValid = values.password.trim() !== '';
+
+    setValues({
+      ...values,
+      cedulaError: !isCedulaValid,
+      passwordError: !isPasswordValid,
+    });
+
+    if (isCedulaValid && isPasswordValid) {
+      // Redirect to the external page or perform form submission here
+      window.location.href = '/pages/dashboard';
     } else {
-      // Redirect to the external page
-      window.location.href = '/pages/dashboard'
+      // Show an error message or perform some error handling here
+      console.log('Please fill in all fields correctly');
     }
-  }
+  };
 
   // ** State
 
@@ -112,9 +130,9 @@ const LoginPage = () => {
           <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
             Postula Aquí
           </Typography>
-          <Typography variant='body2'>Forma parte de la Comunidad de la UNACH</Typography>
+          <Typography variant='body2'>Forma parte de la Comunidad de la ESPE</Typography>
         </Box>
-        <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
+        <form noValidate autoComplete='off' onSubmit={handleSubmit}>
           <TextField
             autoFocus
             fullWidth
@@ -129,9 +147,10 @@ const LoginPage = () => {
               }
             }}
             required
+            error={values.cedulaError} // Apply error style when cedulaError is true
+            helperText={values.cedulaError ? 'Ingrese un N° de Identificación válido' : ''} // Display error message when cedulaError is true
             sx={{ marginBottom: 4 }}
           />
-
           <FormControl fullWidth>
             <InputLabel htmlFor='auth-login-password'>Contraseña</InputLabel>
             <OutlinedInput
@@ -153,13 +172,15 @@ const LoginPage = () => {
                 </InputAdornment>
               }
               required
+              error={values.passwordError} // Apply error style when passwordError is true
+              helperText={values.passwordError ? 'Este campo es obligatorio' : ''} // Display error message when passwordError is true
               sx={{ marginBottom: 4 }}
             />
           </FormControl>
           <Box sx={{ mb: 4, display: 'flex', alignItems: 'left', flexWrap: 'wrap', justifyContent: 'space-between' }}>
             <FormControlLabel control={<Checkbox />} label='Recuerdame' />
           </Box>
-          <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={handleSubmit}>
+          <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} type='submit'>
             Iniciar Sesión
           </Button>
         </form>
