@@ -16,9 +16,14 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Select from '@mui/material/Select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
-import EyeOutline from 'mdi-material-ui/EyeOutline';
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline';
+import Modal from '@mui/material/Modal';
+
+
+
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='Fecha de Nacimiento' autoComplete='off' />;
@@ -47,6 +52,9 @@ const FormInfo = () => {
   const [paisNacimientoValido, setPaisNacimientoValido] = useState(true);
   const [sexoValido, setSexoValido] = useState(true);
   const [estadoCivilValido, setEstadoCivilValido] = useState(true);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -74,8 +82,7 @@ const FormInfo = () => {
       sexoValido &&
       estadoCivilValido
     ) {
-      // Add form submission logic here
-      // For simplicity, we will not add the form submission logic in this example.
+      setIsConfirmationModalOpen(true);
     }
   };
 
@@ -110,40 +117,78 @@ const FormInfo = () => {
   const validateDocumento = (value) => {
     const regex = /^\d{10}$/;
 
-return regex.test(value);
+    return regex.test(value);
   };
 
   const validateTelefono = (value) => {
     const regex = /^\d+$/;
 
-return regex.test(value);
+    return regex.test(value);
   };
 
-   // Función para validar que el nombre contenga solo letras
-   const validateNombre = (value) => {
+  // Función para validar que el nombre contenga solo letras
+  const validateNombre = (value) => {
     const regex = /^[A-Za-z]+$/;
 
-return regex.test(value);
+    return regex.test(value);
   };
 
   // Función para validar que el apellido contenga solo letras
   const validateApellido = (value) => {
     const regex = /^[A-Za-z]+$/;
 
-return regex.test(value);
+    return regex.test(value);
   };
 
- const handleIdentificationImageUpload = event => {
+  const handleIdentificationImageUpload = event => {
     const file = event.target.files[0]
     setIdentificationImage(file)
   }
-
-
 
   const handleVotingCardImageUpload = event => {
     const file = event.target.files[0]
     setVotingCardImage(file)
   }
+
+  const handleConfirmModal = () => {
+    // Realizar la lógica de envío del formulario aquí (opcional)
+    console.log('Formulario enviado exitosamente');
+
+    // Restablecer los estados y cerrar el modal de confirmación
+    setIsConfirmationModalOpen(false);
+
+  };
+
+  const handleFormConfirmation = () => {
+    // Realiza el envío del formulario (aquí puedes agregar la lógica para enviar los datos al servidor)
+    console.log('Formulario enviado exitosamente');
+
+    // Restablece los estados y cierra el modal de confirmación
+    setIsFormSubmitted(true);
+    setIsConfirmationModalOpen(false);
+
+    // Restablece los valores del formulario (opcional, si se necesita)
+    setValues({
+      password: '',
+      password2: '',
+      showPassword: false,
+      showPassword2: false,
+      paisNacimiento: '',
+      sexo: '',
+      estadoCivil: '',
+    });
+    setDate(null);
+
+    // Restablece otros estados si es necesario...
+
+    // Opcional: Puedes redirigir al usuario a otra página después del envío exitoso del formulario
+    // window.location.href = '/ruta-de-redireccion';
+  };
+
+  const handleCancelModal = () => {
+    // Cierra el modal de confirmación sin borrar los datos del formulario
+    setIsConfirmationModalOpen(false);
+  };
 
   return (
     <Card>
@@ -366,7 +411,7 @@ return regex.test(value);
             </Grid>
           </Grid>
 
-<Grid container spacing={5} mt={2}>
+          <Grid container spacing={5} mt={2}>
             <Grid item xs={12} sm={12}>
               <Typography variant='body2' sx={{ fontWeight: 600 }}>
                 4. Información Profesional
@@ -423,6 +468,42 @@ return regex.test(value);
           </Button>
         </CardActions>
       </form>
+      {/* Modal de confirmación */}
+      <Modal
+        open={isConfirmationModalOpen}
+        onClose={handleCancelModal}
+        aria-labelledby='modal-title'
+        aria-describedby='modal-description'
+      >
+        <Card sx={{ padding: 2, maxWidth: 400, position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+          <Typography variant='h6' id='modal-title'>
+            Confirmar Envío
+          </Typography>
+          <Typography variant='body2' id='modal-description'>
+            ¿Está seguro de guardar los datos del formulario y enviarlos?
+          </Typography>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={handleFormConfirmation}
+              style={{ marginLeft: 10 }}
+              startIcon={<CheckIcon />}
+            >
+              Sí, Enviar
+            </Button>
+            <Button
+              variant='outlined'
+              color='primary'
+              onClick={handleCancelModal}
+              style={{ marginLeft: 10 }}
+              startIcon={<CloseIcon />}
+            >
+              Cancelar
+            </Button>
+          </div>
+        </Card>
+      </Modal>
     </Card>
   );
 };
