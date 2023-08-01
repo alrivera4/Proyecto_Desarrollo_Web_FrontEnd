@@ -40,6 +40,8 @@ const FormLayoutsCapCurso = () => {
   const [ingresoStartError, setIngresoStartError] = useState('');
   const [salidaEnd, setSalidaEnd] = useState('');
   const [salidaEndError, setSalidaEndError] = useState('');
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+
 
 
   const isValidNumber = (value) => /^\d+$/.test(value);
@@ -60,7 +62,14 @@ const FormLayoutsCapCurso = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Show confirmation dialog to the user
+    setIsConfirmationModalOpen(true);
+  };
+
+  // Maneja la confirmación del modal de confirmación
+  const handleConfirmModal = () => {
     let formIsValid = true;
+
 
     // Validate "Evento"
     if (!isLettersAndSpacesOnly(evento)) {
@@ -150,28 +159,30 @@ const FormLayoutsCapCurso = () => {
     }
 
     if (formIsValid) {
-      // Show confirmation alert before submitting the form
-      const confirmResult = window.confirm('¿Está seguro de guardar los datos del formulario?');
+      // Perform the form submission logic here
+      console.log('Formulario enviado exitosamente');
 
-      if (confirmResult) {
-        // Perform the form submission logic here
-        console.log('Form submitted successfully');
+      // Clear the form data after successful submission
+      setEvento('');
+      setCertifica('');
+      setDuracion('');
+      setFile(null);
+      setCapacitacionType('');
+      setAreaType('');
+      setSubareaType('');
+      setCampoType('');
+      setIngresoStart('');
+      setSalidaEnd('');
 
-        // Clear the form data after successful submission
-        setEvento('');
-        setCertifica('');
-        setDuracion('');
-        setFile(null);
-        setCapacitacionType('');
-        setAreaType('');
-        setSubareaType('');
-        setCampoType('');
-        setIngresoStart('');
-        setSalidaEnd('');
-      } else {
-        console.log('Form submission canceled');
-      }
+      // Cierra el modal de confirmación
+      setIsConfirmationModalOpen(false);
     }
+  };
+
+  // Maneja la cancelación del modal de confirmación
+  const handleCancelModal = () => {
+    // Cierra el modal de confirmación sin borrar los datos del formulario
+    setIsConfirmationModalOpen(false);
   };
 
   return (
@@ -368,6 +379,50 @@ const FormLayoutsCapCurso = () => {
           </Button>
         </CardActions>
       </form>
+      {/* Modal de confirmación */}
+      {isConfirmationModalOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 9999,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Card style={{ padding: 20, maxWidth: 400 }}>
+            <Typography variant='h6' style={{ marginBottom: 20 }}>
+              Confirmar Envío
+            </Typography>
+            <Typography variant='body2'>
+              ¿Está seguro de guardar los datos del formulario y borrarlos?
+            </Typography>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={handleConfirmModal}
+                style={{ marginLeft: 10 }}
+              >
+                Sí, Enviar
+              </Button>
+              <Button
+                variant='outlined'
+                color='primary'
+                onClick={handleCancelModal}
+                style={{ marginLeft: 10 }}
+              >
+                Cancelar
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
     </Card>
   )
 }

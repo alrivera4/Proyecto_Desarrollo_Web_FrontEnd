@@ -48,17 +48,12 @@ const FormLayoutsPubArticulos = () => {
   const [volumenError, setVolumenError] = useState('');
   const [numero, setNumero] = useState('');
   const [numeroError, setNumeroError] = useState('');
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
   const isValidNumber = (value) => /^\d+$/.test(value);
-
   const isLettersAndSpacesOnly = (value) => /^[a-zA-Z\s]*$/.test(value);
-
   const isValidDOI = (value) => /^[a-zA-Z0-9]+$/.test(value);
-
-
-  const isValidDate = (value) => {
-    return !isNaN(Date.parse(value));
-  };
+  const isValidDate = (value) => !isNaN(Date.parse(value));
 
   // Handle File Upload
   const handleFileChange = (event) => {
@@ -178,286 +173,342 @@ const FormLayoutsPubArticulos = () => {
       setNumeroError('');
     }
 
-
     if (formIsValid) {
-      // Perform the form submission logic here
-      console.log('Form submitted successfully');
-
-
-      // Clear the form data after successful submission
-      setTitulo('');
-      setDatosType('');
-      setImpactoType('');
-      setFile(null);
-      setAreaType('');
-      setSubareaType('');
-      setCampoType('');
-      setPublicacionStart('');
-      setIndice('');
-      setDoi('');
-      setIssn('');
-      setPaginas('');
-      setVolumen('');
-      setNumero('');
-
+      // Show confirmation dialog to the user
+      setIsConfirmationModalOpen(true);
     }
   };
 
-  return (
-    <Card>
-      <CardHeader title='Artículos Científicos' titleTypographyProps={{ variant: 'h6' }} />
-      <Divider sx={{ margin: 0 }} />
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Typography variant='body2' sx={{ fontWeight: 600 }}>Título</Typography>
+  // Maneja la confirmación del modal de confirmación
+  const handleConfirmModal = () => {
+    // Simular el envío del formulario
+    console.log('Formulario enviado exitosamente');
+
+    // Cierra el modal de confirmación
+    setIsConfirmationModalOpen(false);
+
+    // Clear the form data after successful submission
+    setTitulo('');
+    setDatosType('');
+    setImpactoType('');
+    setFile(null);
+    setAreaType('');
+    setSubareaType('');
+    setCampoType('');
+    setPublicacionStart('');
+    setIndice('');
+    setDoi('');
+    setIssn('');
+    setPaginas('');
+    setVolumen('');
+    setNumero('');
+  };
+
+  // Maneja la cancelación del modal de confirmación
+  const handleCancelModal = () => {
+    // Cierra el modal de confirmación sin borrar los datos del formulario
+    setIsConfirmationModalOpen(false);
+  };
+  
+return (
+  <Card>
+    <CardHeader title='Artículos Científicos' titleTypographyProps={{ variant: 'h6' }} />
+    <Divider sx={{ margin: 0 }} />
+    <form onSubmit={handleSubmit}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Título</Typography>
+          <TextField
+            fullWidth
+            placeholder=''
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+            error={!!tituloError}
+            helperText={tituloError}
+            required
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <FormControl fullWidth>
+            <Typography variant='body2' sx={{ fontWeight: 600 }}>Base de Datos</Typography>
+            <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+            <Select
+              labelId='base-de-datos-type-label'
+              label='Base de Datos'
+              value={datosType}
+              onChange={(e) => setDatosType(e.target.value)}
+              error={!!datosTypeError}
+            >
+              <MenuItem value='Base1'>PubMed</MenuItem>
+              <MenuItem value='Base2'>Scopus</MenuItem>
+              <MenuItem value='Base3'>Web of Science</MenuItem>
+              <MenuItem value='Base4'>IEEE Xplore</MenuItem>
+              <MenuItem value='Base5'>Google Scholar</MenuItem>
+            </Select>
+            {datosTypeError && <Typography variant='body2' color='error'>{datosTypeError}</Typography>}
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <FormControl fullWidth>
+            <Typography variant='body2' sx={{ fontWeight: 600 }}>Impacto</Typography>
+            <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+            <Select
+              labelId='impacto-type-label'
+              label='Impacto'
+              value={impactoType}
+              onChange={(e) => setImpactoType(e.target.value)}
+              error={!!impactoTypeError}
+            >
+              <MenuItem value='Cap1'>Técnica o Profesional</MenuItem>
+              <MenuItem value='Cap2'>Gerencial y Liderazgo</MenuItem>
+              <MenuItem value='Cap3'>Ventas y Servicio al Cliente</MenuItem>
+              <MenuItem value='Cap4'>Seguridad Laboral</MenuItem>
+              <MenuItem value='Cap5'>Trabajo en Equipo</MenuItem>
+            </Select>
+            {impactoTypeError && <Typography variant='body2' color='error'>{impactoTypeError}</Typography>}
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <FormControl fullWidth>
+            <Typography variant='body2' sx={{ fontWeight: 600 }}>Área</Typography>
+            <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+            <Select
+              labelId='area-type-label'
+              label='Área'
+              value={areaType}
+              onChange={(e) => setAreaType(e.target.value)}
+              error={!!areaTypeError}
+            >
+              <MenuItem value='Impacto1'>Citaciones</MenuItem>
+              <MenuItem value='Impacto2'>Factor de impacto de la revista</MenuItem>
+              <MenuItem value='Impacto3'>Índice h (h-index)</MenuItem>
+              <MenuItem value='Impacto4'>Altmetrics</MenuItem>
+            </Select>
+            {areaTypeError && <Typography variant='body2' color='error'>{areaTypeError}</Typography>}
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <FormControl fullWidth>
+            <Typography variant='body2' sx={{ fontWeight: 600 }}>Subárea</Typography>
+            <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+            <Select
+              labelId='subarea-type-label'
+              label='Subárea'
+              value={subareaType}
+              onChange={(e) => setSubareaType(e.target.value)}
+              error={!!subareaTypeError}
+            >
+              <MenuItem value='Subarea1'>Desarrollo de software</MenuItem>
+              <MenuItem value='Subarea2'>Fisioterapia y rehabilitación</MenuItem>
+              <MenuItem value='Subarea3'>Educación a distancia</MenuItem>
+              <MenuItem value='Subarea4'>Auditoría interna</MenuItem>
+              <MenuItem value='Subarea5'>Ingeniería civil</MenuItem>
+              <MenuItem value='Subarea6'>Marketing digital</MenuItem>
+            </Select>
+            {subareaTypeError && <Typography variant='body2' color='error'>{subareaTypeError}</Typography>}
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <FormControl fullWidth>
+            <Typography variant='body2' sx={{ fontWeight: 600 }}>Campo</Typography>
+            <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
+            <Select
+              labelId='campo-type-label'
+              label='Campo'
+              value={campoType}
+              onChange={(e) => setCampoType(e.target.value)}
+              error={!!campoTypeError}
+            >
+              <MenuItem value='Campo1'>Agricultura y agroindustria</MenuItem>
+              <MenuItem value='Campo2'>Turismo y hotelería</MenuItem>
+              <MenuItem value='Campo3'>Investigación y desarrollo</MenuItem>
+              <MenuItem value='Campo4'>Industria manufacturera</MenuItem>
+              <MenuItem value='Campo5'>Servicios al cliente</MenuItem>
+              <MenuItem value='Campo6'>Administración y Gestión</MenuItem>
+            </Select>
+            {campoTypeError && <Typography variant='body2' color='error'>{campoTypeError}</Typography>}
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <FormControl fullWidth>
+            <Typography variant='body2' sx={{ fontWeight: 600 }}>Fecha de Publicación</Typography>
+            <InputLabel id='form-layouts-separator-select-label-2'></InputLabel>
             <TextField
               fullWidth
-              placeholder=''
-              value={titulo}
-              onChange={(e) => setTitulo(e.target.value)}
-              error={!!tituloError}
-              helperText={tituloError}
+              type='date'
+              value={publicacionStart}
+              onChange={(e) => setPublicacionStart(e.target.value)}
+              error={!!publicacionStartError}
+              helperText={publicacionStartError}
               required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FormControl fullWidth>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>Base de Datos</Typography>
-              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-              <Select
-                labelId='base-de-datos-type-label'
-                label='Base de Datos'
-                value={datosType}
-                onChange={(e) => setDatosType(e.target.value)}
-                error={!!datosTypeError}
-              >
-                <MenuItem value='Base1'>PubMed</MenuItem>
-                <MenuItem value='Base2'>Scopus</MenuItem>
-                <MenuItem value='Base3'>Web of Science</MenuItem>
-                <MenuItem value='Base4'>IEEE Xplore</MenuItem>
-                <MenuItem value='Base5'>Google Scholar</MenuItem>
-              </Select>
-              {datosTypeError && <Typography variant='body2' color='error'>{datosTypeError}</Typography>}
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FormControl fullWidth>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>Impacto</Typography>
-              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-              <Select
-                labelId='impacto-type-label'
-                label='Impacto'
-                value={impactoType}
-                onChange={(e) => setImpactoType(e.target.value)}
-                error={!!impactoTypeError}
-              >
-                <MenuItem value='Cap1'>Técnica o Profesional</MenuItem>
-                <MenuItem value='Cap2'>Gerencial y Liderazgo</MenuItem>
-                <MenuItem value='Cap3'>Ventas y Servicio al Cliente</MenuItem>
-                <MenuItem value='Cap4'>Seguridad Laboral</MenuItem>
-                <MenuItem value='Cap5'>Trabajo en Equipo</MenuItem>
-              </Select>
-              {impactoTypeError && <Typography variant='body2' color='error'>{impactoTypeError}</Typography>}
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FormControl fullWidth>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>Área</Typography>
-              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-              <Select
-                labelId='area-type-label'
-                label='Área'
-                value={areaType}
-                onChange={(e) => setAreaType(e.target.value)}
-                error={!!areaTypeError}
-              >
-                <MenuItem value='Impacto1'>Citaciones</MenuItem>
-                <MenuItem value='Impacto2'>Factor de impacto de la revista</MenuItem>
-                <MenuItem value='Impacto3'>Índice h (h-index)</MenuItem>
-                <MenuItem value='Impacto4'>Altmetrics</MenuItem>
-              </Select>
-              {areaTypeError && <Typography variant='body2' color='error'>{areaTypeError}</Typography>}
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FormControl fullWidth>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>Subárea</Typography>
-              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-              <Select
-                labelId='subarea-type-label'
-                label='Subárea'
-                value={subareaType}
-                onChange={(e) => setSubareaType(e.target.value)}
-                error={!!subareaTypeError}
-              >
-                <MenuItem value='Subarea1'>Desarrollo de software</MenuItem>
-                <MenuItem value='Subarea2'>Fisioterapia y rehabilitación</MenuItem>
-                <MenuItem value='Subarea3'>Educación a distancia</MenuItem>
-                <MenuItem value='Subarea4'>Auditoría interna</MenuItem>
-                <MenuItem value='Subarea5'>Ingeniería civil</MenuItem>
-                <MenuItem value='Subarea6'>Marketing digital</MenuItem>
-              </Select>
-              {subareaTypeError && <Typography variant='body2' color='error'>{subareaTypeError}</Typography>}
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FormControl fullWidth>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>Campo</Typography>
-              <InputLabel id='form-layouts-separator-multiple-select-label-2'></InputLabel>
-              <Select
-                labelId='campo-type-label'
-                label='Campo'
-                value={campoType}
-                onChange={(e) => setCampoType(e.target.value)}
-                error={!!campoTypeError}
-              >
-                <MenuItem value='Campo1'>Agricultura y agroindustria</MenuItem>
-                <MenuItem value='Campo2'>Turismo y hotelería</MenuItem>
-                <MenuItem value='Campo3'>Investigación y desarrollo</MenuItem>
-                <MenuItem value='Campo4'>Industria manufacturera</MenuItem>
-                <MenuItem value='Campo5'>Servicios al cliente</MenuItem>
-                <MenuItem value='Campo6'>Administración y Gestión</MenuItem>
-              </Select>
-              {campoTypeError && <Typography variant='body2' color='error'>{campoTypeError}</Typography>}
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FormControl fullWidth>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>Fecha de Publicación</Typography>
-              <InputLabel id='form-layouts-separator-select-label-2'></InputLabel>
-              <TextField
-                fullWidth
-                type='date'
-                value={publicacionStart}
-                onChange={(e) => setPublicacionStart(e.target.value)}
-                error={!!publicacionStartError}
-                helperText={publicacionStartError}
-                required
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Typography variant='body2' sx={{ fontWeight: 600 }}>Índice SJR</Typography>
-            <TextField
-              fullWidth
-              placeholder=''
-              value={indice}
-              onChange={(e) => setIndice(e.target.value)}
-              error={!!indiceError}
-              helperText={indiceError}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Typography variant='body2' sx={{ fontWeight: 600 }}>DOI</Typography>
-            <TextField
-              fullWidth
-              placeholder=''
-              value={doi}
-              onChange={(e) => setDoi(e.target.value)}
-              error={!!doiError}
-              helperText={doiError}
-              required
-              inputProps={{
-                maxLength: 50,
-                pattern: '[a-zA-Z0-9]*',
+              InputLabelProps={{
+                shrink: true,
               }}
             />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Typography variant='body2' sx={{ fontWeight: 600 }}>ISSN</Typography>
-            <TextField
-              fullWidth
-              placeholder=''
-              value={issn}
-              onChange={(e) => setIssn(e.target.value)}
-              error={!!issnError}
-              helperText={issnError}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Typography variant='body2' sx={{ fontWeight: 600 }}>Páginas</Typography>
-            <TextField
-              fullWidth
-              placeholder=''
-              value={paginas}
-              onChange={(e) => setPaginas(e.target.value)}
-              error={!!paginasError}
-              helperText={paginasError}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Typography variant='body2' sx={{ fontWeight: 600 }}>Volúmen</Typography>
-            <TextField
-              fullWidth
-              placeholder=''
-              value={volumen}
-              onChange={(e) => setVolumen(e.target.value)}
-              error={!!volumenError}
-              helperText={volumenError}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Typography variant='body2' sx={{ fontWeight: 600 }}>Número</Typography>
-            <TextField
-              fullWidth
-              placeholder=''
-              value={numero}
-              onChange={(e) => setNumero(e.target.value)}
-              error={!!numeroError}
-              helperText={numeroError}
-              required
-            />
-          </Grid>
+          </FormControl>
         </Grid>
-        <br></br>
-        <Divider sx={{ margin: 0 }} />
-        <br></br>
-        <Grid item xs={12}>
-          <Typography variant='body2' sx={{ fontWeight: 600 }}>
-            Certificado
-          </Typography>
-        </Grid>
-        <br></br>
-        <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column' }}>
-          <input
-            accept=".pdf"
-            id="document-upload"
-            type="file"
-            style={{ display: 'none' }}
-            onChange={handleFileChange}
+        <Grid item xs={12} sm={6} md={4}>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Índice SJR</Typography>
+          <TextField
+            fullWidth
+            placeholder=''
+            value={indice}
+            onChange={(e) => setIndice(e.target.value)}
+            error={!!indiceError}
+            helperText={indiceError}
+            required
           />
-          <label htmlFor="document-upload" sx={{ marginBottom: '10px' }}>
-            <Button
-              variant="outlined"
-              component="span"
-              fullWidth
-              size="large"
-              startIcon={<CloudUploadIcon />}
-            >
-              Add Documents (PDF)
-            </Button>
-          </label>
-          {file && <Typography variant="body2">{file.name}</Typography>}
         </Grid>
-        <br></br>
-        <Divider sx={{ margin: 0 }} />
-        <br></br>
-        <CardActions>
-          <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-            Submit
+        <Grid item xs={12} sm={6} md={4}>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>DOI</Typography>
+          <TextField
+            fullWidth
+            placeholder=''
+            value={doi}
+            onChange={(e) => setDoi(e.target.value)}
+            error={!!doiError}
+            helperText={doiError}
+            required
+            inputProps={{
+              maxLength: 50,
+              pattern: '[a-zA-Z0-9]*',
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>ISSN</Typography>
+          <TextField
+            fullWidth
+            placeholder=''
+            value={issn}
+            onChange={(e) => setIssn(e.target.value)}
+            error={!!issnError}
+            helperText={issnError}
+            required
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Páginas</Typography>
+          <TextField
+            fullWidth
+            placeholder=''
+            value={paginas}
+            onChange={(e) => setPaginas(e.target.value)}
+            error={!!paginasError}
+            helperText={paginasError}
+            required
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Volúmen</Typography>
+          <TextField
+            fullWidth
+            placeholder=''
+            value={volumen}
+            onChange={(e) => setVolumen(e.target.value)}
+            error={!!volumenError}
+            helperText={volumenError}
+            required
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Typography variant='body2' sx={{ fontWeight: 600 }}>Número</Typography>
+          <TextField
+            fullWidth
+            placeholder=''
+            value={numero}
+            onChange={(e) => setNumero(e.target.value)}
+            error={!!numeroError}
+            helperText={numeroError}
+            required
+          />
+        </Grid>
+      </Grid>
+      <br></br>
+      <Divider sx={{ margin: 0 }} />
+      <br></br>
+      <Grid item xs={12}>
+        <Typography variant='body2' sx={{ fontWeight: 600 }}>
+          Certificado
+        </Typography>
+      </Grid>
+      <br></br>
+      <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column' }}>
+        <input
+          accept=".pdf"
+          id="document-upload"
+          type="file"
+          style={{ display: 'none' }}
+          onChange={handleFileChange}
+        />
+        <label htmlFor="document-upload" sx={{ marginBottom: '10px' }}>
+          <Button
+            variant="outlined"
+            component="span"
+            fullWidth
+            size="large"
+            startIcon={<CloudUploadIcon />}
+          >
+            Add Documents (PDF)
           </Button>
-        </CardActions>
-      </form>
-    </Card>
-  )
+        </label>
+        {file && <Typography variant="body2">{file.name}</Typography>}
+      </Grid>
+      <br></br>
+      <Divider sx={{ margin: 0 }} />
+      <br></br>
+      <CardActions>
+        <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
+          Submit
+        </Button>
+      </CardActions>
+    </form>
+    {/* Modal de confirmación */}
+    {isConfirmationModalOpen && (
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 9999,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Card style={{ padding: 20, maxWidth: 400 }}>
+          <Typography variant='h6' style={{ marginBottom: 20 }}>
+            Confirmar Envío
+          </Typography>
+          <Typography variant='body2'>
+            ¿Está seguro de guardar los datos del formulario y borrarlos?
+          </Typography>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={handleConfirmModal}
+              style={{ marginLeft: 10 }}
+            >
+              Sí, Enviar
+            </Button>
+            <Button
+              variant='outlined'
+              color='primary'
+              onClick={handleCancelModal}
+              style={{ marginLeft: 10 }}
+            >
+              Cancelar
+            </Button>
+          </div>
+        </Card>
+      </div>
+    )}
+  </Card>
+)
 }
 
 export default FormLayoutsPubArticulos

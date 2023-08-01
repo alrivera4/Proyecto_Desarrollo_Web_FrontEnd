@@ -38,6 +38,7 @@ const FormLayoutsTrayectoria = () => {
   const [contractStartError, setContractStartError] = useState('');
   const [contractEnd, setContractEnd] = useState('');
   const [contractEndError, setContractEndError] = useState('');
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
 
   const isLettersAndSpacesOnly = (value) => /^[a-zA-Z\s]*$/.test(value);
@@ -55,14 +56,14 @@ const FormLayoutsTrayectoria = () => {
   // Handle Form Submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Show confirmation dialog to the user
-    const confirmResult = window.confirm('¿Está seguro de guardar los datos del formulario y borrarlos?');
+    setIsConfirmationModalOpen(true);
+  };
 
-    // If the user clicks "Aceptar" in the confirmation dialog
-    if (confirmResult) {
-      let formIsValid = true;
-
+  // Maneja la confirmación del modal de confirmación
+  const handleConfirmModal = () => {
+    let formIsValid = true;
 
     // Validate "Institución"
     if (!isLettersAndSpacesOnly(institution)) {
@@ -141,30 +142,35 @@ const FormLayoutsTrayectoria = () => {
       setContractEndError('');
     }
 
-   if (formIsValid && contractStart > contractEnd) {
-        setContractEndError('La fecha de fin debe ser posterior a la fecha de inicio');
-        formIsValid = false;
-      }
-
-      if (formIsValid) {
-        // Perform the form submission logic here
-        console.log('Formulario enviado exitosamente');
-
-        // Clear the form data after successful submission
-        setInstitution('');
-        setDepartment('');
-        setPosition('');
-        setFile(null);
-        setContractType('');
-        setInstitutionType('');
-        setExperienceType('');
-        setContractStart('');
-        setContractEnd('');
-      }
-    } else {
-      // If the user clicks "Cancelar" in the confirmation dialog
-      console.log('Envío de formulario cancelado');
+    if (formIsValid && contractStart > contractEnd) {
+      setContractEndError('La fecha de fin debe ser posterior a la fecha de inicio');
+      formIsValid = false;
     }
+
+    if (formIsValid) {
+      // Perform the form submission logic here
+      console.log('Formulario enviado exitosamente');
+
+      // Clear the form data after successful submission
+      setInstitution('');
+      setDepartment('');
+      setPosition('');
+      setFile(null);
+      setContractType('');
+      setInstitutionType('');
+      setExperienceType('');
+      setContractStart('');
+      setContractEnd('');
+
+      // Cierra el modal de confirmación
+      setIsConfirmationModalOpen(false);
+    }
+  };
+
+  // Maneja la cancelación del modal de confirmación
+  const handleCancelModal = () => {
+    // Cierra el modal de confirmación sin borrar los datos del formulario
+    setIsConfirmationModalOpen(false);
   };
 
   return (
@@ -342,6 +348,50 @@ const FormLayoutsTrayectoria = () => {
           </Button>
         </CardActions>
       </form>
+      {/* Modal de confirmación */}
+      {isConfirmationModalOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 9999,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Card style={{ padding: 20, maxWidth: 400 }}>
+            <Typography variant='h6' style={{ marginBottom: 20 }}>
+              Confirmar Envío
+            </Typography>
+            <Typography variant='body2'>
+              ¿Está seguro de guardar los datos del formulario y borrarlos?
+            </Typography>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={handleConfirmModal}
+                style={{ marginLeft: 10 }}
+              >
+                Sí, Enviar
+              </Button>
+              <Button
+                variant='outlined'
+                color='primary'
+                onClick={handleCancelModal}
+                style={{ marginLeft: 10 }}
+              >
+                Cancelar
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
     </Card>
   )
 }
