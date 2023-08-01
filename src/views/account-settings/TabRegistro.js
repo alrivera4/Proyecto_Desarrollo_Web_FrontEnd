@@ -39,7 +39,7 @@ import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { Container } from '@mui/material'
 
 const CustomInput = forwardRef((props, ref) => {
-  return <TextField inputRef={ref} label='Birth Date' fullWidth {...props} />
+  return <TextField inputRef={ref} label='Fecha de Nacimiento' fullWidth {...props} />
 })
 
 const ImgStyled = styled('img')(({ theme }) => ({
@@ -102,6 +102,11 @@ const TabRegister = () => {
 
   const handleClose = () => {
     setOpen(false)
+  }
+
+  const handleCloseSuccessMessage = () => {
+    setShowSuccessMessage(false)
+    window.location.reload()
   }
 
   const handleNumberChange = event => {
@@ -232,7 +237,7 @@ const TabRegister = () => {
             <TextField
               fullWidth
               type='email'
-              label='Email'
+              label='Coreo Electrónico'
               placeholder='johnDoe@example.com'
               value={email}
               onChange={handleEmailChange}
@@ -370,16 +375,17 @@ const TabRegister = () => {
           </Grid>
         )}
       </form>
-      {showSuccessMessage && (
-        <Grid container spacing={10}>
-          <Grid item xs={12}>
-            <Alert severity='success'>
-              <AlertTitle>Éxito</AlertTitle>
-              Usuario registrado con éxito.
-            </Alert>
-          </Grid>
-        </Grid>
-      )}
+      <Dialog open={showSuccessMessage} onClose={handleCloseSuccessMessage} maxWidth="md" fullWidth>
+        <DialogTitle>Éxito</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Usuario registrado con éxito.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseSuccessMessage}>Cerrar</Button>
+        </DialogActions>
+      </Dialog>
     </CardContent>
   )
 }

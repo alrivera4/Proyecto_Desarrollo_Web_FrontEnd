@@ -27,7 +27,7 @@ import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
 const CustomInput = forwardRef((props, ref) => {
-  return <TextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
+  return <TextField fullWidth {...props} inputRef={ref} label='Fecha de Nacimiento' autoComplete='off' />
 })
 
 const FormInfo = () => {
@@ -209,7 +209,7 @@ const FormInfo = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <TextField fullWidth label='Email' placeholder='usuario@ejemplo.com' />
+              <TextField fullWidth label='Correo Electrónico' placeholder='usuario@ejemplo.com' />
             </Grid>
           </Grid>
 

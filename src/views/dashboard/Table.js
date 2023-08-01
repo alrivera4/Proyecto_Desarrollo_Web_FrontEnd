@@ -101,7 +101,7 @@ const DashboardTable = () => {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
+              <TableCell>Correo Electrónico</TableCell>
               <TableCell>Date</TableCell>
               <TableCell>Salary</TableCell>
               <TableCell>Age</TableCell>

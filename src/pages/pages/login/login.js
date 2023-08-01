@@ -117,7 +117,7 @@ const LoginPage = () => {
             autoFocus
             fullWidth
             id='cedula'
-            label='Cédula'
+            label='N° de Identificación'
             value={values.cedula}
             onChange={handleChange('cedula')}
             InputProps={{

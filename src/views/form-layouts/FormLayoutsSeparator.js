@@ -27,7 +27,7 @@ import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
 const CustomInput = forwardRef((props, ref) => {
-  return <TextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
+  return <TextField fullWidth {...props} inputRef={ref} label='Fecha de nacimiento' autoComplete='off' />
 })
 
 const FormLayoutsSeparator = () => {
@@ -89,7 +89,7 @@ const FormLayoutsSeparator = () => {
               <TextField fullWidth label='Username' placeholder='carterLeonard' />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth type='email' label='Email' placeholder='carterleonard@gmail.com' />
+              <TextField fullWidth type='email' label='Correo Electrónico' placeholder='carterleonard@gmail.com' />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>

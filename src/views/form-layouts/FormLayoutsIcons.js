@@ -38,7 +38,7 @@ const FormLayoutsIcons = () => {
               <TextField
                 fullWidth
                 type='email'
-                label='Email'
+                label='Correo Electrónico'
                 placeholder='carterleonard@gmail.com'
                 helperText='You can use letters, numbers & periods'
                 InputProps={{

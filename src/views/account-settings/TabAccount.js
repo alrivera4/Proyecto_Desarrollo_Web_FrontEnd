@@ -33,7 +33,7 @@ import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
 
 const CustomInput = forwardRef((props, ref) => {
-  return <TextField inputRef={ref} label='Birth Date' fullWidth {...props} />
+  return <TextField inputRef={ref} label='Fecha de Nacimiento' fullWidth {...props} />
 })
 
 
@@ -79,7 +79,7 @@ const TabAccount = () => {
 
   return (
     <CardContent>
-       <form> 
+       <form>
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -104,13 +104,13 @@ const TabAccount = () => {
               </Box>
             </Box>
           </Grid>
-        
 
-          <Grid item xs={12} sm={6}> Informacion Personal 
+
+          <Grid item xs={12} sm={6}> Informacion Personal
             <TextField fullWidth label='Nombre' placeholder='John Steven'  />
-            
+
             <TextField fullWidth label='Apellidos' placeholder='Stewart Lorem'  />
-            
+
             <FormControl>
               <FormLabel item xs={6} sx={{ fontSize: '0.875rem' }}>Estado Civil</FormLabel>
               <Select label='Country'>
@@ -120,7 +120,7 @@ const TabAccount = () => {
                 <MenuItem value='Germany'>Union Libre</MenuItem>
               </Select>
             </FormControl>
-            
+
             <Grid item xs={12} sm={6}>
             <DatePickerWrapper>
               <DatePicker
@@ -134,7 +134,7 @@ const TabAccount = () => {
               />
             </DatePickerWrapper>
           </Grid>
-          
+
             <FormControl>
               <FormLabel item xs={6} sm={{ fontSize: '0.875rem' }}>Genero</FormLabel>
               <RadioGroup row defaultValue='male' aria-label='gender' name='account-settings-info-radio'>
@@ -143,9 +143,9 @@ const TabAccount = () => {
                 <FormControlLabel value='other' label='Otro' control={<Radio />} />
               </RadioGroup>
             </FormControl>
-            
+
           </Grid>
-          <Grid item xs={12} sm={6}>Experiencia Laboral 
+          <Grid item xs={12} sm={6}>Experiencia Laboral
             <TextField
               fullWidth
               multiline
@@ -153,16 +153,7 @@ const TabAccount = () => {
               minRows={2}
               placeholder='Bio'
             />
-            <Grid item xs={12} sm={6}>Cursos 
-            <TextField
-              fullWidth
-              multiline
-              label='Bio'
-              minRows={2}
-              placeholder='Bio'
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>Articulos Cientificos 
+            <Grid item xs={12} sm={6}>Cursos
             <TextField
               fullWidth
               multiline
@@ -171,22 +162,31 @@ const TabAccount = () => {
               placeholder='Bio'
             />
           </Grid>
+          <Grid item xs={12} sm={6}>Articulos Cientificos
+            <TextField
+              fullWidth
+              multiline
+              label='Bio'
+              minRows={2}
+              placeholder='Bio'
+            />
           </Grid>
-          
-         
           </Grid>
-          
+
+
+          </Grid>
+
       </form>
-       
-       <form > 
+
+       <form >
         <Grid container spacing={7}>
-          
+
           <Grid item xs={12} sm={6}>Contacto
             <TextField fullWidth type='number' label='Telefono ' placeholder='(123) 456-7890' />
             <TextField
               fullWidth
               type='email'
-              label='Email'
+              label='Correo Electrónico'
               placeholder='johnDoe@example.com'
             />
 
@@ -219,10 +219,10 @@ const TabAccount = () => {
               </Select>
             </FormControl>
           </Grid>
-          
+
         </Grid>
-          
-          
+
+
           <Grid item xs={12}>
             <Button variant='contained' sx={{ marginRight: 3.5 }}>
               Save Changes
@@ -233,7 +233,7 @@ const TabAccount = () => {
           </Grid>
         </Grid>
       </form>
-     
+
     </CardContent>
   )
 }
