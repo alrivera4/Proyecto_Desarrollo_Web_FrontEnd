@@ -15,6 +15,8 @@ import Select from '@mui/material/Select'
 import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import ConfirmationModal from './ConfirmationModal';
+
 
 const FormLayoutsPubLibros = () => {
   // ** States
@@ -47,6 +49,8 @@ const FormLayoutsPubLibros = () => {
   const isValidDate = (value) => {
     return !isNaN(Date.parse(value));
   };
+
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
   // Handle Form Submission
   const handleSubmit = (e) => {
@@ -105,7 +109,14 @@ const FormLayoutsPubLibros = () => {
       setIssnError('');
     }
 
-    // Perform the form submission logic here
+    if (formIsValid) {
+      // Show the confirmation modal when the form is valid
+      setIsConfirmationModalOpen(true);
+    }
+  };
+
+  // Handle the user's decision from the confirmation modal
+  const handleConfirmModal = () => {
     console.log('Form submitted successfully');
 
     // Clear the form data after successful submission
@@ -116,6 +127,14 @@ const FormLayoutsPubLibros = () => {
     setPublicacionStart('');
     setIssn('');
     setFile(null);
+
+    // Close the confirmation modal
+    setIsConfirmationModalOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    // Close the confirmation modal
+    setIsConfirmationModalOpen(false);
   };
 
   return (
@@ -273,6 +292,50 @@ const FormLayoutsPubLibros = () => {
           </Button>
         </CardActions>
       </form>
+      {/* Modal de confirmación */}
+      {isConfirmationModalOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 9999,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Card style={{ padding: 20, maxWidth: 400 }}>
+            <Typography variant='h6' style={{ marginBottom: 20 }}>
+              Confirmar Envío
+            </Typography>
+            <Typography variant='body2'>
+              ¿Está seguro de guardar los datos del formulario?
+            </Typography>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={handleConfirmModal}
+                style={{ marginLeft: 10 }}
+              >
+                Sí, Enviar
+              </Button>
+              <Button
+                variant='outlined'
+                color='primary'
+                onClick={handleCloseModal}
+                style={{ marginLeft: 10 }}
+              >
+                Cancelar
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
     </Card>
   );
 }
