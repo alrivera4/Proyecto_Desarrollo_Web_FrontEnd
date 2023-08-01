@@ -295,7 +295,7 @@ const FormInfo = () => {
               <TextField fullWidth label='Perfil Profesional' placeholder='Perfil Profesional' />
             </Grid>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={12} mt={8}>
                 <Typography variant='body2' sx={{ fontWeight: 600 }}>
                   5. Imagenes de Documentos
                 </Typography>
