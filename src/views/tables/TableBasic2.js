@@ -17,11 +17,11 @@ const createData = (name, calories, fat, carbs, protein, a, b) => {
 };
 
 const rows = [
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 2, <Magnify sx={{ color: '#1da1f2' }} />),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 1, <Magnify sx={{ color: '#1da1f2' }} />),
-  createData('Eclair', 262, 16.0, 24, 6.0, 4, <Magnify sx={{ color: '#1da1f2' }} />),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 'HOLA', <Magnify sx={{ color: '#1da1f2' }} />),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 'AA', <Magnify sx={{ color: '#1da1f2' }} />),
+  createData( 237, 9.0, 37,'Ice cream sandwich', 4.3, 2, <Magnify sx={{ color: '#1da1f2' }} />),
+  createData( 159,6.0, 24, 'Ice cream sandwich',4.0, 1, <Magnify sx={{ color: '#1da1f2' }} />),
+  createData( 262, 16.0, 24, 'Eclair',6.0, 4, <Magnify sx={{ color: '#1da1f2' }} />),
+  createData(305,  3.7, 67,'Cupcake', 4.3, 'HOLA', <Magnify sx={{ color: '#1da1f2' }} />),
+  createData( 356, 16.0, 49,'Gingerbread', 3.9, 'AA', <Magnify sx={{ color: '#1da1f2' }} />),
 ];
 
 const TableBasic = () => {
@@ -55,7 +55,7 @@ const TableBasic = () => {
         type="text"
         value={searchValue}
         onChange={handleSearchChange}
-        placeholder="Buscar por Facultad"
+        placeholder="Buscar por Campo de conocimietno"
         style={{ width: '300px', marginRight: '20px' }}
       />
       <TableContainer component={Paper}>
@@ -73,7 +73,7 @@ const TableBasic = () => {
           </TableHead>
           <TableBody>
             {rows
-              .filter(row => row.name.toLowerCase().includes(searchValue.toLowerCase()))
+              .filter(row => row.carbs.toLowerCase().includes(searchValue.toLowerCase()))
               .map(row => (
                 <TableRow
                   key={row.name}

@@ -18,11 +18,10 @@ const MUITable = () => {
            Mi  Postulacion 
           </Link>
         </Typography>
-        <Typography variant='body2'>Tables display sets of data. They can be fully customized</Typography>
       </Grid>
       <Grid item xs={12}>
         <Card>
-          <CardHeader title='Basic Table' titleTypographyProps={{ variant: 'h6' }} />
+          <CardHeader titleTypographyProps={{ variant: 'h6' }} />
           <TableBasic />
         </Card>
       </Grid>
