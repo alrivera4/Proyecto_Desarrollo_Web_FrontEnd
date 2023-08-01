@@ -88,16 +88,23 @@ const FormLayoutsCapIdioma = () => {
 
 
     if (formIsValid) {
-      console.log('Form submitted successfully');
+      // Show confirmation alert before submitting the form
+      const confirmResult = window.confirm('¿Está seguro de guardar los datos del formulario?');
+      
+      if (confirmResult) {
+        // Perform the form submission logic here
+        console.log('Form submitted successfully');
 
-
-      // Clear the form data after successful submission
-      setCertificacion('');
-      setFile(null);
-      setIdiomaType('');
-      setEscritoType('');
-      setOralType('');
-      setComprensionType('');
+        // Clear the form data after successful submission
+        setCertificacion('');
+        setFile(null);
+        setIdiomaType('');
+        setEscritoType('');
+        setOralType('');
+        setComprensionType('');
+      } else {
+        console.log('Form submission canceled');
+      }
     }
   };
 
