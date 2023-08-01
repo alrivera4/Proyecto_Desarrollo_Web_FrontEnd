@@ -34,6 +34,8 @@ const FormInfo = () => {
   // ** States
   const [language, setLanguage] = useState([])
   const [date, setDate] = useState(null)
+  const [identificationImage, setIdentificationImage] = useState(null)
+  const [votingCardImage, setVotingCardImage] = useState(null)
 
   const [values, setValues] = useState({
     password: '',
@@ -66,6 +68,16 @@ const FormInfo = () => {
 
   const handleMouseDownConfirmPassword = event => {
     event.preventDefault()
+  }
+
+  const handleIdentificationImageUpload = event => {
+    const file = event.target.files[0]
+    setIdentificationImage(file)
+  }
+
+  const handleVotingCardImageUpload = event => {
+    const file = event.target.files[0]
+    setVotingCardImage(file)
   }
 
   // Handle Select
@@ -273,13 +285,51 @@ const FormInfo = () => {
             </Grid>
           </Grid>
 
-
-
-
-
-
-
-
+          <Grid container spacing={5} mt={2}>
+            <Grid item xs={12} sm={12}>
+              <Typography variant='body2' sx={{ fontWeight: 600 }}>
+                4. Información Profesional
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField fullWidth label='Perfil Profesional' placeholder='Perfil Profesional' />
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={12}>
+                <Typography variant='body2' sx={{ fontWeight: 600 }}>
+                  5. Imagenes de Documentos
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6} mt={5}>
+                <input
+                  accept='image/*'
+                  style={{ display: 'none' }}
+                  id='identification-image-upload-button'
+                  type='file'
+                  onChange={handleIdentificationImageUpload}
+                />
+                <label htmlFor='identification-image-upload-button'>
+                  <Button variant='contained' component='span'>
+                    Subir Imagen Cédula
+                  </Button>
+                </label>
+              </Grid>
+              <Grid item xs={12} sm={6} mt={5}>
+                <input
+                  accept='image/*'
+                  style={{ display: 'none' }}
+                  id='voting-card-image-upload-button'
+                  type='file'
+                  onChange={handleVotingCardImageUpload}
+                />
+                <label htmlFor='voting-card-image-upload-button'>
+                  <Button variant='contained' component='span'>
+                    Subir Imagen Papeleta de Votación
+                  </Button>
+                </label>
+              </Grid>
+            </Grid>
+          </Grid>
         </CardContent>
         <Divider sx={{ margin: 0 }} />
         <CardActions>

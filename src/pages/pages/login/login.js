@@ -1,4 +1,5 @@
 // ** React Imports
+
 import { useState } from 'react'
 
 // ** Next Imports
@@ -52,14 +53,11 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 }))
 
 const LoginPage = () => {
-  // ** State
   const [values, setValues] = useState({
     cedula: '',
     password: '',
     showPassword: false
   })
-
-
 
   // ** Hook
   const theme = useTheme()
@@ -69,7 +67,7 @@ const LoginPage = () => {
     if (prop === 'cedula') {
       // Verificar que solo se ingresen números en el campo "cedula"
       const cedulaValue = event.target.value
-      if (/^\d*$/.test(cedulaValue)) {
+      if (/^\d{0,10}$/.test(cedulaValue)) {
         setValues({ ...values, [prop]: cedulaValue })
       }
     } else {
@@ -86,7 +84,11 @@ const LoginPage = () => {
   }
 
   const isFormValid = () => {
-    return values.cedula.trim() !== '' && values.password.trim() !== ''
+    const isCedulaValid = /^\w{10}$/.test(values.cedula)
+
+    const isPasswordValid = values.password.trim() !== ''
+
+    return isCedulaValid && isPasswordValid
   }
 
   const handleSubmit = e => {
@@ -157,7 +159,8 @@ const LoginPage = () => {
           <Box sx={{ mb: 4, display: 'flex', alignItems: 'left', flexWrap: 'wrap', justifyContent: 'space-between' }}>
             <FormControlLabel control={<Checkbox />} label='Recuerdame' />
           </Box>
-          <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={handleSubmit}>Iniciar Sesión
+          <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={handleSubmit}>
+            Iniciar Sesión
           </Button>
         </form>
         <FooterIllustrationsV1 />
