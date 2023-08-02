@@ -13,7 +13,7 @@ const CardDirector = () => {
       />
       <CardContent>
         <Typography variant='h6' sx={{ marginBottom: 2 }}>
-          Víctor Villavicencio Álvarez, Ph
+          Víctor Villavicencio Álvarez, PhD.
         </Typography>
         <Typography variant='body2'>
           “Al asumir la rectoría pondré toda mi capacidad profesional, mi mayor esfuerzo, responsabilidad, lealtad y

@@ -22,6 +22,9 @@ import MuiCard from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
 
+/* import axios backend */
+import axios from 'axios'
+
 // ** Icons Imports
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
@@ -58,7 +61,7 @@ const LoginPage = () => {
     password: '',
     showPassword: false,
     cedulaError: false,
-    passwordError: false,
+    passwordError: false
   })
 
   // ** Hook
@@ -81,8 +84,7 @@ const LoginPage = () => {
     } else {
       setValues({ ...values, [prop]: event.target.value })
     }
-  };
-
+  }
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword })
@@ -100,29 +102,42 @@ const LoginPage = () => {
     return isCedulaValid && isPasswordValid
   }
 
-  const handleSubmit = e => {
-    e.preventDefault()
-
-    const isCedulaValid = /^\d{10}$/.test(values.cedula);
-    const isPasswordValid = values.password.trim() !== '';
-
-    setValues({
-      ...values,
-      cedulaError: !isCedulaValid,
-      passwordError: !isPasswordValid,
-    });
-
-    if (isCedulaValid && isPasswordValid) {
-      // Redirect to the external page or perform form submission here
-      window.location.href = '/pages/dashboard';
-    } else {
-      // Show an error message or perform some error handling here
-      console.log('Please fill in all fields correctly');
-    }
-  };
 
   // ** State
+  /* handleSubmit backend */
+  
+  const handleSubmit = async e => {
+    e.preventDefault()
 
+    if (!isFormValid()) {
+      console.log('Please fill in all fields')
+    } else {
+      try {
+        // Enviar los datos de inicio de sesión al servidor
+        const response = await axios.post('http://10.240.2.252:4000/login', {
+          numeroidentificacion: values.cedula,
+          password: values.password
+        })
+
+        // La respuesta del servidor contiene el token JWT
+        const { token } = response.data
+        console.log(token);
+        
+        // Almacenar el token en el localStorage
+        localStorage.setItem('token', token)
+
+        // Limpiar los campos de inicio de sesión
+        setValues({ ...values, cedula: '', password: '' })
+
+        // Redirigir a la página de dashboard
+
+        router.push('/pages/dashboard')
+      } catch (error) {
+        console.error('Error de inicio de sesión:', error.response.data.error)
+      }
+    }
+  }
+  
   return (
     <Box>
       <Container>
