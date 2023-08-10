@@ -23,9 +23,11 @@ import axios from 'axios'
 
 import React, { useEffect, useState } from 'react'
 
-import { getTokenFromStorage } from '../utils/index.js'
-
-
+const getTokenFromStorage = () => {
+  const token = localStorage.getItem('token'); // Cambiar 'token' por el nombre real de tu token en el almacenamiento local
+  
+  return token;
+};
 
 const Dashboard = () => {
   const [data, setData] = useState(null)

@@ -23,7 +23,7 @@ nextApp.prepare().then(() => {
   app.use(cors())
 
   // Conexión a MongoDB
-  mongoose.connect('mongodb://localhost:27017/db', {
+  mongoose.connect('mongodb://localhost:27017//db', {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
