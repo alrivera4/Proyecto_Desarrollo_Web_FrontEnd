@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const sequelize = new Sequelize('proyectopost', 'postgres', '123123', {
   host: 'localhost',
-  port: 5433,
+  port: 5432,
   dialect: 'postgres',
   define: {
     timestamps: false // Deshabilitar los campos createdAt y updatedAt
