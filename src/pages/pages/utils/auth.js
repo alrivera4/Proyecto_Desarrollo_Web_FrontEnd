@@ -1,5 +1,5 @@
 // Funciones para manejar el token en una cookie o almacenamiento local
-default export function setTokenInStorage(token) {
+export default function setTokenInStorage(token) {
   localStorage.setItem('token', token);
 }
 
