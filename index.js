@@ -18,6 +18,7 @@ const router = express.Router()
 // Configurar Next.js
 nextApp.prepare().then(() => {
   const app = express()
+  app.use(express.static('public'));
 
   app.use(express.json())
   app.use(cors())
@@ -85,8 +86,6 @@ nextApp.prepare().then(() => {
 
   // Rutas de autenticación (en un archivo separado para mantener la organización)
 
-
-
   app.use((err, req, res, next) => {
     if (err.name === 'TokenExpiredError') {
       // Token expirado, devolver un mensaje de error JSON
@@ -98,9 +97,9 @@ nextApp.prepare().then(() => {
   })
 
   // Configura Express para manejar todas las rutas y redirigir a la página de inicio de Next.js
-  /*  app.all('*', (req, res) => {
+  app.all('*', (req, res) => {
     return handle(req, res)
-  }) */
+  })
 
   app.get('*', (req, res) => {
     return nextApp.getRequestHandler()(req, res)
