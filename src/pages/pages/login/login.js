@@ -114,7 +114,7 @@ const LoginPage = () => {
     } else {
       try {
         // Enviar los datos de inicio de sesión al servidor
-        const response = await axios.post('http://10.240.2.252:4000/login', {
+        const response = await axios.post('http://localhost:4000/login', {
           numeroidentificacion: values.cedula,
           password: values.password
         })
@@ -131,7 +131,7 @@ const LoginPage = () => {
 
         // Redirigir a la página de dashboard
 
-        router.push('/pages/dashboard')
+        router.push('/panel')
       } catch (error) {
         console.error('Error de inicio de sesión:', error.response.data.error)
       }

@@ -1,7 +1,8 @@
 const express = require('express')
 const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcrypt')
-const { Usuario, generateToken, authenticateToken } = require('../authUtils')
+const { Usuario, generateToken, authenticateToken } = require('../authUtils.js')
+const jwt = require('jsonwebtoken')
 
 const router = express.Router()
 
@@ -93,6 +94,10 @@ router.post(
         numeroidentificacion: user.numeroidentificacion
       })
       res.json({ token })
+      
+      // Set the token as a cookie in the response
+      res.cookie('token', token, { httpOnly: true });
+
     } catch (error) {
       console.error('Error en el servidor:', error)
       res.status(500).json({ error: 'Error en el servidor---' })
@@ -126,12 +131,20 @@ router.post(
 //   }
 // });
 
+router.get('/panel', authenticateToken, (req, res) => {
+  return nextApp.render(req, res, '/pages/dashboard')
+})
+
 // Ruta protegida (requiere un token válido)
-router.get('/pages/dashboard', authenticateToken, (req, res) => {
+router.get('/autenticacion', authenticateToken, (req, res) => {
   // Si el token es válido, el middleware authenticateToken agregará el usuario al objeto req
   // Puedes acceder al usuario autenticado utilizando req.user
   // Aquí puedes devolver la información del perfil del usuario autenticado
   // Por ejemplo, puedes obtener los datos del usuario desde la base de datos y devolverlos en la respuesta
+
+  const usuarioAutenticado = req.user
+
+  res.json({ usuario: usuarioAutenticado })
 })
 
 // Ruta protegida para la página dashboard (requiere un token válido)
@@ -140,4 +153,5 @@ router.get('/pages/dashboard', authenticateToken, (req, res) => {
   res.json({ message: 'Bienvenido a la página dashboard. Usuario autenticado correctamente.' })
 })
  */
+
 module.exports = router

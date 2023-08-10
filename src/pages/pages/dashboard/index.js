@@ -6,6 +6,7 @@ import Poll from 'mdi-material-ui/Poll'
 import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 import BriefcaseVariantOutline from 'mdi-material-ui/BriefcaseVariantOutline'
+import { useRouter } from 'next/router'
 
 // ** Custom Components Imports
 import CardStatisticsVerticalComponent from 'src/@core/components/card-statistics/card-stats-vertical'
@@ -22,43 +23,55 @@ import axios from 'axios'
 
 import React, { useEffect, useState } from 'react'
 
-import { getTokenFromStorage } from '../utils/auth.js'
+import { getTokenFromStorage } from '../utils/index.js'
+
+
 
 const Dashboard = () => {
   const [data, setData] = useState(null)
-  
+  const router = useRouter()  
+
   const fetchData = async () => {
     try {
       // Obtener el token del almacenamiento local
-      const token = getTokenFromStorage();
-      console.log("client"+token);
+      const token = getTokenFromStorage()
+
+      // Verificar si el token es nulo o 'null'
+      
+      console.log('client' + token)
+      
+      /* if (!token || token == null || token == 'null'){
+        router.push('/pages/landing')
+        
+        return ;
+      } */
 
       // Hacer una solicitud al servidor usando el token en el encabezado
-      const response = await axios.get('http://10.240.2.252:4000/pages/dashboard', {
+      const response = await axios.get('http://localhost:4000/autenticacion', {
         headers: {
-          'Authorization' : `Bearer ${token}`,
-        },
-      });
-      console.log(response);
-
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log(response)
+      
       // Actualizar el estado con los datos del usuario recibidos del servidor
-      setData(response.data);
-      console.log(response.data);
+      setData(response.data)
+      console.log(response.data)
     } catch (error) {
-      console.error('Error fetching data:', error);
-      setData(null);
+      console.error('Error fetching data:', error)
+      setData(null)
     }
-  };
+  }
 
   // Obtener los datos del usuario al cargar el componente
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
-/*   if (!data) {
+  /*   if (!data) {
     return <p>Loading...</p>;
   } */
-
+  
   return (
     <ApexChartWrapper>
       <Grid container spacing={2} mt={20}>

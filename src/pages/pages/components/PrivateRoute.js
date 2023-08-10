@@ -1,7 +1,7 @@
 // PrivateRoute.js
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getTokenFromStorage } from '../utils/auth';
+import { getTokenFromStorage } from '../utils';
 
 function PrivateRoute({ children }) {
   const router = useRouter();

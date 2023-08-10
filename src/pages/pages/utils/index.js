@@ -12,13 +12,22 @@ export function removeTokenFromStorage() {
 // utils/auth.js
 // utils/auth.js
 export function getTokenFromStorage() {
-  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-  console.log('Token from storage:', token);
-  
-  return token;
+  if (typeof window !== 'undefined') {
+    // El código aquí solo se ejecutará en el cliente (navegador)
+    const token = localStorage.getItem('token');
+    console.log('Token from storage:', token);
+    if (!token) {
+      return null
+    }
+
+    return token;
+  } else {
+    return null;
+  }
 }
 
- 
+
+ export default getTokenFromStorage;
 
 
 // Eliminar Token del Almacenamiento Local al Cerrar Sesion

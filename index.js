@@ -7,10 +7,13 @@ const cors = require('cors')
 const next = require('next')
 const path = require('path')
 const axios = require('axios')
+const { authenticateToken } = require('./authUtils.js')
 
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
+
+const router = express.Router()
 
 // Configurar Next.js
 nextApp.prepare().then(() => {
@@ -34,7 +37,7 @@ nextApp.prepare().then(() => {
   // Conexión a PostgreSQL
   const sequelize = new Sequelize('proyectopost', 'postgres', '123123', {
     host: 'localhost',
-    port: 5433,
+    port: 5432,
     dialect: 'postgres',
     define: {
       timestamps: false // Deshabilitar los campos createdAt y updatedAt
@@ -75,16 +78,38 @@ nextApp.prepare().then(() => {
     }
   })()
 
-  // Rutas de autenticación (en un archivo separado para mantener la organización)
-  app.use('/', authRoutes)
-
   // Configura Express para servir los archivos estáticos generados por Next.js
   app.use('/_next', express.static(path.join(__dirname, '.next')))
 
-  // Configura Express para manejar todas las rutas y redirigir a la página de inicio de Next.js
-  app.all('*', (req, res) => {
-    return handle(req, res)
+  app.use('/', authRoutes)
+
+  // Rutas de autenticación (en un archivo separado para mantener la organización)
+
+
+
+  app.use((err, req, res, next) => {
+    if (err.name === 'TokenExpiredError') {
+      // Token expirado, devolver un mensaje de error JSON
+      return res.status(401).json({ error: 'Token expired' })
+    } else {
+      // Otro error en la verificación del token, devolver un mensaje de error JSON
+      return res.status(403).json({ error: 'Token verification failed' })
+    }
   })
+
+  // Configura Express para manejar todas las rutas y redirigir a la página de inicio de Next.js
+  /*  app.all('*', (req, res) => {
+    return handle(req, res)
+  }) */
+
+  app.get('*', (req, res) => {
+    return nextApp.getRequestHandler()(req, res)
+  })
+
+  // Configura Express para manejar todas las rutas y redirigir a la página de inicio de Next.js
+  /*   app.all('*', (req, res) => {
+    return handle(req, res)
+  }) */
 
   const port = 4000
   app.listen(port, () => {

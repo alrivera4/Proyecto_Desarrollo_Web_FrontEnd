@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const sequelize = new Sequelize('proyectopost', 'postgres', '123123', {
   host: 'localhost',
-  port: 5433,
+  port: 5432,
   dialect: 'postgres',
   define: {
     timestamps: false // Deshabilitar los campos createdAt y updatedAt
@@ -33,63 +33,41 @@ const Usuario = sequelize.define('usuarios', {
   }
 })
 
-function generateToken(user) {
-  const payload = { sub: user._id, username: user.username }
+function generateToken(numeroidentificacion) {
+  const payload = { sub: numeroidentificacion };
+  
+  return jwt.sign(payload, 'your-secret-key', { expiresIn: '1h' });
+}
 
-  return jwt.sign(payload, 'your-secret-key', { expiresIn: '1h' })
-} // Middleware para validar el token JWT
 // Función para almacenar el token en el almacenamiento local
 
-const setTokenInStorage = payload => {
-  // Replace 'your-secret-key' with your actual secret key used to sign the token
-  const token = jwt.sign(payload, 'your-secret-key', { expiresIn: '1h' })
-  localStorage.setItem('token', token)
-
-  return token
-}
-
-const useTokenState = () => {
-  const [token, setToken] = useState('')
-
-  useEffect(() => {
-    // Check if token is already present in local storage
-    const storedToken = localStorage.getItem('token')
-    if (storedToken) {
-      setToken(storedToken)
-    }
-  }, [])
-
-  const setTokenState = newToken => {
-    setToken(newToken)
-    localStorage.setItem('token', newToken)
-  }
-
-  return [token, setTokenState]
-}
 
 // Middleware para validar el token JWT
 function authenticateToken(req, res, next) {
+  // Obtener el token del encabezado 'Authorization'
   const authHeader = req.headers['authorization']
-  console.log(req.headers);
+  console.log(req.headers)
   const token = authHeader && authHeader.split(' ')[1]
   console.log(token)
-  if (!token) {
-    return res.sendStatus(401)
+  if (!token || token == null || token == 'null') {
+    return res.sendStatus(401) // No se proporcionó token, denegar acceso
   }
 
-  // Replace 'your-secret-key' with the actual secret key used to sign the token
-  jwt.verify(token, 'your-secret-key', (err, decoded) => {
+  // Verificar el token y continuar si es válido
+  jwt.verify(token, 'your-secret-key', (err, user) => {
     if (err) {
-      console.error('Error verifying token:', err)
+      console.error('Error verifying token:', err) // Log del error
 
-      return res.sendStatus(403)
+      return res.sendStatus(403) // Token inválido, denegar acceso
     }
 
-    console.log('User from token:', decoded) // Log the decoded user from the token
-    req.user = decoded // Assign the decoded user to the request object
-    next()
+    // Token válido, se puede acceder al recurso protegido
+    console.log('User from token:', user) // Log del usuario decodificado desde el token
+    req.user = user // Guardar el usuario en el objeto req para futuras referencias
+    next() // Continuar con la siguiente función o middleware
   })
 }
+
 
 /*   // Middleware para validar el token JWT
   function authenticateToken(req, res, next) {
