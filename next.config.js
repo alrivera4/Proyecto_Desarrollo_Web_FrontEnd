@@ -22,7 +22,7 @@ module.exports = {
     return [
       {
         source: '/',
-        destination: '/pages/landing', // Reemplaza 'home' con la ruta de tu página de inicio
+        destination: '/', // Reemplaza 'home' con la ruta de tu página de inicio
         permanent: true,
       },
     ];
