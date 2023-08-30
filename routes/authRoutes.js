@@ -96,7 +96,6 @@ router.post(
       res.json({ token })
       
       // Set the token as a cookie in the response
-      res.cookie('token', token, { httpOnly: true });
 
     } catch (error) {
       console.error('Error en el servidor:', error)
