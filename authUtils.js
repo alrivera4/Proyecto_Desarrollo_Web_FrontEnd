@@ -59,7 +59,7 @@ sequelize.query('CREATE DATABASE IF NOT EXISTS proyectopost')
   })
   .catch((error) => {
     console.error('Error al crear la base de datos:', error);
-  });
+  }); 
 
 function generateToken(numeroidentificacion) {
   const payload = { sub: numeroidentificacion };
