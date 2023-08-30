@@ -114,7 +114,7 @@ const LoginPage = () => {
     } else {
       try {
         // Enviar los datos de inicio de sesión al servidor
-        const response = await axios.post('http://localhost:4000/login', {
+        const response = await axios.post('http://nextjs:4000/login', {
           numeroidentificacion: values.cedula,
           password: values.password
         })
