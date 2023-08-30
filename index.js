@@ -24,7 +24,7 @@ nextApp.prepare().then(() => {
   app.use(cors())
 
   // Conexión a MongoDB
-  mongoose.connect('mongodb://localhost:27017//db', {
+  mongoose.connect('mongodb://mongodb_container:27017//db', {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -37,7 +37,7 @@ nextApp.prepare().then(() => {
 
   // Conexión a PostgreSQL
   const sequelize = new Sequelize('proyectopost', 'postgres', '123123', {
-    host: 'localhost',
+    host: 'postgresql_container',
     port: 5432,
     dialect: 'postgres',
     define: {
