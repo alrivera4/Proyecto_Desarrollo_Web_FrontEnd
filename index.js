@@ -23,6 +23,8 @@ nextApp.prepare().then(() => {
   app.use(express.json())
   app.use(cors())
 
+
+
   // Conexión a MongoDB
   mongoose.connect('mongodb://mongodb_container:27017//db', {
     useNewUrlParser: true,
@@ -34,50 +36,41 @@ nextApp.prepare().then(() => {
     password: String
   })
   const UserModel = mongoose.model('User', UserSchema)
-
-  // Conexión a PostgreSQL
-  const sequelize = new Sequelize('proyectopost', 'postgres', '123123', {
-    host: 'postgresql_container',
+  // Conexión a PostgreSQL sin especificar una base de datos
+  const sequelize = new Sequelize('postgres', 'postgres', '123123', {
+    host: 'postgresql_container', // Cambia esto a tu host de PostgreSQL
     port: 5432,
     dialect: 'postgres',
     define: {
-      timestamps: false // Deshabilitar los campos createdAt y updatedAt
-    }
-  })
+      timestamps: false, // Deshabilitar los campos createdAt y updatedAt
+    },
+  });
 
-  const Usuario = sequelize.define('usuarios', {
-    numeroidentificacion: {
-      type: DataTypes.STRING,
-      primaryKey: true
-    },
-    tipoidentificacion: {
-      type: DataTypes.STRING
-    },
-    correo: {
-      type: DataTypes.STRING
-    },
-    password: {
-      type: DataTypes.STRING
-    },
-    nombres: {
-      type: DataTypes.STRING
-    },
-    apellidos: {
-      type: DataTypes.STRING
-    }
-  })
+  // Crear la base de datos y el modelo
+  sequelize.query('CREATE DATABASE IF NOT EXISTS proyectopost')
+    .then(() => {
+      // Conexión a la base de datos recién creada
+      const db = new Sequelize('proyectopost', 'postgres', '123123', {
+        host: 'postgresql_container',
+        port: 5432,
+        dialect: 'postgres',
+        define: {
+          timestamps: false,
+        },
+      });
 
-  // Sincronizar el modelo con la base de datos
-  ;(async () => {
-    try {
-      await sequelize.authenticate()
-      console.log('Conexión a PostgreSQL exitosa.')
-      await sequelize.sync()
-      console.log('Tablas creadas en PostgreSQL.')
-    } catch (error) {
-      console.error('Error al conectar o sincronizar con PostgreSQL:', error)
-    }
-  })()
+      // Sincronizar el modelo con la base de datos
+      db.sync()
+        .then(() => {
+          console.log('Base de datos y tabla creadas exitosamente.');
+        })
+        .catch((error) => {
+          console.error('Error al crear la base de datos y tabla:', error);
+        });
+    })
+    .catch((error) => {
+      console.error('Error al crear la base de datos:', error);
+    });
 
   // Configura Express para servir los archivos estáticos generados por Next.js
   app.use('/_next', express.static(path.join(__dirname, '.next')))
