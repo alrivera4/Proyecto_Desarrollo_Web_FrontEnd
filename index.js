@@ -111,8 +111,8 @@ nextApp.prepare().then(() => {
       console.error('Error al crear la base de datos:', error);
     });
 
-  // Configura Express para servir los archivos estáticos generados por Next.js
-  app.use('/_next', express.static(path.join(__dirname, '.next')))
+
+  app.use(express.static('public'));
 
   app.use('/', authRoutes)
 
