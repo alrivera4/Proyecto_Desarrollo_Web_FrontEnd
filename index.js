@@ -58,6 +58,28 @@ nextApp.prepare().then(() => {
           timestamps: false,
         },
       });
+      // Definición del modelo de Usuario
+      const Usuario = db.define('usuarios', {
+        numeroidentificacion: {
+          type: DataTypes.STRING,
+          primaryKey: true,
+        },
+        tipoidentificacion: {
+          type: DataTypes.STRING,
+        },
+        correo: {
+          type: DataTypes.STRING,
+        },
+        password: {
+          type: DataTypes.STRING,
+        },
+        nombres: {
+          type: DataTypes.STRING,
+        },
+        apellidos: {
+          type: DataTypes.STRING,
+        },
+      });
 
       // Sincronizar el modelo con la base de datos
       db.sync()
