@@ -105,28 +105,39 @@ const LoginPage = () => {
 
   // ** State
   /* handleSubmit backend */
-
+  
   const handleSubmit = async e => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!isFormValid()) {
-      console.log('Please fill in all fields');
+      console.log('Please fill in all fields')
     } else {
       try {
         // Enviar los datos de inicio de sesión al servidor
         const response = await axios.post('/login', {
           numeroidentificacion: values.cedula,
           password: values.password
-        });
+        })
 
+        // La respuesta del servidor contiene el token JWT
+        const { token } = response.data
+        console.log(token);
+        
+        // Almacenar el token en el localStorage
+        localStorage.setItem('token', token)
 
+        // Limpiar los campos de inicio de sesión
+        setValues({ ...values, cedula: '', password: '' })
+
+        // Redirigir a la página de dashboard
+
+        router.push('/panel')
       } catch (error) {
-        console.error('Error de inicio de sesión:', error.response.data.error);
+        console.error('Error de inicio de sesión:', error.response.data.error)
       }
     }
-  };
-
-
+  }
+  
   return (
     <Box>
       <Container>
