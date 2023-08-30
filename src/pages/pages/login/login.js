@@ -119,22 +119,7 @@ const LoginPage = () => {
           password: values.password
         });
 
-        if (response.data && response.data.token) {
-          // La respuesta del servidor contiene el token JWT
-          const { token } = response.data;
-          console.log(token);
 
-          // Almacenar el token en el localStorage
-          localStorage.setItem('token', token);
-
-          // Limpiar los campos de inicio de sesión
-          setValues({ ...values, cedula: '', password: '' });
-
-          // Redirigir a la página de dashboard
-          router.push('/panel');
-        } else {
-          console.error('Respuesta de servidor inesperada:', response);
-        }
       } catch (error) {
         console.error('Error de inicio de sesión:', error.response.data.error);
       }
