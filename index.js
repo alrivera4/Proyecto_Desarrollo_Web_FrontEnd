@@ -8,6 +8,7 @@ const next = require('next')
 const path = require('path')
 const axios = require('axios')
 const { authenticateToken } = require('./authUtils.js')
+const { Client } = require('pg');
 
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
@@ -37,6 +38,8 @@ nextApp.prepare().then(() => {
   })
   const UserModel = mongoose.model('User', UserSchema)
   // Conexión a PostgreSQL sin especificar una base de datos
+
+  // Conexión a PostgreSQL sin especificar una base de datos
   const sequelize = new Sequelize('postgres', 'postgres', '123123', {
     host: 'postgresql_container', // Cambia esto a tu host de PostgreSQL
     port: 5432,
@@ -46,9 +49,22 @@ nextApp.prepare().then(() => {
     },
   });
 
-  // Crear la base de datos y el modelo
-  sequelize.query('CREATE DATABASE IF NOT EXISTS proyectopost')
+  // Crear la base de datos
+  const client = new Client({
+    user: 'postgres',
+    host: 'postgresql_container', // Cambia esto a tu host de PostgreSQL
+    database: 'postgres',
+    password: '123123',
+    port: 5432,
+  });
+
+  client.connect()
     .then(() => {
+      return client.query('CREATE DATABASE proyectopost');
+    })
+    .then(() => {
+      client.end(); // Cerrar la conexión
+
       // Conexión a la base de datos recién creada
       const db = new Sequelize('proyectopost', 'postgres', '123123', {
         host: 'postgresql_container',
@@ -58,6 +74,7 @@ nextApp.prepare().then(() => {
           timestamps: false,
         },
       });
+
       // Definición del modelo de Usuario
       const Usuario = db.define('usuarios', {
         numeroidentificacion: {

@@ -1,6 +1,8 @@
 // authUtils.js
 const { Sequelize, DataTypes } = require('sequelize')
 const jwt = require('jsonwebtoken')
+const { Client } = require('pg');
+
 // Conexión a PostgreSQL sin especificar una base de datos
 const sequelize = new Sequelize('postgres', 'postgres', '123123', {
   host: 'postgresql_container', // Cambia esto a tu host de PostgreSQL
@@ -11,9 +13,22 @@ const sequelize = new Sequelize('postgres', 'postgres', '123123', {
   },
 });
 
-// Crear la base de datos y el modelo
-sequelize.query('CREATE DATABASE IF NOT EXISTS proyectopost')
+// Crear la base de datos
+const client = new Client({
+  user: 'postgres',
+  host: 'postgresql_container', // Cambia esto a tu host de PostgreSQL
+  database: 'postgres',
+  password: '123123',
+  port: 5432,
+});
+
+client.connect()
   .then(() => {
+    return client.query('CREATE DATABASE proyectopost');
+  })
+  .then(() => {
+    client.end(); // Cerrar la conexión
+
     // Conexión a la base de datos recién creada
     const db = new Sequelize('proyectopost', 'postgres', '123123', {
       host: 'postgresql_container',
@@ -51,12 +66,6 @@ sequelize.query('CREATE DATABASE IF NOT EXISTS proyectopost')
     db.sync()
       .then(() => {
         console.log('Base de datos y tabla creadas exitosamente.');
-
-        // Exportar el modelo Usuario para que esté disponible en otros archivos
-        module.exports = {
-          Usuario: Usuario,
-          sequelize: db // Usar la instancia "db" en lugar de "sequelize"
-        };
       })
       .catch((error) => {
         console.error('Error al crear la base de datos y tabla:', error);
@@ -65,6 +74,7 @@ sequelize.query('CREATE DATABASE IF NOT EXISTS proyectopost')
   .catch((error) => {
     console.error('Error al crear la base de datos:', error);
   });
+
 
 function generateToken(numeroidentificacion) {
   const payload = { sub: numeroidentificacion };
