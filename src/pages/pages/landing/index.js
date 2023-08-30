@@ -6,7 +6,7 @@ import Account from 'src/pages/account-settings/index1'
 
 const styles = {
   heroContainer: {
-    backgroundImage: `url(${'/images/ESPE.PNG'})`,
+    backgroundImage: `url(${'/images/ESPE.png'})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '450px',
