@@ -49,7 +49,7 @@ const Dashboard = () => {
       } */
 
       // Hacer una solicitud al servidor usando el token en el encabezado
-      const response = await axios.get('desktop-nextjs-1:4000/autenticacion', {
+      const response = await axios.get('http://localhost:4000/autenticacion', {
         headers: {
           Authorization: `Bearer ${token}`
         }
