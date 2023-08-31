@@ -32,86 +32,6 @@ nextApp.prepare().then(() => {
     useUnifiedTopology: true
   })
 
-  const UserSchema = new mongoose.Schema({
-    username: String,
-    password: String
-  })
-  const UserModel = mongoose.model('User', UserSchema)
-  // Conexión a PostgreSQL sin especificar una base de datos
-
-  // Conexión a PostgreSQL sin especificar una base de datos
-  const sequelize = new Sequelize('postgres', 'postgres', '123123', {
-    host: 'postgresql_container', // Cambia esto a tu host de PostgreSQL
-    port: 5432,
-    dialect: 'postgres',
-    define: {
-      timestamps: false, // Deshabilitar los campos createdAt y updatedAt
-    },
-  });
-
-  // Crear la base de datos
-  const client = new Client({
-    user: 'postgres',
-    host: 'postgresql_container', // Cambia esto a tu host de PostgreSQL
-    database: 'postgres',
-    password: '123123',
-    port: 5432,
-  });
-
-  client.connect()
-    .then(() => {
-      return client.query('CREATE DATABASE proyectopost');
-    })
-    .then(() => {
-      client.end(); // Cerrar la conexión
-
-      // Conexión a la base de datos recién creada
-      const db = new Sequelize('proyectopost', 'postgres', '123123', {
-        host: 'postgresql_container',
-        port: 5432,
-        dialect: 'postgres',
-        define: {
-          timestamps: false,
-        },
-      });
-
-      // Definición del modelo de Usuario
-      const Usuario = db.define('usuarios', {
-        numeroidentificacion: {
-          type: DataTypes.STRING,
-          primaryKey: true,
-        },
-        tipoidentificacion: {
-          type: DataTypes.STRING,
-        },
-        correo: {
-          type: DataTypes.STRING,
-        },
-        password: {
-          type: DataTypes.STRING,
-        },
-        nombres: {
-          type: DataTypes.STRING,
-        },
-        apellidos: {
-          type: DataTypes.STRING,
-        },
-      });
-
-      // Sincronizar el modelo con la base de datos
-      db.sync()
-        .then(() => {
-          console.log('Base de datos y tabla creadas exitosamente.');
-        })
-        .catch((error) => {
-          console.error('Error al crear la base de datos y tabla:', error);
-        });
-    })
-    .catch((error) => {
-      console.error('Error al crear la base de datos:', error);
-    });
-
-
   app.use(express.static('public'));
 
   app.use('/', authRoutes)
@@ -147,9 +67,4 @@ nextApp.prepare().then(() => {
     console.log(`Servidor Express en ejecución en el puerto ${port}`)
   })
 
-  // Exportar el modelo Usuario para que esté disponible en otros archivos
-  module.exports = {
-    Usuario: Usuario,
-    sequelize: sequelize
-  }
 })
