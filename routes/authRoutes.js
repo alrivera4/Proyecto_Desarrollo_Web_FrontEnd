@@ -44,41 +44,41 @@ client.connect()
         timestamps: false,
       },
     });
-
-    // Definición del modelo de Usuario
-    const Usuario = db.define('usuarios', {
-      numeroidentificacion: {
-        type: DataTypes.STRING,
-        primaryKey: true,
-      },
-      tipoidentificacion: {
-        type: DataTypes.STRING,
-      },
-      correo: {
-        type: DataTypes.STRING,
-      },
-      password: {
-        type: DataTypes.STRING,
-      },
-      nombres: {
-        type: DataTypes.STRING,
-      },
-      apellidos: {
-        type: DataTypes.STRING,
-      },
-    });
-
-    // Sincronizar el modelo con la base de datos
-    db.sync()
-      .then(() => {
-        console.log('Base de datos y tabla creadas exitosamente.');
-      })
-      .catch((error) => {
-        console.error('Error al crear la base de datos y tabla:', error);
-      });
   })
   .catch((error) => {
     console.error('Error al crear la base de datos:', error);
+  });
+
+  // Definición del modelo de Usuario
+const Usuario = sequelize.define('usuarios', {
+  numeroidentificacion: {
+    type: DataTypes.STRING,
+    primaryKey: true,
+  },
+  tipoidentificacion: {
+    type: DataTypes.STRING,
+  },
+  correo: {
+    type: DataTypes.STRING,
+  },
+  password: {
+    type: DataTypes.STRING,
+  },
+  nombres: {
+    type: DataTypes.STRING,
+  },
+  apellidos: {
+    type: DataTypes.STRING,
+  },
+});
+
+// Sincronizar el modelo con la base de datos
+sequelize.sync()
+  .then(() => {
+    console.log('Base de datos y tabla creadas exitosamente.');
+  })
+  .catch((error) => {
+    console.error('Error al crear la base de datos y tabla:', error);
   });
 
 // Ruta de registro de usuarios
