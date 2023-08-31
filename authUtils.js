@@ -133,7 +133,6 @@ function authenticateToken(req, res, next) {
  */
 
 module.exports = {
-  Usuario: Usuario,
   generateToken: generateToken,
   authenticateToken: authenticateToken
 }

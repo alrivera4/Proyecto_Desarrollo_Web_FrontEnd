@@ -1,9 +1,9 @@
 const express = require('express')
 const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcrypt')
-const { Usuario, generateToken, authenticateToken } = require('../authUtils.js')
+const { generateToken, authenticateToken } = require('../authUtils.js')
 const jwt = require('jsonwebtoken')
-
+const { Usuario} = require('../index.js')
 const router = express.Router()
 
 // Ruta de registro de usuarios
