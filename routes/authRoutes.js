@@ -204,7 +204,7 @@ router.post(
 //   }
 // });
 
-router.get('/panel', authenticateToken, (req, res) => {
+router.get('/panel', (req, res) => {
   return nextApp.render(req, res, '/pages/dashboard')
 })
 
